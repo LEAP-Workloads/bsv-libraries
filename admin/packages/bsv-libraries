@@ -1,0 +1,9 @@
+
+[Global]
+Buildorder=1000
+Version=1
+Lock=asim-bsv-libraries
+Description=Description of bsv-libraries
+Name=bsv-libraries
+Tag=HEAD
+CSN=CSN-bsv-libraries-0
