@@ -1,0 +1,13 @@
+********************************************************************
+* CRC
+********************************************************************
+
+%AWB_START
+
+%name CRC Library
+%desc CRC Library
+%provides crc
+
+%sources -t BSV -v PUBLIC CRC.bsv
+
+%AWB_END

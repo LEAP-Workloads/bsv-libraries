@@ -1,0 +1,14 @@
+********************************************************************
+* StreamCaptureFIFO
+********************************************************************
+
+%AWB_START
+
+%name StreamCaptureFIFO
+%desc A set of fifos for capturing streams of data
+%provides stream_capture_fifo
+
+%sources -t BSV -v PUBLIC StreamCaptureFIFO.bsv
+%sources -t BSV -v PUBLIC TriggeredStreamCaptureFIFOF.bsv
+
+%AWB_END

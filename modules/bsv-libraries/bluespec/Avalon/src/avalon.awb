@@ -1,0 +1,17 @@
+********************************************************************
+* Avalon Bus interfaces
+********************************************************************
+
+%AWB_START
+
+%name Avalon Bus Intefaces 
+%desc Master and Slave device for simple word-level avalon interface
+%provides avalon
+
+%attribute altera
+
+%sources -t BSV -v PUBLIC AvalonCommon.bsv
+%sources -t BSV -v PUBLIC AvalonMaster.bsv
+%sources -t BSV -v PUBLIC AvalonSlave.bsv
+
+%AWB_END

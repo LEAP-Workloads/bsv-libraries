@@ -1,0 +1,13 @@
+********************************************************************
+* ReversalBuffer
+********************************************************************
+
+%AWB_START
+
+%name ReversalBuffer
+%desc A fifo that reverses a parameteric block of data
+%provides reversal_buffer
+
+%sources -t BSV -v PUBLIC ReversalBuffer.bsv
+
+%AWB_END

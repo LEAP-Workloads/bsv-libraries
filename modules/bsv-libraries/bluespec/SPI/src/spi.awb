@@ -1,0 +1,14 @@
+********************************************************************
+* SPI Library
+********************************************************************
+
+%AWB_START
+
+%name SPI
+%desc SPI Master and Slave
+%provides spi
+
+%sources -t BSV -v PUBLIC SPIMaster.bsv
+%sources -t BSV -v PUBLIC SPISlave.bsv
+
+%AWB_END

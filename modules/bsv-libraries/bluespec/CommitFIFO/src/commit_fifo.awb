@@ -1,0 +1,13 @@
+********************************************************************
+* CommitFIFO
+********************************************************************
+
+%AWB_START
+
+%name CommitFIFO
+%desc A FIFO with an abort/commit mechanism for uncertain data
+%provides commit_fifo
+
+%sources -t BSV -v PUBLIC CommitFIFO.bsv
+
+%AWB_END
