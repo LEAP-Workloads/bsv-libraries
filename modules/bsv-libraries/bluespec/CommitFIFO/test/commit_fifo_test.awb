@@ -1,0 +1,15 @@
+********************************************************************
+* CommitFIFO Test
+********************************************************************
+
+%AWB_START
+
+%name CommitFIFO
+%desc Testbench for CommitFIFO
+%provides hw_only_application
+
+%requires commit_fifo
+
+%sources -t BSV -v PUBLIC CommitFIFOTest.bsv
+
+%AWB_END

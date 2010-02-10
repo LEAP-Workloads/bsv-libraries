@@ -1,0 +1,13 @@
+********************************************************************
+* Debug Utilities
+********************************************************************
+
+%AWB_START
+
+%name Debug Utilities
+%desc Debug Utilities
+%provides debug_utils
+
+%sources -t BSV -v PUBLIC Debug.bsv
+
+%AWB_END
