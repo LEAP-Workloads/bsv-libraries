@@ -1,0 +1,13 @@
+********************************************************************
+* RegisterLibrary
+********************************************************************
+
+%AWB_START
+
+%name RegisterLibrary
+%desc A set of useful register functions
+%provides register_library
+
+%sources -t BSV -v PUBLIC Register.bsv ControlReg.bsv
+
+%AWB_END

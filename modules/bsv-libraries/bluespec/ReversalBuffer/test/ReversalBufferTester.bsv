@@ -6,7 +6,7 @@ import FIFOF::*;
 import ReversalBuffer::*;
 import FIFOUtility::*;
 
-module mkReversalBufferTester();
+module mkHWOnlyApplication();
   ReversalBuffer#(Bit#(15), Bool, 64) buffer <- mkReversalBuffer("testbench");
   Reg#(Bit#(15)) counter <- mkReg(0);
   Reg#(Bit#(15)) rev_count <- mkReg(0); 

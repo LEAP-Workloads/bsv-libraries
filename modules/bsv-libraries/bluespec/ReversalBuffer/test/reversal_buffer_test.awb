@@ -4,12 +4,12 @@
 
 %AWB_START
 
-%name ReversalBuffer
-%desc A fifo that reverses a parameteric block of data
-%provides reversal_buffer
+%name ReversalBufferTest
+%desc Testbench for Reversal Buffer
+%provides hw_only_application
 
-%requires fifo_utility
+%requires reversal_buffer
 
-%sources -t BSV -v PUBLIC ReversalBuffer.bsv
+%sources -t BSV -v PUBLIC ReversalBufferTester.bsv
 
 %AWB_END
