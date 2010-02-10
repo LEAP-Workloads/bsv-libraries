@@ -24,6 +24,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 Author: Kermin Fleming
 */
+
+`include "asim/provides/fifo_utils.bsh"
+`include "asim/provides/c_bus_utils.bsh"
+`include "asim/provides/debug_utils.bsh"
+`include "asim/provides/register_mapper.bsh"
  
 import FIFO::*;
 import FIFOF::*;
@@ -32,16 +37,6 @@ import StmtFSM::*;
 import GetPut::*;
 import CBus::*;
 import Clocks::*;
-import FIFOUtility::*;
-
-import Debug::*;
-import CBusUtils::*;
-// This import should be dragged to some other generic header file
-import RegisterMapper::*;
-
-
-import AvalonCommon::*;
-
 
 interface AvalonSlaveWires#(numeric type address_width, numeric type data_width);
   (* always_ready, always_enabled, prefix="", result="read" *) 

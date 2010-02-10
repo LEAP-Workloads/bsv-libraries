@@ -25,7 +25,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 Author: Kermin Fleming
 */
 
-import RegisterMapper::*;
+`include "asim/provides/register_mapper.bsh"
 
 Bool avalonDebug = True;
 

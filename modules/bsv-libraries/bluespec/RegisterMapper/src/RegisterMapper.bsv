@@ -25,13 +25,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 Author: Kermin Fleming
 */
 
+`include "asim/provides/register_library.bsh"
+
 import GetPut::*;
 import List::*;
 import Vector::*;
 import FIFO::*;
-
-
-import Register::*;
 
 /*******
  *

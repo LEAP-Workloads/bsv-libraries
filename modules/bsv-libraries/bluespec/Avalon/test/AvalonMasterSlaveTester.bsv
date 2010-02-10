@@ -28,17 +28,12 @@ Author: Kermin Fleming
 import GetPut::*;
 import ClientServer::*;
 import StmtFSM::*;
-import RegisterMapper::*;
 
-import AvalonSlave::*;
-import AvalonMaster::*;
-import AvalonCommon::*;
-import AvalonRegisterFile::*;
+`include "asim/provides/register_mapper.bsh"
+`include "asim/provides/avalon.bsh"
 
 
-
-
-module mkAvalonMasterSlaveTester (Empty);
+module mkHWOnlyApplication (Empty);
   Clock clock <- exposeCurrentClock;
   Reset reset <- exposeCurrentReset;
   AvalonSlaveWires#(4,32) regs <- mkSmallAvalonRegisterFile;

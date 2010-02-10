@@ -6,7 +6,7 @@
 
 %name FIFO Utility
 %desc Some useful fifo functions
-%provides fifo_utility
+%provides fifo_utils
 
 %sources -t BSV -v PUBLIC FIFOUtility.bsv
 

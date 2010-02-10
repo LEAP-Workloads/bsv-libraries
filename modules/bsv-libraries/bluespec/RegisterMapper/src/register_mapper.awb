@@ -8,6 +8,8 @@
 %desc Register Mapping Utilities
 
 %provides register_mapper
+
+%requires register_library
 	 
 %sources -t BSV -v PUBLIC RegisterMapper.bsv
 
