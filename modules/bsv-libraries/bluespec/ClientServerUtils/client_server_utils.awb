@@ -1,0 +1,14 @@
+********************************************************************
+* Client Server Utils
+********************************************************************
+
+%AWB_START
+
+%name ClientServer Utilities
+%desc Some augmentation to the ClientServer Library
+
+%provides client_server_utils
+	 
+%sources -t BSV -v PUBLIC ClientServerUtils.bsv
+
+%AWB_END

@@ -1,0 +1,14 @@
+********************************************************************
+* Register Mapper
+********************************************************************
+
+%AWB_START
+
+%name Register Mapping Utilities
+%desc Register Mapping Utilities
+
+%provides register_mapper
+	 
+%sources -t BSV -v PUBLIC RegisterMapper.bsv
+
+%AWB_END

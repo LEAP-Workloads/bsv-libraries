@@ -1,0 +1,16 @@
+********************************************************************
+* PLB Master Simple
+********************************************************************
+
+%AWB_START
+
+%name PLB Master Simple
+%desc A simple PLB master with single sized burst requests
+
+%provides plb_master
+
+%requires plb_common
+	 
+%sources -t BSV -v PUBLIC PLBMaster.bsv
+
+%AWB_END

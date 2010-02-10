@@ -1,0 +1,14 @@
+********************************************************************
+* CBus Utilities
+********************************************************************
+
+%AWB_START
+
+%name CBus Utilities
+%desc CBus Utilities
+
+%provides c_bus_utils
+	 
+%sources -t BSV -v PUBLIC CBusUtils.bsv
+
+%AWB_END

@@ -1,0 +1,15 @@
+********************************************************************
+* PLB Common
+********************************************************************
+
+%AWB_START
+
+%name PLB Common
+%desc Common definition files for various plb implementations
+
+%provides plb_common
+	 
+%sources -t BSV -v PUBLIC PLBMasterDefaultParameters.bsv
+%sources -t BSV -v PUBLIC PLBMasterWires.bsv
+
+%AWB_END

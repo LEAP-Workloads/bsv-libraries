@@ -1,0 +1,14 @@
+********************************************************************
+* Vector Utilities
+********************************************************************
+
+%AWB_START
+
+%name Vector Utilities
+%desc Common definition files for various plb implementations
+
+%provides vector_utils
+	 
+%sources -t BSV -v PUBLIC VectorUtils.bsv
+
+%AWB_END
