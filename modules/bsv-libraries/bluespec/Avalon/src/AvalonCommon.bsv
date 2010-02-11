@@ -27,7 +27,7 @@ Author: Kermin Fleming
 
 `include "asim/provides/register_mapper.bsh"
 
-Bool avalonDebug = True;
+Bool avalonDebug = True;'
 
 typedef struct {
   Bit#(address_width)  addr;

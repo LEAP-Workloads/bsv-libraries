@@ -8,8 +8,6 @@
 %desc A fifo that reverses a parameteric block of data
 %provides reversal_buffer
 
-%requires fifo_utility
-
 %sources -t BSV -v PUBLIC ReversalBuffer.bsv
 
 %AWB_END

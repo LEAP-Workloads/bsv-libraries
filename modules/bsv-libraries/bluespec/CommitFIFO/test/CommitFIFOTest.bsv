@@ -6,8 +6,7 @@ import CommitFIFO::*;
 
 typedef 1024 MaxEntries;
 
-(*synthesize*)
-module mkCommitFIFOTest(Empty);
+module mkHWOnlyApplication(Empty);
 
   LFSR#(Bit#(16)) lfsr <- mkLFSR_16();
   FIFO#(Bit#(16)) expected <- mkSizedFIFO(valueof(MaxEntries));

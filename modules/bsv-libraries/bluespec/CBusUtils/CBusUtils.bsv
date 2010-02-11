@@ -1,12 +1,12 @@
-import Register::*;
+`include "asim/provides/vector_utils.bsh"
+`include "asim/provides/register_libraries.bsh"
+
 import Vector::*;
 import GetPut::*;
 import CBus::*;
 import StmtFSM::*;
 import Debug::*;
 import RegFile::*;
-
-import VectorUtils::*;
 
 /* eventually we should refactor the CBUS get/put in terms of the wide
 register r/w, since these are effectively the data payloads. We can probably also merge 

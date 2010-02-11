@@ -10,6 +10,8 @@
 
 %requires reversal_buffer
 
+%requires fifo_utils
+
 %sources -t BSV -v PUBLIC ReversalBufferTester.bsv
 
 %AWB_END

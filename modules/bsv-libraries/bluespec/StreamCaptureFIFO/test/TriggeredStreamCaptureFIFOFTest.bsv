@@ -3,7 +3,7 @@ import TriggeredStreamCaptureFIFOF::*;
 import LFSR::*;
 
 
-module mkTriggeredStreamCaptureFIFOFTest (Empty);
+module mkHWOnlyApplication (Empty);
   TriggeredStreamCaptureFIFOF#(Bit#(32)) fifof <- mkTriggeredStreamCaptureFIFOF(512);
   Reg#(Bit#(32)) counter <- mkReg(0);
   LFSR#(Bit#(16)) lfsr <- mkLFSR_16;  

@@ -1,15 +1,15 @@
 ********************************************************************
-* CommitFIFO Test
+* StreamCaptureFIFO Test
 ********************************************************************
 
 %AWB_START
 
-%name CommitFIFO Test
-%desc Testbench for CommitFIFO
+%name StreamCaptureFIFO Test
+%desc Testbench for StreamCaptureFIFO
 %provides hw_only_application
 
-%requires commit_fifo
+%requires stream_capture_fifo
 
-%sources -t BSV -v PUBLIC CommitFIFOTest.bsv
+%sources -t BSV -v PUBLIC TriggeredStreamCaptureFIFOFTest.bsv
 
 %AWB_END

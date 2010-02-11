@@ -13,6 +13,8 @@
 %requires c_bus_utils
 %requires debug_utils
 %requires register_mapper
+%requires vector_utils
+
 
 %sources -t BSV -v PUBLIC AvalonMasterSlaveTester.bsv
 %sources -t BSV -v PUBLIC AvalonRegisterFile.bsv
