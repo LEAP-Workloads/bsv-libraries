@@ -4,7 +4,6 @@ import FIFOF::*;
 import FIFO::*;
 import GetPut::*;
 import ClientServer::*;
-import Register::*;
 
 interface ControlReg#(type addr_t, type data_t);
    method addr_t getAddr();

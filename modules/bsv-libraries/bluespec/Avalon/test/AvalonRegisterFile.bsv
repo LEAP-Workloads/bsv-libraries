@@ -25,13 +25,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 Author: Kermin Fleming
 */
 
+`include "asim/provides/register_mapper.bsh"
+
 import RegFile::*;
 import ClientServer::*;
 import GetPut::*;
-
-import AvalonSlave::*;
-import AvalonCommon::*;
-import RegisterMapper::*;
 
 
 module mkSmallAvalonRegisterFile (AvalonSlaveWires#(4,32));
@@ -39,14 +37,14 @@ module mkSmallAvalonRegisterFile (AvalonSlaveWires#(4,32));
   return m;
 endmodule
 
-module mkAvalonRegisterFile (AvalonSlaveWires#(addr_size,data_size));
+module mkAvalonRegisterFile (AvalonSlaveWires#(addr_size,data_width));
   Reset reset <- exposeCurrentReset;
   Clock clock <- exposeCurrentClock;
-  AvalonSlave#(addr_size,data_size) avalonSlave <- mkAvalonSlaveDualDomain(clock, reset);
-  RegisterFile(Bit#(addr_size),Bit#(data_size)) regs <- mkRegFileFull();
+  AvalonSlave#(addr_size,data_width) avalonSlave <- mkAvalonSlaveDualDomain(clock, reset);
+  RegFile#(Bit#(addr_size),Bit#(data_width)) regs <- mkRegFileFull();
 
   rule handleReqs;
-    AvalonRequest#(address_width,data_width) req <- avalonSlave.busClient.request.get;
+    AvalonRequest#(addr_size,data_width) req <- avalonSlave.busClient.request.get;
     if(req.command == Write)
       begin
         regs.upd(req.addr,req.data);
@@ -62,14 +60,14 @@ module mkAvalonRegisterFile (AvalonSlaveWires#(addr_size,data_size));
 endmodule
 
 
-module mkAvalonRegisterFileFullLoad#(String str) (AvalonSlaveWires#(addr_size,data_size));
+module mkAvalonRegisterFileFullLoad#(String str) (AvalonSlaveWires#(addr_size,data_width));
   Reset reset <- exposeCurrentReset;
   Clock clock <- exposeCurrentClock;
-  AvalonSlave#(addr_size,data_size) avalonSlave <- mkAvalonSlaveDualDomain(clock, reset);
-  RegisterFile(Bit#(addr_size),Bit#(data_size)) regs <- mkRegFileFullLoad(str);
+  AvalonSlave#(addr_size,data_width) avalonSlave <- mkAvalonSlaveDualDomain(clock, reset);
+  RegFile#(Bit#(addr_size),Bit#(data_width)) regs <- mkRegFileFullLoad(str);
 
   rule handleReqs;
-    AvalonRequest#(address_width,data_width) req <- avalonSlave.busClient.request.get;
+    AvalonRequest#(addr_size,data_width) req <- avalonSlave.busClient.request.get;
     if(req.command == Write)
       begin
         regs.upd(req.addr,req.data);

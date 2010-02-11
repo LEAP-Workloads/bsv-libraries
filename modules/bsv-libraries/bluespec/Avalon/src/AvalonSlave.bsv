@@ -29,6 +29,7 @@ Author: Kermin Fleming
 `include "asim/provides/c_bus_utils.bsh"
 `include "asim/provides/debug_utils.bsh"
 `include "asim/provides/register_mapper.bsh"
+`include "asim/provides/avalon.bsh"
  
 import FIFO::*;
 import FIFOF::*;
@@ -192,7 +193,7 @@ module mkAvalonSlaveDriverCBusWrapper#(Server#(AvalonRequest#(address_width,data
      end
   endrule   
 
-  rule deqNullResp(commandFIFO.first == CBusUtils::Write);
+  rule deqNullResp(commandFIFO.first == cBusWrite);
     commandFIFO.deq;
     drops <= drops + 1;
     debug(avalonDebug,$display("Avalon CBus Wrapper Driver Null response drop"));   
@@ -210,7 +211,7 @@ module mkAvalonSlaveDriverCBusWrapper#(Server#(AvalonRequest#(address_width,data
     commandFIFO.enq(isWrite);
   endmethod
 
-  method ActionValue#(Bit#(data_width)) getBusResponse() if(commandFIFO.first == CBusUtils::Read);
+  method ActionValue#(Bit#(data_width)) getBusResponse() if(commandFIFO.first == cBusRead);
     commandFIFO.deq; 
     resps <= resps + 1;  
     debug(avalonDebug,$display("Avalon Cbus Wrapper returning a response"));   

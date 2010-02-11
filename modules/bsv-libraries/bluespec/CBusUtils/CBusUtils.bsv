@@ -1,5 +1,5 @@
 `include "asim/provides/vector_utils.bsh"
-`include "asim/provides/register_libraries.bsh"
+`include "asim/provides/register_library.bsh"
 
 import Vector::*;
 import GetPut::*;
@@ -330,8 +330,8 @@ typedef enum {
   Write
 } CBusCommand deriving (Bits,Eq);
 
-
-
+CBusCommand cBusRead = Read;
+CBusCommand cBusWrite = Write;
 
 module mkMarshalCBusPutOld#(Integer baseAddr, Integer wordOffset, function Action putBusRequest(CBusCommand isWrite, Bit#(size_bus_addr) addr, Bit#(size_bus_data) data), function ActionValue#(Bit#(size_bus_data)) getBusResponse()) (Put#(data_t))
   provisos(
@@ -351,7 +351,7 @@ module mkMarshalCBusPutOld#(Integer baseAddr, Integer wordOffset, function Actio
 	     debug(cBusDebug,$display("CBusPut[%h] Marshall begins: data: %h", baseAddr, dataContainer));            
 	     while(!putReady)
 	       seq
-		 putBusRequest(CBusUtils::Read,fromInteger(baseAddr), ?); 
+		 putBusRequest(cBusRead,fromInteger(baseAddr), ?); 
 		 debug(cBusDebug,$display("CBusPut[%h] Marshall sends putReady req: data:%h", baseAddr, dataContainer));
 		 action
 		   Bit#(size_bus_data) data <- getBusResponse;
@@ -361,13 +361,13 @@ module mkMarshalCBusPutOld#(Integer baseAddr, Integer wordOffset, function Actio
 	       endseq
 	     for(transmitCount <= 0; transmitCount < fromInteger(valueof(reg_vec_size)); transmitCount <= transmitCount + 1)
 	       seq
-		 putBusRequest(CBusUtils::Write,fromInteger(baseAddr+wordOffset)+fromInteger(wordOffset)*transmitCount,
+		 putBusRequest(cBusWrite,fromInteger(baseAddr+wordOffset)+fromInteger(wordOffset)*transmitCount,
 			       regVectorActual[transmitCount]);
 		 debug(cBusDebug,$display("CBusPut[%h] Marshall data[%d]: %h", baseAddr, transmitCount, regVectorActual[transmitCount]));
 	       endseq
 
 
-	       putBusRequest(CBusUtils::Write,fromInteger(baseAddr),1);
+	       putBusRequest(cBusWrite,fromInteger(baseAddr),1);
 	       putReady <= False; 
 	       debug(cBusDebug,$display("CBusPut[%h] Marshall completes data: %h", baseAddr, dataContainer));
 
@@ -412,7 +412,7 @@ module mkMarshalCBusPut#(Integer baseAddr, Integer wordOffset, function Action p
 
    rule issueReady(state == IssueReady);
      state <= CheckReady;
-     putBusRequest(CBusUtils::Read,fromInteger(baseAddr), ?); 
+     putBusRequest(cBusRead,fromInteger(baseAddr), ?); 
    endrule
    
    rule checkReady(state == CheckReady);
@@ -423,12 +423,12 @@ module mkMarshalCBusPut#(Integer baseAddr, Integer wordOffset, function Action p
 
    rule writeReg(state == Write && transmitCount < fromInteger(valueof(reg_vec_size)));
      transmitCount <= transmitCount + 1;
-     putBusRequest(CBusUtils::Write,fromInteger(baseAddr+wordOffset)+fromInteger(wordOffset)*transmitCount,regVectorActual[transmitCount]);
+     putBusRequest(cBusWrite,fromInteger(baseAddr+wordOffset)+fromInteger(wordOffset)*transmitCount,regVectorActual[transmitCount]);
      debug(cBusDebug,$display("CBusPut[%h] Marshall data[%d]: %h", baseAddr, transmitCount, regVectorActual[transmitCount]));
    endrule  
 
    rule writePush(state == Write && transmitCount == fromInteger(valueof(reg_vec_size)));
-     putBusRequest(CBusUtils::Write,fromInteger(baseAddr),1);
+     putBusRequest(cBusWrite,fromInteger(baseAddr),1);
      debug(cBusDebug,$display("CBusPut[%h] Marshall completes data: %h", baseAddr, dataContainer));
      state <= Idle;
    endrule
@@ -473,19 +473,19 @@ module mkMarshalCBusGetOld#(Integer baseAddr, Integer wordOffset, function Actio
             debug(cBusDebug,$display("Cbus SIZEINFO AddrBase: %h, data_sz: %d", baseAddr, valueof(data_t_size))); 
             while(!getReady)
               seq
-                putBusRequest(CBusUtils::Read,fromInteger(baseAddr), ?); 
+                putBusRequest(cBusRead,fromInteger(baseAddr), ?); 
                 action
                   Bit#(size_bus_data) data <- getBusResponse;
                   getReady <= data[0] == 0;
                 endaction
               endseq
             // Execute the get and then pull out the data
-            putBusRequest(CBusUtils::Write,fromInteger(baseAddr),1);
+            putBusRequest(cBusWrite,fromInteger(baseAddr),1);
             // Now we need to wait for this to go away before attempting to read.
             getReady <= False;
             while(!getReady)
               seq
-                putBusRequest(CBusUtils::Read,fromInteger(baseAddr), ?); 
+                putBusRequest(cBusRead,fromInteger(baseAddr), ?); 
                 action
                   Bit#(size_bus_data) data <- getBusResponse;
                   getReady <= data[0] == 0; // Wait for the 1 to get cleared...
@@ -494,7 +494,7 @@ module mkMarshalCBusGetOld#(Integer baseAddr, Integer wordOffset, function Actio
             debug(cBusDebug,$display("CBus Get Marshal sees available data"));
             for(transmitCount <= 0; transmitCount < fromInteger(valueof(reg_vec_size)); transmitCount <= transmitCount + 1)
               seq
-                putBusRequest(CBusUtils::Read,fromInteger(baseAddr+wordOffset)+fromInteger(wordOffset)*transmitCount,?);
+                putBusRequest(cBusRead,fromInteger(baseAddr+wordOffset)+fromInteger(wordOffset)*transmitCount,?);
                 action
                   Bit#(size_bus_data) data <- getBusResponse;
                   regVectorActual[transmitCount] <= data;
@@ -544,7 +544,7 @@ module mkMarshalCBusGet#(Integer baseAddr, Integer wordOffset, function Action p
   Vector#(reg_vec_size,Reg#(Bit#(size_bus_data))) regVectorActual <- replicateM(mkRegU);  
 
   rule idle(!hasData && state == Idle);
-    putBusRequest(CBusUtils::Read,fromInteger(baseAddr), ?); 
+    putBusRequest(cBusRead,fromInteger(baseAddr), ?); 
     state <= CheckReadySanity;
   endrule
 
@@ -561,12 +561,12 @@ module mkMarshalCBusGet#(Integer baseAddr, Integer wordOffset, function Action p
   endrule
 
   rule setReady(state == SetReady);
-    putBusRequest(CBusUtils::Write,fromInteger(baseAddr),1); // may not need this...
+    putBusRequest(cBusWrite,fromInteger(baseAddr),1); // may not need this...
     state <= IssueCheckReady;
   endrule
 
   rule issueCheckReady(state == IssueCheckReady);
-    putBusRequest(CBusUtils::Read,fromInteger(baseAddr), ?); 
+    putBusRequest(cBusRead,fromInteger(baseAddr), ?); 
     state <= CheckReady;
   endrule
 
@@ -584,7 +584,7 @@ module mkMarshalCBusGet#(Integer baseAddr, Integer wordOffset, function Action p
   endrule
 
   rule readIssue(state == ReadIssue);
-    putBusRequest(CBusUtils::Read,fromInteger(baseAddr+wordOffset)+fromInteger(wordOffset)*transmitCount,?);
+    putBusRequest(cBusRead,fromInteger(baseAddr+wordOffset)+fromInteger(wordOffset)*transmitCount,?);
     state <= Read;
   endrule
 

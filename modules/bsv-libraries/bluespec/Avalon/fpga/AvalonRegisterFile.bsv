@@ -25,10 +25,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 Author: Kermin Fleming
 */
 
+`include "asim/provides/register_mapper.bsh"
+
 import RegFile::*;
-import AvalonSlave::*;
-import AvalonCommon::*;
-import RegisterMapper::*;
 import ClientServer::*;
 import GetPut::*;
 
