@@ -1,0 +1,72 @@
+
+[Global]
+SaveParameters=0
+Description=Hello World Demo using hybrid streams
+File=crc_exe
+Version=2.1
+Name=Hello World
+DefaultBenchmark=config/bm/bluespec/demos.cfx/benchmarks/null.cfg
+Type=HAsim
+Class=Asim::Model
+DefaultRunOpts=
+
+[Model]
+DefaultAttributes=hello unconnected hybrid project exe
+model=HW/SW Hybrid Project Foundation
+
+[HW only hybrid application]
+File=modules/bsv-libraries/bluespec/Common/hw-only-testbench.awb
+Packagehint=bsv-libraries
+
+[Hybrid Project Common Utilities]
+File=config/pm/hasim/submodels/common/project-common-default.apm
+Packagehint=hasim
+
+[HW only hybrid application/Requires]
+hw_only_application=CRCTest
+
+[FPGA Environment]
+File=config/pm/hasim/submodels/fpgaenv/fpgaenv-hybrid-exe.apm
+Packagehint=platforms
+
+[HW/SW Hybrid Project Foundation]
+File=modules/project/project-hybrid.awb
+Packagehint=platforms
+
+[HW/SW Hybrid Project Foundation/Requires]
+project_common=Hybrid Project Common Utilities
+fpgaenv=FPGA Environment
+application_env=Soft Connections Hybrid Application Environment
+
+[Soft Connections Hybrid Application Environment/Requires]
+platform_services=Platform Services
+soft_connections_lib=Soft Connections Library
+connected_application=HW only hybrid application
+
+[Soft Connections Library]
+File=config/pm/hasim/submodels/common/soft-connections-lib.apm
+Packagehint=hasim
+
+[Platform Services]
+File=config/pm/hasim/submodels/platform-services/standard-platform-services.apm
+Packagehint=hasim
+
+[Soft Connections Hybrid Application Environment]
+File=modules/application-env/hybrid/soft-connections/application-env-hybrid-soft-conn.awb
+Packagehint=platforms
+
+[CRCTest]
+File=modules/bsv-libraries/bluespec/CRC/test/crc_test.awb
+Packagehint=bsv-libraries
+
+[CRC Library]
+File=modules/bsv-libraries/bluespec/CRC/src/crc.awb
+Packagehint=bsv-libraries
+
+[CRCTest/Requires]
+crc=CRC Library
+debug_utils=Debug Utilities
+
+[Debug Utilities]
+File=modules/bsv-libraries/bluespec/Debug/debug_utils.awb
+Packagehint=bsv-libraries

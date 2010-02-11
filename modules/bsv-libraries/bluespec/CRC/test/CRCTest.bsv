@@ -4,8 +4,7 @@ import GetPut::*;
 import StmtFSM::*;
 import CRC::*;
 
-(* synthesize *) 
-module mkCRCTest(Empty);
+module mkHWOnlyApplication(Empty);
    
    CRC#(Bit#(1),Bit#(1)) crc <- mkNaiveCRC('b11,'b0);
    CRC#(Bit#(1),Bit#(1)) crcPar <- mkParallelCRC('b11,'b0);

@@ -1,8 +1,10 @@
+`include "asim/provides/debug_utils.bsh"
+
 import FIFO::*;
 import FIFOF::*;
 import GetPut::*;
 import Vector::*;
-import Debug::*;
+
 
 Bool crcDebug = False;
 
