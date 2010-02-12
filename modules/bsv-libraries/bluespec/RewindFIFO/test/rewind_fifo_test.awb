@@ -1,0 +1,16 @@
+********************************************************************
+* RewindFIFO Test
+********************************************************************
+
+%AWB_START
+
+%name RewindFIFO Test
+%desc Testbench for RewindFIFO
+%provides hw_only_application
+
+%requires commit_fifo
+%requires rewind_fifo
+
+%sources -t BSV -v PUBLIC RewindFIFOTest.bsv
+
+%AWB_END

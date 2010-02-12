@@ -1,0 +1,13 @@
+********************************************************************
+* RewindFIFO
+********************************************************************
+
+%AWB_START
+
+%name RewindFIFO
+%desc A FIFO with an rewind/commit mechanism for uncertain deqs
+%provides rewind_fifo
+
+%sources -t BSV -v PUBLIC RewindFIFO.bsv
+
+%AWB_END

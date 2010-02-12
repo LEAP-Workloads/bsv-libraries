@@ -90,9 +90,12 @@ module mkCommitFIFO (CommitFIFO#(data,size))
         commitCounter <= commitCounter + 1;
       end
 
-    if(commitPulse && countUp)
+    if(commitPulse)
       begin
-        enqPtr <= (enqPtr + 1 == fromInteger(valueof(size)))?0:enqPtr+1;  
+        if(countUp)
+          begin
+            enqPtr <= (enqPtr + 1 == fromInteger(valueof(size)))?0:enqPtr+1;  
+          end
       end
     else if(abortPulse)
       begin
