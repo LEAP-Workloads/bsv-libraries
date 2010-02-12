@@ -35,20 +35,33 @@ interface CommitFIFO#(type data, numeric type size);
   method Bool notEmpty;
 endinterface
 
+interface CommitFIFOLevel#(type data, numeric type size);
+  method data first();
+  method Action commit();  
+  method Action abort();  
+  method Action deq();
+  method Action enq(data inData);
+  method Bool notFull;
+  method Bool notEmpty;
 
-module mkCommitFIFO (CommitFIFO#(data,size))
+  // These are a little confusing, since they measure the number of data
+  // including speculative data
+  method Bool isLessThan   ( Bit#(TAdd#(1,TLog#(size))) c1 ) ;
+  method Bool isGreaterThan( Bit#(TAdd#(1,TLog#(size))) c1 ) ;
+endinterface
+
+module mkCommitFIFOLevel (CommitFIFOLevel#(data,size))
    provisos(
-     Add#(1,TLog#(size), indexSz),
      Bits#(data, dataSz)
    );
 
-  RegFile#(Bit#(indexSz),data) memory <- mkRegFile(0,fromInteger(valueof(size))); 
+  RegFile#(Bit#(TAdd#(1,TLog#(size))),data) memory <- mkRegFile(0,fromInteger(valueof(size))); 
 
-  Reg#(Bit#(indexSz)) firstPtr      <- mkReg(0);
-  Reg#(Bit#(indexSz)) commitPtr     <- mkReg(0);
-  Reg#(Bit#(indexSz)) enqPtr        <- mkReg(0);
-  Reg#(Bit#(indexSz)) dataCounter   <- mkReg(0);
-  Reg#(Bit#(indexSz)) commitCounter <- mkReg(0);
+  Reg#(Bit#(TAdd#(1,TLog#(size)))) firstPtr      <- mkReg(0);
+  Reg#(Bit#(TAdd#(1,TLog#(size)))) commitPtr     <- mkReg(0);
+  Reg#(Bit#(TAdd#(1,TLog#(size)))) enqPtr        <- mkReg(0);
+  Reg#(Bit#(TAdd#(1,TLog#(size)))) dataCounter   <- mkReg(0);
+  Reg#(Bit#(TAdd#(1,TLog#(size)))) commitCounter <- mkReg(0);
   PulseWire           countUp       <- mkPulseWire;
   PulseWire           countDown     <- mkPulseWire;
   PulseWire           commitPulse   <- mkPulseWire;
@@ -149,4 +162,31 @@ module mkCommitFIFO (CommitFIFO#(data,size))
   method Bool notEmpty;
     return dataCounter > 0;
   endmethod
+
+  method Bool isLessThan   ( Bit#(TAdd#(1,TLog#(size))) c1 );
+    return ( dataCounter + commitCounter  < c1 );
+  endmethod
+
+  method Bool isGreaterThan( Bit#(TAdd#(1,TLog#(size))) c1 );
+   return ( dataCounter + commitCounter  > c1 );   
+  endmethod
+
+endmodule
+
+
+module mkCommitFIFO (CommitFIFO#(data,size))
+   provisos(
+     Bits#(data, dataSz)
+   );
+
+  CommitFIFOLevel#(data,size) fifo <- mkCommitFIFOLevel(); 
+
+  method first = fifo.first;
+  method commit = fifo.commit;  
+  method abort = fifo.abort;  
+  method deq = fifo.deq;
+  method enq = fifo.enq;
+  method notFull = fifo.notFull;
+  method notEmpty = fifo.notEmpty; 
+
 endmodule

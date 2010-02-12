@@ -12,7 +12,7 @@ typedef 1024 MaxEntries;
 module mkHWOnlyApplication(Empty);
 
   Reg#(Bit#(16)) counter <- mkReg(0);
-  Reg#(Bit#(18)) outputCount <- mkReg(0);
+  Reg#(Bit#(8)) outputCount <- mkReg(0);
 
   Reg#(Bool) shouldRewind <- mkReg(False); 
   LFSR#(Bit#(8)) lfsr <- mkLFSR_8();
@@ -64,7 +64,7 @@ module mkHWOnlyApplication(Empty);
        $display("Error: Expected %h, Commit %h", expectedFIFO.first, commitFIFO.first);
        $finish;
      end
-
+   outputCount <= outputCount + 1;
    if(outputCount + 1 == 0) 
      begin
        $display("Pass");

@@ -2,7 +2,6 @@
 * RewindFIFO
 ********************************************************************
 
-%AWB_START
 
 %name RewindFIFO
 %desc A FIFO with an rewind/commit mechanism for uncertain deqs
@@ -10,4 +9,7 @@
 
 %sources -t BSV -v PUBLIC RewindFIFO.bsv
 
-%AWB_END
+%param DEBUG_REWIND_FIFO 0 "Enable debug messages"
+
+
+ 

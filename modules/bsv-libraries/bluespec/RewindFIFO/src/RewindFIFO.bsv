@@ -1,3 +1,5 @@
+`include "asim/provides/rewind_fifo.bsh"
+
 import RegFile::*;
 import GetPut::*;
 
@@ -135,7 +137,10 @@ module mkRewindFIFOLevel (RewindFIFOLevel#(data,size))
         firstPtr <= (firstPtr + 1 == fromInteger(valueof(size)))?0:firstPtr+1;
       end
 
-    $display("RwFIFO: firstPtr: %h, rwPtr: %h, enqPtr: %h, rwCnt: %h, dataCnt: %h", firstPtr, rewindPtr, enqPtr, rewindCounter, dataCounter);
+    if(`DEBUG_REWIND_FIFO == 1)
+      begin
+        $display("RwFIFO: firstPtr: %h, rwPtr: %h, enqPtr: %h, rwCnt: %h, dataCnt: %h", firstPtr, rewindPtr, enqPtr, rewindCounter, dataCounter);
+      end
 
     // some simple checks
    if((enqPtr > rewindPtr) && (enqPtr - rewindPtr != dataCounter))
@@ -222,4 +227,5 @@ module mkRewindFIFOLevel (RewindFIFOLevel#(data,size))
   method Bool isGreaterThan( Bit#(TAdd#(1,TLog#(size))) c1 );
    return ( dataCounter - rewindCounter  > c1 );   
   endmethod
+
 endmodule
