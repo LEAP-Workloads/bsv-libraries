@@ -33,6 +33,9 @@ Author: Kermin Fleming
    which allow it to be used for various applications.   
 */
 
+`include "asim/providec/rewind_fifo.bsv"
+`include "asim/providec/commit_fifo.bsv"
+
 // Global Imports
 import GetPut::*;
 import FIFO::*;
@@ -58,28 +61,26 @@ module mkPLBMaster (PLBMaster);
   Clock plbClock <- exposeCurrentClock();
   Reset plbReset <- exposeCurrentReset();
   // state for the actual magic memory hardware
-  FIFO#(BusWord)            recordInfifo <- mkFIFO;
-  FIFO#(BusWord)            recordOutfifo <- mkFIFO;
   FIFO#(PLBMasterCommand)  plbMasterCommandInfifo <- mkFIFO(); 
   
 
-  // Output buffer
-  RegFile#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))),BusWord)                            storeBuffer <- mkRegFileFull();   
+  typedef TMul#(4,BeatsPerBurst) OutputBufferSize;
+  // Output buffers
+  CommitFIFOLevel#(BusWord,OutputBufferSize) infifo <- mkCommitFIFOLevel;
+  RewindFIFOLevel#(BusWord,OutputBufferSize) outfifo <- mkRewindFIFOLevel;
 
   
-  // Input buffer
-  RegFile#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))),BusWord)                            loadBuffer <- mkRegFileFull();   
+  Reg#(PLBAddr)                             rowAddrOffsetLoad <- mkReg(0);
+  Reg#(PLBAddr)                             rowAddrOffsetStore <- mkReg(0);  
 
-  
-  Reg#(PLBAddr)                              rowAddrOffsetLoad <- mkReg(0);
-  Reg#(PLBAddr)                              rowAddrOffsetStore <- mkReg(0);  
+  Reg#(PLBLength)                           lengthLoad  <- mkReg(0);
+  Reg#(PLBLength)                           lengthStore <- mkReg(0);
 
   Reg#(Bool)                                doingLoad <- mkReg(False);
   Reg#(Bool)                                doingStore <- mkReg(False);
 
-  Bit#(TLog#(TMul#(BytesPerWord,TMul#(BeatsPerBurst, WordsPerBeat)))) zeroOffset = 0; // Words per Burst
   Reg#(Bool)                                requestingStore <- mkReg(False);
-  PLBAddr addressOffset                   = zeroExtend({(requestingStore)?rowAddrOffsetStore:rowAddrOffsetLoad,zeroOffset});
+  PLBAddr addressOffset                   = zeroExtend((requestingStore)?rowAddrOffsetStore:rowAddrOffsetLoad);
   
 
   Reg#(StateRequest)                        stateRequest <- mkReg(Idle);
@@ -98,15 +99,6 @@ module mkPLBMaster (PLBMaster);
 
   Reg#(Bit#(1))                             rdBurst <- mkReg(0);
   Reg#(Bit#(1))                             wrBurst <- mkReg(0);
-
-  Reg#(Bit#(1))                             storeCounter <- mkReg(0);
-  Reg#(Bit#(1))                             loadCounter <- mkReg(0);              
-
-  Reg#(Bit#(TAdd#(1,TLog#(BeatsPerBurst)))) storeBufferWritePointer <- mkReg(0);
-  FIFOF#(Bit#(0))                           storeValid <- mkUGFIFOF;//XXX: This could be bad
-  Reg#(Bit#(TAdd#(1,TLog#(BeatsPerBurst)))) loadBufferReadPointer <- mkReg(0);
-  FIFOF#(Bit#(0))                           loadValid <- mkUGFIFOF;//XXX: This could be bad  
-
 
   // Input wires  
   Wire#(Bit#(1)) mRst <- mkBypassWire();
@@ -133,7 +125,7 @@ module mkPLBMaster (PLBMaster);
   Bit#(TAdd#(1,TLog#(BeatsPerBurst))) sbuf_addr = {storeCounter,storeDataCount};
   
  
-  Bit#(64)mWrDBus_o   = storeBuffer.sub(sbuf_addr);
+  Bit#(64)mWrDBus_o   = infifo.first();
   Bit#(1) mRequest_o  = request & ~mRst; // Request
   Bit#(1) mBusLock_o  = 1'b0 & ~mRst; // Bus lock
   Bit#(1) mRdBurst_o  = rdBurst & ~mRst; // read burst 
@@ -161,32 +153,23 @@ module mkPLBMaster (PLBMaster);
   let newloadDataCount_plus2  =  loadDataCount_plus2 + 1;
   let newstoreDataCount_plus2 = storeDataCount_plus2 + 1;
 
+  //Check for buffer space
  
-  rule startPageLoad(cmd_in_first matches tagged LoadPage .command &&& !doingLoad);
+  rule startPageLoad(cmd_in_first matches tagged LoadPage .command &&& !doingLoad &&& outfifo.isGreaterThan(fromInteger(valueof(OutputBufferSize)) - zeroExtend(command.length)));
         $display("Start Page");
         plbMasterCommandInfifo.deq();
         $display("Load Page");
-        rowAddrOffsetLoad   <= truncate(command.addr()>>SizeOf#(ZeroOffset)); // this is the log 
-        Bit#(SizeOf#(zeroOffset)) addrBottom = truncate(command.addr);
-        if (addrBottom != 0)
-          begin
-            $display("ERROR:Address not 64-byte aligned"); 
-          end
-
+        rowAddrOffsetLoad   <= truncate(command.addr()); // this is the log 
+        lengthLoad <= command.length;        
         doingLoad <= True;
   endrule
 
-  rule startPageStore(cmd_in_first matches tagged StorePage .command &&& !doingStore);
+  rule startPageStore(cmd_in_first matches tagged StorePage .command &&& !doingStore &&& infifo.isGreaterThan(command.addr));
     $display("Start Page");
     plbMasterCommandInfifo.deq();
     $display("Store Page");
     rowAddrOffsetStore <= truncate(command.addr>>SizeOf#(zeroOffset)); 
-    Bit#(SizeOf#(zeroOffset)) addrBottom = truncate(command.addr);
-    if (addrBottom != 0)
-      begin
-        $display("ERROR:Address not 64-byte aligned");
-      end
-
+    lengthStore <= command.length;        
     doingStore <= True;	
   endrule
 
@@ -243,29 +226,30 @@ module mkPLBMaster (PLBMaster);
       end
   endrule    
 
+  // Now we only want to go for loadLength beats
   rule loadPage_Data(doingLoad && stateLoad == Data);
-    if(((mRdBTerm == 1) && (loadDataCount_plus2 < (fromInteger(valueof(BeatsPerBurst))))) || (mErr == 1))
+    if(((mRdBTerm == 1) && (loadDataCount_plus2 < loadLength)) || (mErr == 1))
       begin
 	// We got terminated / Errored 
 	rdBurst <= 1'b0;
 	loadDataCount <= 0;
  	loadDataCount_plus2 <= 2;   	
-	stateLoad <= Idle;             
+	stateLoad <= Idle;  
+        outfifo.abort();           
       end
     else if(mRdDAck == 1)
       begin
 	loadDataCount <= newloadDataCount;
         loadDataCount_plus2 <= newloadDataCount_plus2;
-        loadBuffer.upd({loadCounter,loadDataCount}, mRdDBus);                   
-	if(newloadDataCount == 0)
+        outfifo.enq(mRdDBus);
+	if(newloadDataCount == loadLength)
 	  begin
-            loadCounter <= loadCounter + 1; // Flip the loadCounter
 	    //We're now done reading... what should we do?
-            loadValid.enq(0);  // This signifies that the data is valid Nirav could probably remove this
+            outfifo.commit();// This signifies that the data is valid
 	    doingLoad <= False;
             stateLoad <= Idle;
 	  end
-	else if(newloadDataCount == maxBound) // YYY: ndave used to ~0
+	else if(newloadDataCount == loadLength - 1) 
 	  begin
 	    // Last read is upcoming.  Need to set down the 
 	    // rdBurst signal.
@@ -273,8 +257,6 @@ module mkPLBMaster (PLBMaster);
 	  end
       end
   endrule
-
-
   
   rule storePage_Requesting(doingStore && stateRequest == RequestingStore && stateStore == Idle);
     // We've just requested the bus and are waiting for an ack
@@ -313,35 +295,36 @@ module mkPLBMaster (PLBMaster);
 
 
   rule storePage_Data(doingStore && stateStore == Data);
-    if((mWrBTerm == 1) && (storeDataCount_plus2 < (fromInteger(valueof(BeatsPerBurst)))) || (mErr == 1))
+    if(((mWrBTerm == 1) && (storeDataCount_plus2 < storeLength)) || (mErr == 1))
       begin
 	// We got terminated / Errored 
 	wrBurst <= 1'b0;
 	storeDataCount <= 0;
         storeDataCount_plus2 <= 2;
 	stateStore <= Idle; // Can't burst for a cycle p. 30             
+        infifo.rewind();
       end
     else if(mWrDAck == 1)
       begin
 	storeDataCount <= newstoreDataCount;                   
 	storeDataCount_plus2 <= newstoreDataCount_plus2;
-	if(newstoreDataCount == 0)
+        infifo.deq();
+	if(newstoreDataCount == storeLength)
 	  begin
 	    //We're now done reading... what should we do?
 	    // Data transfer complete
             if(mBusy == 0) 
               begin
+                infifo.commit();
                 doingStore <= False;
-                stateStore <= Idle;
-                storeValid.deq();
-                storeCounter <= storeCounter + 1;
+                stateStore <= Idle;                
               end
             else
               begin
                 stateStore <= WaitForBusy;
               end
 	  end
-	else if(newstoreDataCount == maxBound) //YYY: used to be ~0
+	else if(newstoreDataCount == storeLength - 1) //YYY: used to be ~0
 	  begin
 	    // Last read is upcoming.  Need to set down the 
 	    // wrBurst signal.
@@ -357,62 +340,23 @@ module mkPLBMaster (PLBMaster);
 	wrBurst <= 1'b0;
 	storeDataCount <= 0; // may not be necessary
         storeDataCount_plus2 <= 2; 
-	stateStore <= Idle; // Can't burst for a cycle p. 30             
+	stateStore <= Idle; // Can't burst for a cycle p. 30     
+        infifo.abort();        
       end    
     else if(mBusy == 0)
       begin
-        storeCounter <= storeCounter + 1;
+        infifo.commit();
         doingStore <= False;
         stateStore <= Idle;
-        storeValid.deq();
-      end
-  endrule
-
-  /********
-  /* Code For Handling Record Translation
-  /*******/
-
-  rule writeStoreData(storeValid.notFull());
-    storeBufferWritePointer <= storeBufferWritePointer + 1;
-     
-   
-    storeBuffer.upd(storeBufferWritePointer, recordInfifo.first);
-   
-
-    recordInfifo.deq;
-    
-    Bit#(TLog#(BeatsPerBurst)) bottomValue = 0;
-    if(truncate(storeBufferWritePointer + 1) == bottomValue)
-      begin
-        $display("Store Data finished a flight");
-        storeValid.enq(0);
       end
   endrule
 
 
-  rule wordToRecord(loadValid.notEmpty());
-    loadBufferReadPointer <= loadBufferReadPointer + 1;
-    Bit#(64) loadValue = loadBuffer.sub(loadBufferReadPointer);
-    Bit#(32) loadHigh = loadValue [63:32];
-    Bit#(32) loadLow = loadValue [31:0];
-    Bit#(TLog#(BeatsPerBurst)) bottomValue = 0;
-    if(truncate(loadBufferReadPointer + 1) == bottomValue)
-      begin
-        $display("Load Data finished a flight");
-        loadValid.deq();
-      end
+  interface Put wordInput = rewindFifoToPut(infifo);
 
-
-    recordOutfifo.enq({loadHigh,loadLow});
-
-  endrule
-
-  interface Put wordInput = fifoToPut(recordInfifo);
-
-  interface Get wordOutput = fifoToGet(recordOutfifo);
+  interface Get wordOutput = commitFifoToGet(outfifo);
 
   interface Put plbMasterCommandInput = fifoToPut(plbMasterCommandInfifo);
-
 
   interface PLBMasterWires  plbMasterWires;
  
