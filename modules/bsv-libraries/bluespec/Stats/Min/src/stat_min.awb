@@ -1,0 +1,13 @@
+********************************************************************
+* Stat Min 
+********************************************************************
+
+%AWB_START
+
+%name Min collector
+%desc Keeps the minimum value seen 
+%provides stat_min
+
+%sources -t BSV -v PUBLIC Min.bsv
+
+%AWB_END

@@ -1,0 +1,13 @@
+********************************************************************
+* Stat Max 
+********************************************************************
+
+%AWB_START
+
+%name Max collector
+%desc Keeps the maximum value seen 
+%provides stat_max
+
+%sources -t BSV -v PUBLIC Max.bsv
+
+%AWB_END

@@ -1,0 +1,13 @@
+********************************************************************
+* Stat Averager
+********************************************************************
+
+%AWB_START
+
+%name Averager collector
+%desc Keeps the averager value seen 
+%provides stat_averager
+
+%sources -t BSV -v PUBLIC Averager.bsv
+
+%AWB_END
