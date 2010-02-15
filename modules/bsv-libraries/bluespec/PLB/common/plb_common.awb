@@ -11,5 +11,9 @@
 	 
 %sources -t BSV -v PUBLIC PLBMasterDefaultParameters.bsv
 %sources -t BSV -v PUBLIC PLBMasterWires.bsv
+%sources -t BSV -v PUBLIC PLBSlaveWires.bsv
+%sources -t BSV -v PUBLIC PLBMasterTypes.bsv
+%sources -t BSV -v PUBLIC PLBSlaveTypes.bsv
+
 
 %AWB_END

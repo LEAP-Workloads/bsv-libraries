@@ -33,8 +33,11 @@ Author: Kermin Fleming
    which allow it to be used for various applications.   
 */
 
-`include "asim/providec/rewind_fifo.bsv"
-`include "asim/providec/commit_fifo.bsv"
+
+`include "asim/provides/plb_common.bsh"
+`include "asim/provides/librl_bsv_base.bsh"
+`include "asim/provides/rewind_fifo.bsh"
+`include "asim/provides/commit_fifo.bsh"
 
 // Global Imports
 import GetPut::*;
@@ -57,17 +60,19 @@ typedef enum {
 } StateRequest 
     deriving(Bits, Eq);
 
+typedef TMul#(4,BeatsPerBurst) OutputBufferSize;
+
 module mkPLBMaster (PLBMaster);
   Clock plbClock <- exposeCurrentClock();
   Reset plbReset <- exposeCurrentReset();
   // state for the actual magic memory hardware
-  FIFO#(PLBMasterCommand)  plbMasterCommandInfifo <- mkFIFO(); 
+  FIFO#(BURST_REQUEST#(PLBAddr,PLBMaxBurst))  plbMasterCommandInfifo <- mkFIFO(); 
   
 
-  typedef TMul#(4,BeatsPerBurst) OutputBufferSize;
+
   // Output buffers
-  CommitFIFOLevel#(BusWord,OutputBufferSize) infifo <- mkCommitFIFOLevel;
-  RewindFIFOLevel#(BusWord,OutputBufferSize) outfifo <- mkRewindFIFOLevel;
+  CommitFIFOLevel#(BusWord,OutputBufferSize) outfifo <- mkCommitFIFOLevel;
+  RewindFIFOLevel#(BusWord,OutputBufferSize) infifo <- mkRewindFIFOLevel;
 
   
   Reg#(PLBAddr)                             rowAddrOffsetLoad <- mkReg(0);
@@ -90,8 +95,8 @@ module mkPLBMaster (PLBMaster);
   Reg#(Bit#(1))                             rnw <- mkReg(0);
 
 
-  Reg#(Bit#(TLog#(BeatsPerBurst)))              loadDataCount <- mkReg(0);
-  Reg#(Bit#(TLog#(BeatsPerBurst)))              storeDataCount <-mkReg(0);// If you change this examine mWrDBus_o
+  Reg#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))))              loadDataCount <- mkReg(0);
+  Reg#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))))              storeDataCount <-mkReg(0);// If you change this examine mWrDBus_o
   Reg#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))))      loadDataCount_plus2 <- mkReg(2);
   Reg#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))))      storeDataCount_plus2 <-mkReg(2);  
   
@@ -101,35 +106,32 @@ module mkPLBMaster (PLBMaster);
   Reg#(Bit#(1))                             wrBurst <- mkReg(0);
 
   // Input wires  
-  Wire#(Bit#(1)) mRst <- mkBypassWire();
-  Wire#(Bit#(1)) mAddrAck <- mkBypassWire();	
-  Wire#(Bit#(1)) mBusy <- mkBypassWire(); 	
-  Wire#(Bit#(1)) mErr <- mkBypassWire();		
-  Wire#(Bit#(1)) mRdBTerm <- mkBypassWire(); 	
-  Wire#(Bit#(1)) mRdDAck <- mkBypassWire();
-  Wire#(Bit#(64))mRdDBus <- mkBypassWire(); 
-  Wire#(Bit#(3)) mRdWdAddr <- mkBypassWire(); 	
-  Wire#(Bit#(1)) mRearbitrate <- mkBypassWire(); 
-  Wire#(Bit#(1)) mWrBTerm <- mkBypassWire(); 	
-  Wire#(Bit#(1)) mWrDAck <- mkBypassWire(); 	
-  Wire#(Bit#(1)) mSSize <- mkBypassWire(); 	
-  Wire#(Bit#(1)) sMErr <- mkBypassWire(); // on a read, during the data ack		
-  Wire#(Bit#(1)) sMBusy <- mkBypassWire();
+  Wire#(Bit#(1)) mRst_i <- mkBypassWire();
+  Wire#(Bit#(1)) mAddrAck_i <- mkBypassWire();	
+  Wire#(Bit#(1)) mBusy_i <- mkBypassWire(); 	
+  Wire#(Bit#(1)) mErr_i <- mkBypassWire();		
+  Wire#(Bit#(1)) mRdBTerm_i <- mkBypassWire(); 	
+  Wire#(Bit#(1)) mRdDAck_i <- mkBypassWire();
+  Wire#(Bit#(64))mRdDBus_i <- mkBypassWire(); 
+  Wire#(Bit#(4)) mRdWdAddr_i <- mkBypassWire(); 	
+  Wire#(Bit#(1)) mRearbitrate_i <- mkBypassWire(); 
+  Wire#(Bit#(1)) mWrBTerm_i <- mkBypassWire(); 	
+  Wire#(Bit#(1)) mWrDAck_i <- mkBypassWire(); 	
+  Wire#(Bit#(2)) mSSize_i <- mkBypassWire(); 	
+  Wire#(Bit#(1)) sMErr_i <- mkBypassWire(); // on a read, during the data ack		
+  Wire#(Bit#(1)) sMBusy_i <- mkBypassWire();
 
   //  Outputs
 
 
-  Bit#(PLBAddr) mABus_o = addressOffset; // Our address Address Bus, we extend to compensate for word 
+  PLBAddr mABus_o = addressOffset; // Our address Address Bus, we extend to compensate for word 
 
   
-  Bit#(TAdd#(1,TLog#(BeatsPerBurst))) sbuf_addr = {storeCounter,storeDataCount};
-  
- 
   Bit#(64)mWrDBus_o   = infifo.first();
-  Bit#(1) mRequest_o  = request & ~mRst; // Request
-  Bit#(1) mBusLock_o  = 1'b0 & ~mRst; // Bus lock
-  Bit#(1) mRdBurst_o  = rdBurst & ~mRst; // read burst 
-  Bit#(1) mWrBurst_o  = wrBurst & ~mRst; // write burst
+  Bit#(1) mRequest_o  = request & ~mRst_i; // Request
+  Bit#(1) mBusLock_o  = 1'b0 & ~mRst_i; // Bus lock
+  Bit#(1) mRdBurst_o  = rdBurst & ~mRst_i; // read burst 
+  Bit#(1) mWrBurst_o  = wrBurst & ~mRst_i; // write burst
   Bit#(1) mRNW_o      = rnw; // Read Not Write
   Bit#(1) mAbort_o    = 1'b0; // Abort
   Bit#(2) mPriority_o = 2'b11;// priority indicator
@@ -146,35 +148,38 @@ module mkPLBMaster (PLBMaster);
   // precompute the next address offset.  Sometimes
   
   
-  PLBMasterCommand cmd_in_first = plbMasterCommandInfifo.first();
+  BURST_REQUEST#(PLBAddr,PLBMaxBurst) cmd_in_first = plbMasterCommandInfifo.first();
 
   let newloadDataCount  =  loadDataCount + 1;
   let newstoreDataCount = storeDataCount + 1;
   let newloadDataCount_plus2  =  loadDataCount_plus2 + 1;
   let newstoreDataCount_plus2 = storeDataCount_plus2 + 1;
 
+  let storeDataAvailable =  infifo.isGreaterThan(zeroExtend(lengthStore));
+  let loadBufferAvailable = outfifo.isGreaterThan(fromInteger(valueof(OutputBufferSize)) - zeroExtend(lengthLoad));
+
   //Check for buffer space
  
-  rule startPageLoad(cmd_in_first matches tagged LoadPage .command &&& !doingLoad &&& outfifo.isGreaterThan(fromInteger(valueof(OutputBufferSize)) - zeroExtend(command.length)));
-        $display("Start Page");
-        plbMasterCommandInfifo.deq();
-        $display("Load Page");
-        rowAddrOffsetLoad   <= truncate(command.addr()); // this is the log 
-        lengthLoad <= command.length;        
-        doingLoad <= True;
+  rule startPageLoad(cmd_in_first matches tagged ReadReq .command &&& !doingLoad);
+    $display("Start Page");
+    plbMasterCommandInfifo.deq();
+    $display("Load Page");
+    rowAddrOffsetLoad   <= truncate(command.addr()); // this is the log 
+    lengthLoad <= command.size;        
+    doingLoad <= True;
   endrule
 
-  rule startPageStore(cmd_in_first matches tagged StorePage .command &&& !doingStore &&& infifo.isGreaterThan(command.addr));
+  rule startPageStore(cmd_in_first matches tagged WriteReq .command &&& !doingStore);
     $display("Start Page");
     plbMasterCommandInfifo.deq();
     $display("Store Page");
-    rowAddrOffsetStore <= truncate(command.addr>>SizeOf#(zeroOffset)); 
-    lengthStore <= command.length;        
+    rowAddrOffsetStore <= truncate(command.addr); 
+    lengthStore <= command.size;        
     doingStore <= True;	
   endrule
 
 
-  rule loadPage_Idle(doingLoad && stateRequest == Idle && stateLoad == Idle && loadValid.notFull);
+  rule loadPage_Idle(doingLoad && stateRequest == Idle && stateLoad == Idle && !loadBufferAvailable);
     // We should not initiate a transfer if the wordOutfifo is not valid
     requestingStore <= False;
     request <= 1'b1;
@@ -183,7 +188,7 @@ module mkPLBMaster (PLBMaster);
   endrule
 
   // Store page idle is somehow running!!!
-  rule storePage_Idle(doingStore && stateRequest == Idle && stateStore == Idle && storeValid.notEmpty);
+  rule storePage_Idle(doingStore && stateRequest == Idle && stateStore == Idle&& !storeDataAvailable);
     requestingStore <= True;
     request <= 1'b1;
     stateRequest <= RequestingStore;
@@ -191,7 +196,7 @@ module mkPLBMaster (PLBMaster);
     rnw <= 1'b0; // We're writing
   endrule
 
-  rule continueIdling (stateRequest == Idle && stateStore == Idle && (!(doingStore && storeValid.notEmpty) && !(doingLoad && loadValid.notFull))); // Gotta work out the complements of the stuff up above
+  rule continueIdling (stateRequest == Idle && stateStore == Idle && (!(doingStore && storeDataAvailable) && !(doingLoad && loadBufferAvailable))); // Gotta work out the complements of the stuff up above
     request <= 1'b0;
     requestingStore <= True;
     wrBurst <= 1'b1; // Write burst is asserted with the write request
@@ -202,11 +207,15 @@ module mkPLBMaster (PLBMaster);
   rule loadPage_Requesting(doingLoad && stateRequest == RequestingLoad && stateLoad == Idle);
     // We've just requested the bus and are waiting for an ack
     //$display("loadPage_Requesting");
-    if(mAddrAck == 1 )
+    //reset Counters
+    loadDataCount <= 0;
+    loadDataCount_plus2 <= 2;
+
+    if(mAddrAck_i == 1 )
       begin
         stateRequest <= Idle;
 	// Check for error conditions  
-	if(mRearbitrate == 1) 
+	if(mRearbitrate_i == 1) 
 	  begin
 	    // Got terminated by the bus
 	    $display("Terminated by BUS @ %d",$time);
@@ -228,7 +237,7 @@ module mkPLBMaster (PLBMaster);
 
   // Now we only want to go for loadLength beats
   rule loadPage_Data(doingLoad && stateLoad == Data);
-    if(((mRdBTerm == 1) && (loadDataCount_plus2 < loadLength)) || (mErr == 1))
+    if(((mRdBTerm_i == 1) && (loadDataCount_plus2 < lengthLoad)) || (mErr_i == 1))
       begin
 	// We got terminated / Errored 
 	rdBurst <= 1'b0;
@@ -237,19 +246,19 @@ module mkPLBMaster (PLBMaster);
 	stateLoad <= Idle;  
         outfifo.abort();           
       end
-    else if(mRdDAck == 1)
+    else if(mRdDAck_i == 1)
       begin
 	loadDataCount <= newloadDataCount;
         loadDataCount_plus2 <= newloadDataCount_plus2;
-        outfifo.enq(mRdDBus);
-	if(newloadDataCount == loadLength)
+        outfifo.enq(mRdDBus_i);
+	if(newloadDataCount == lengthLoad)
 	  begin
 	    //We're now done reading... what should we do?
             outfifo.commit();// This signifies that the data is valid
 	    doingLoad <= False;
             stateLoad <= Idle;
 	  end
-	else if(newloadDataCount == loadLength - 1) 
+	else if(newloadDataCount == lengthLoad - 1) 
 	  begin
 	    // Last read is upcoming.  Need to set down the 
 	    // rdBurst signal.
@@ -260,11 +269,14 @@ module mkPLBMaster (PLBMaster);
   
   rule storePage_Requesting(doingStore && stateRequest == RequestingStore && stateStore == Idle);
     // We've just requested the bus and are waiting for an ack
-    if(mAddrAck == 1 )
+    storeDataCount <= 0;
+    storeDataCount_plus2 <= 2;
+
+    if(mAddrAck_i == 1 )
       begin
         stateRequest <= Idle; 
 	// Check for error conditions
-	if(mRearbitrate == 1)
+	if(mRearbitrate_i == 1)
 	  begin
 	    // Got terminated by the bus
 	    wrBurst <= 1'b0;
@@ -275,14 +287,12 @@ module mkPLBMaster (PLBMaster);
 	    // Set down request, as we are not request pipelining
 	    request <= 1'b0;
 	    // We can be WrDAck'ed at this time p.29 or WrBTerm p.30 
-	    if(mWrBTerm == 1)
+	    if(mWrBTerm_i == 1)
 	      begin  
 		wrBurst <= 1'b0;
 	      end
-            else if(mWrDAck == 1)
+            else if(mWrDAck_i == 1)
 	      begin
-		storeDataCount <= newstoreDataCount;
-    		storeDataCount_plus2 <= newstoreDataCount_plus2;
 		stateStore <= Data;
 	      end
             else
@@ -295,7 +305,7 @@ module mkPLBMaster (PLBMaster);
 
 
   rule storePage_Data(doingStore && stateStore == Data);
-    if(((mWrBTerm == 1) && (storeDataCount_plus2 < storeLength)) || (mErr == 1))
+    if(((mWrBTerm_i == 1) && (storeDataCount_plus2 < lengthStore)) || (mErr_i == 1))
       begin
 	// We got terminated / Errored 
 	wrBurst <= 1'b0;
@@ -304,16 +314,16 @@ module mkPLBMaster (PLBMaster);
 	stateStore <= Idle; // Can't burst for a cycle p. 30             
         infifo.rewind();
       end
-    else if(mWrDAck == 1)
+    else if(mWrDAck_i == 1)
       begin
 	storeDataCount <= newstoreDataCount;                   
 	storeDataCount_plus2 <= newstoreDataCount_plus2;
         infifo.deq();
-	if(newstoreDataCount == storeLength)
+	if(newstoreDataCount == lengthStore)
 	  begin
 	    //We're now done reading... what should we do?
 	    // Data transfer complete
-            if(mBusy == 0) 
+            if(mBusy_i == 0) 
               begin
                 infifo.commit();
                 doingStore <= False;
@@ -324,7 +334,7 @@ module mkPLBMaster (PLBMaster);
                 stateStore <= WaitForBusy;
               end
 	  end
-	else if(newstoreDataCount == storeLength - 1) //YYY: used to be ~0
+	else if(newstoreDataCount == lengthStore - 1) //YYY: used to be ~0
 	  begin
 	    // Last read is upcoming.  Need to set down the 
 	    // wrBurst signal.
@@ -334,16 +344,16 @@ module mkPLBMaster (PLBMaster);
   endrule
 
   rule storePage_WaitForBusy(doingStore && stateStore == WaitForBusy);
-    if(mErr == 1)
+    if(mErr_i == 1)
       begin
 	// We got terminated / Errored 
 	wrBurst <= 1'b0;
 	storeDataCount <= 0; // may not be necessary
         storeDataCount_plus2 <= 2; 
 	stateStore <= Idle; // Can't burst for a cycle p. 30     
-        infifo.abort();        
+        infifo.rewind();        
       end    
-    else if(mBusy == 0)
+    else if(mBusy_i == 0)
       begin
         infifo.commit();
         doingStore <= False;
@@ -352,11 +362,42 @@ module mkPLBMaster (PLBMaster);
   endrule
 
 
-  interface Put wordInput = rewindFifoToPut(infifo);
+  interface BURST_MEMORY_IFC burstIfc;
+    method ActionValue#(BusWord) readRsp();
+      outfifo.deq();
+      return outfifo.first();
+    endmethod
 
-  interface Get wordOutput = commitFifoToGet(outfifo);
+    // Look at the read response value without popping it
+    method BusWord peek();
+      return outfifo.first();
+    endmethod
 
-  interface Put plbMasterCommandInput = fifoToPut(plbMasterCommandInfifo);
+    // Read response ready
+    method Bool notEmpty();
+      return outfifo.notEmpty();
+    endmethod
+
+    // Read request possible?
+    method Bool notFull();
+      return outfifo.notFull;
+    endmethod
+
+    // We must split the write request and response...
+    method Action writeData(BusWord data); 
+      infifo.enq(data);
+    endmethod
+  
+    method Action burstReq(BURST_REQUEST#(PLBAddr, PLBMaxBurst) burstReqIn);
+      plbMasterCommandInfifo.enq(burstReqIn);
+    endmethod    
+
+    // Write request possible?
+    method Bool writeNotFull();
+      return infifo.notFull();
+    endmethod
+  endinterface
+
 
   interface PLBMasterWires  plbMasterWires;
  
@@ -427,35 +468,62 @@ module mkPLBMaster (PLBMaster);
       return mWrDBus_o;    
     endmethod
 
-    method Action plbIN(
-      Bit#(1) mRst_in,            // PLB reset
-      Bit#(1) mAddrAck_in,	       // Addr Ack
-      Bit#(1) mBusy_in,           // Master Busy
-      Bit#(1) mErr_in,            // Slave Error
-      Bit#(1) mRdBTerm_in,	       // Read burst terminate signal
-      Bit#(1) mRdDAck_in,	       // Read data ack
-      Bit#(64)mRdDBus_in,	       // Read data bus
-      Bit#(3) mRdWdAddr_in,       // Read word address
-      Bit#(1) mRearbitrate_in,    // Rearbitrate
-      Bit#(1) mWrBTerm_in,	       // Write burst terminate
-      Bit#(1) mWrDAck_in,	       // Write data ack
-      Bit#(1) mSSize_in, 	       // Slave bus size
-      Bit#(1) sMErr_in,	       // Slave error
-      Bit#(1) sMBusy_in);	       // Slave busy       
-      mRst <= mRst_in;       
-      mAddrAck <= mAddrAck_in;	
-      mBusy <= mBusy_in;		
-      mErr <= mErr_in;		
-      mRdBTerm <= mRdBTerm_in;	
-      mRdDAck <= mRdDAck_in;	
-      mRdDBus <= mRdDBus_in;	
-      mRdWdAddr <= mRdWdAddr_in;	
-      mRearbitrate <= mRearbitrate_in;
-      mWrBTerm <= mWrBTerm_in;	
-      mWrDAck <= mWrDAck_in;	
-      mSSize <= mSSize_in; 	
-      sMErr <= sMErr_in;		
-      sMBusy <= sMBusy_in;	
+
+    method Action mRst(Bit#(1) mRst_in);
+      mRst_i <= mRst_in;       
     endmethod
-   endinterface
+
+    method Action mAddrAck(Bit#(1) mAddrAck_in);
+      mAddrAck_i <= mAddrAck_in;	
+    endmethod
+
+    method Action mBusy(Bit#(1) mBusy_in);
+      mBusy_i <= mBusy_in;		
+    endmethod
+
+    method Action mErr(Bit#(1) mErr_in);
+     mErr_i <= mErr_in;		
+    endmethod
+
+    method Action mRdBTerm(Bit#(1) mRdBTerm_in);
+     mRdBTerm_i <= mRdBTerm_in;	
+    endmethod
+
+    method Action mRdDAck(Bit#(1) mRdDAck_in);
+      mRdDAck_i <= mRdDAck_in;	
+    endmethod
+
+    method Action mRdDBus(Bit#(64) mRdDBus_in);
+      mRdDBus_i <= mRdDBus_in;	
+    endmethod
+
+    method Action mRdWdAddr(Bit#(4) mRdWdAddr_in);
+      mRdWdAddr_i <= mRdWdAddr_in;	
+    endmethod
+
+    method Action mRearbitrate(Bit#(1) mRearbitrate_in);
+      mRearbitrate_i <= mRearbitrate_in;
+    endmethod
+
+    method Action mWrBTerm(Bit#(1) mWrBTerm_in);
+      mWrBTerm_i <= mWrBTerm_in;	
+    endmethod
+
+    method Action mWrDAck(Bit#(1) mWrDAck_in);
+      mWrDAck_i <= mWrDAck_in;	
+    endmethod
+
+    method Action mSSize(Bit#(2) mSSize_in);
+      mSSize_i <= mSSize_in; 	
+    endmethod
+
+    method Action sMErr(Bit#(1) sMErr_in);
+      sMErr_i <= sMErr_in;		
+    endmethod
+
+    method Action sMBusy(Bit#(1) sMBusy_in);
+      sMBusy_i <= sMBusy_in;	    
+    endmethod
+
+  endinterface
 endmodule

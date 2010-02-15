@@ -1,14 +1,14 @@
 ********************************************************************
-* PLB Master Simple
+* PLB Slave
 ********************************************************************
 
 %AWB_START
 
-%name PLB Master Simple
-%desc Full PLB Master		
+%name PLB Slave
+%desc A simple PLB Slave, which translates bus signals into slave requests
 
-%provides plb_master
+%provides plb_slave
 
-%sources -t BSV -v PUBLIC PLBMaster.bsv
+%sources -t BSV -v PUBLIC PLBSlave.bsv
 
 %AWB_END

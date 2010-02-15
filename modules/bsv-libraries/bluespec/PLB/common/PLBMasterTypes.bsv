@@ -1,10 +1,7 @@
-typedef Bit#(32) PLBAddr;
-typedef Bit#(5)  PLBLength; // Note Maximum Length is 16, but we'll waste resources for now...
+`include "asim/provides/librl_bsv_base.bsh"
 
 interface PLBMaster;
-  interface Put#(BusWord) wordInput;
-  interface Get#(BusWord) wordOutput;
-  interface Put#(PLBMasterCommand) plbMasterCommandInput;
+  interface BURST_MEMORY_IFC#(PLBAddr,BusWord,PLBMaxBurst) burstIfc;
   interface PLBMasterWires   plbMasterWires;
 endinterface
  

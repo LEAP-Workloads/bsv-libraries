@@ -1,14 +1,15 @@
 ********************************************************************
-* PLB Master Simple
+* PLB Master Multi
 ********************************************************************
 
 %AWB_START
 
-%name PLB Master Simple
+%name PLB Master Multi
 %desc Full PLB Master		
 
 %provides plb_master
-
-%sources -t BSV -v PUBLIC PLBMaster.bsv
+	 
+%sources -t BSV -v PUBLIC PLBMasterMultiSize.bsv
+%sources -t BSV -v PUBLIC PLBMasterWrapper.bsv
 
 %AWB_END

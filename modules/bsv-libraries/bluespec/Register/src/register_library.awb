@@ -8,6 +8,6 @@
 %desc A set of useful register functions
 %provides register_library
 
-%sources -t BSV -v PUBLIC Register.bsv ControlReg.bsv
+%sources -t BSV -v PUBLIC Register.bsv 
 
 %AWB_END

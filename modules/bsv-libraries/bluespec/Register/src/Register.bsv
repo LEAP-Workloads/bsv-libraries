@@ -490,3 +490,67 @@ function Put#(data_t) registerToPut(Reg#(data_t) data);
                      endinterface;
   return ifc;
 endfunction
+
+interface RegBE#(type data_t, numeric type be_sz);
+  method data_t read();
+  method Action write(data_t data, Bit#(be_sz) be);
+endinterface
+
+
+module mkRegBE#(data_t initializer) (RegBE#(data_t,be_sz))
+  provisos(
+            Bits#(data_t, data_sz),
+            Bits#(Vector::Vector#(be_sz, Bit#(8)), data_sz)
+          );
+
+  Vector#(be_sz,Bit#(8)) inits = unpack(pack(initializer));
+  Vector#(be_sz,Reg#(Bit#(8))) regs;
+
+  for(Integer i = 0; i < valueof(be_sz); i = i + 1)
+    begin
+      regs[i] <- mkReg(inits[i]);
+    end
+
+  method data_t read();
+    return unpack(pack(readVReg(regs)));
+  endmethod
+
+  method Action write(data_t data, Bit#(be_sz) be);
+    Vector#(be_sz, Bit#(8)) splitNewData = unpack(pack(data));
+    for(Integer i = 0; i < valueof(be_sz); i = i + 1)
+      begin
+        if(be[i] == 1)
+          begin
+             regs[i] <= splitNewData[i];
+          end
+      end    
+  endmethod
+
+endmodule
+
+function Action writeRegisterBE(Reg#(data_t) regIn, data_t newData, Bit#(be_sz) be)
+ provisos (
+            Bits#(data_t, data_sz),
+            Mul#(be_sz,8,data_sz),
+            Div#(data_sz,8,be_sz),
+            Add#(data_sz, shouldBeZero, TMul#(be_sz, 8)),
+            Add#(extraBits, 8, TMul#(be_sz, 8))
+          );
+  action
+
+    if(valueof(shouldBeZero) != 0)
+      begin
+        error("shouldBeZero is not zero");
+      end
+
+    Vector#(be_sz, Bit#(8)) splitNewData = unpack(pack(newData));
+    Vector#(be_sz, Reg#(Bit#(8))) splitReg = explodeRegister(regIn);
+    for(Integer i = 0; i < valueof(be_sz); i = i + 1)
+      begin
+        if(be[i] == 1)
+          begin
+             splitReg[i] <= splitNewData[i];
+          end
+      end
+  endaction
+endfunction
