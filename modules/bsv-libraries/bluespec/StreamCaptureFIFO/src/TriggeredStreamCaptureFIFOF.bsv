@@ -1,9 +1,9 @@
 import FIFOF::*;
 
-typedef enum {
-  Filling,
-  Draining
-} State deriving (Bits,Eq);
+// typedef enum {
+//   Filling,
+//   Draining
+// } State deriving (Bits,Eq);
 
 interface TriggeredStreamCaptureFIFOF#(type data_t);
   interface FIFOF#(data_t) fifof;

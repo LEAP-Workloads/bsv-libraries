@@ -33,7 +33,7 @@ endinterface
 typedef enum {
   Data,
   Cleanup
-} SPIState deriving (Bits,Eq);
+} SPISlaveState deriving (Bits,Eq);
 
 module mkSPISlaveWriteOnly#(Clock fastClock, Reset fastReset) (SPISlave#(data_t))
    provisos (Bits#(data_t,data_sz),
@@ -45,7 +45,7 @@ module mkSPISlaveWriteOnly#(Clock fastClock, Reset fastReset) (SPISlave#(data_t)
   SyncFIFOIfc#(Bit#(1)) datafifo <- mkSyncFIFOFromCC(valueof(data_sz),fastClock);
 
   Reg#(Bit#(TLog#(data_sz))) dataCount <- mkRegA(0,clocked_by fastClock, reset_by fastReset);
-  Reg#(SPIState) state <- mkRegA(Data,clocked_by fastClock, reset_by fastReset);
+  Reg#(SPISlaveState) state <- mkRegA(Data,clocked_by fastClock, reset_by fastReset);
   Reg#(Bit#(data_sz)) data <- mkRegU(clocked_by fastClock, reset_by fastReset);
 
   

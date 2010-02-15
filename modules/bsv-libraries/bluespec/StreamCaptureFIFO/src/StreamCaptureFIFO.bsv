@@ -2,15 +2,19 @@ import FIFOF::*;
 
 import BRAMFIFO::*;
 
+// local includes
+//`include "asim/provides/librl_bsv_storage.bsh"
+
 typedef enum {
   Filling,
   Draining
 } State deriving (Bits,Eq);
 
 module mkStreamCaptureFIFOF#(Integer streamSize) (FIFOF#(data_t))
-  provisos(Bits#(data_t, data_sz));
+  provisos(Bits#(data_t, data_sz),
+           Literal#(data_t)); // required by bramfifo
 
-  FIFOF#(data_t) fifo <- mkBRAMFIFOF(streamSize);
+  FIFOF#(data_t) fifo <- mkSizedFIFOF(streamSize);
   Reg#(State) state <- mkReg(Filling);
    
   rule setState (!fifo.notFull && state != Draining); 

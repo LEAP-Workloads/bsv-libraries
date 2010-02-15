@@ -38,7 +38,7 @@ endinterface
     ClockWait,
     Data,
     Cleanup
-  } SPIState deriving (Bits,Eq); 
+  } SPIMasterState deriving (Bits,Eq); 
 
 
 //Need to chop 
@@ -70,7 +70,7 @@ module mkSPIMaster#(Integer divisor) (SPIMaster#(slaves,data_t))
 
   Reg#(Bit#(TLog#(data_sz))) dataCount <- mkRegA(0,clocked_by toggleClock.slowClock,
                                                  reset_by toggleReset);
-  Reg#(SPIState) state <- mkRegA(Idle, clocked_by toggleClock.slowClock,
+  Reg#(SPIMasterState) state <- mkRegA(Idle, clocked_by toggleClock.slowClock,
                                                  reset_by toggleReset);
 
   Reg#(Bit#(data_sz)) data <- mkRegU(clocked_by toggleClock.slowClock,
