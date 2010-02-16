@@ -1,14 +1,15 @@
 `include "asim/provides/plb_common.bsh"
+`include "asim/provides/register_library.bsh"
+
 
 import FIFOF::*;
 import ClientServer::*;
 import GetPut::*;
+import Clocks::*;
 
 // Should probably take the avalon abstraction thingy
 
-
-
-module mkPLBSlave (PLBSlave#(address_width, data_width));
+module mkPLBSlave#(Clock externalClock, Reset externalReset) (PLBSlave#(address_width, data_width));
  
   Wire#(Bit#(1)) rdReqInValue <- mkBypassWire;
   Wire#(Bit#(1)) wrReqInValue <- mkBypassWire;
@@ -20,12 +21,22 @@ module mkPLBSlave (PLBSlave#(address_width, data_width));
   Wire#(Bit#(data_width)) dataOutValue <- mkBypassWire;
   Wire#(Bit#(data_width)) dataInValue <- mkBypassWire;
 
+  Reg#(Bit#(32)) loadCommandCountReg <- mkReg(0);
+  Reg#(Bit#(32)) storeCommandCountReg <- mkReg(0);
+  Reg#(Bit#(32)) loadDataCountReg <- mkReg(0);
+  Reg#(Bit#(32)) storeDataCountReg <- mkReg(0);
 
-//  SyncFIFOIfc#(PLBRequest#(address_width,data_width)) reqFIFO <- mkSyncFIFOFromCC(2,asicClock);
- // SyncFIFOIfc#(Bit#(data_width)) respFIFO <- mkSyncFIFOToCC(2,asicClock,asicReset);
+ ReadOnly#(Bit#(32)) loadCommandCountWire <- mkNullCrossingWire(externalClock,loadCommandCountReg._read);
+  ReadOnly#(Bit#(32)) storeCommandCountWire <- mkNullCrossingWire(externalClock,storeCommandCountReg._read);
+  ReadOnly#(Bit#(32)) loadDataCountWire <- mkNullCrossingWire(externalClock,loadDataCountReg._read);
+  ReadOnly#(Bit#(32)) storeDataCountWire <- mkNullCrossingWire(externalClock,storeDataCountReg._read);
 
-  FIFOF#(PLBRequest#(address_width,data_width)) reqFIFO <- mkFIFOF;
-  FIFOF#(Bit#(data_width)) respFIFO <- mkFIFOF;
+
+  SyncFIFOIfc#(PLBRequest#(address_width,data_width)) reqFIFO <- mkSyncFIFOFromCC(2,externalClock);
+  SyncFIFOIfc#(Bit#(data_width)) respFIFO <- mkSyncFIFOToCC(2,externalClock,externalReset);
+
+  //FIFOF#(PLBRequest#(address_width,data_width)) reqFIFO <- mkFIFOF;
+  //FIFOF#(Bit#(data_width)) respFIFO <- mkFIFOF;
   FIFOF#(Bit#(0)) tokenFIFO <- mkSizedFIFOF(2);
 
 
@@ -37,7 +48,8 @@ module mkPLBSlave (PLBSlave#(address_width, data_width));
        reqFIFO.enq(PLBRequest{addr: addressInValue,
                               data: ?,
                               be: ?, 
-                              command: PLBRead});
+                              command: PLBRead});       
+       loadCommandCountReg <= loadCommandCountReg + 1;
       end
     else if(wrReqInValue == 1)
       begin
@@ -47,6 +59,8 @@ module mkPLBSlave (PLBSlave#(address_width, data_width));
                                data: dataInValue,
                                be: beInValue,
                                command: PLBWrite});   
+        storeDataCountReg <= storeDataCountReg + 1;
+        storeCommandCountReg <= storeCommandCountReg + 1;
         wrAckOutValue <= 1;
       end
   endrule
@@ -57,6 +71,7 @@ module mkPLBSlave (PLBSlave#(address_width, data_width));
     tokenFIFO.deq;
     dataOutValue <= respFIFO.first; // could register these.
     rdAckOutValue <= 1;
+    loadDataCountReg <= loadDataCountReg + 1;
   endrule
 
   interface PLBSlaveWires plbSlaveWires;
@@ -137,5 +152,10 @@ module mkPLBSlave (PLBSlave#(address_width, data_width));
      endmethod
    endinterface
  endinterface
+
+ interface loadCommandCount = loadCommandCountWire;
+ interface storeCommandCount = storeCommandCountWire;
+ interface loadDataCount = loadDataCountWire;
+ interface storeDataCount = storeDataCountWire;
 
 endmodule

@@ -1,0 +1,16 @@
+service PLBDEBUGRRR
+{
+    server hw (bsv, connection) <- sw (cpp, method)
+    {
+        method getSlaveLoadCommands(in UINT32[32] dummy, out UINT32[32] count);
+        method getSlaveLoadData(in UINT32[32] dummy, out UINT32[32] count);
+        method getSlaveStoreCommands(in UINT32[32] dummy, out UINT32[32] count);
+        method getSlaveStoreData(in UINT32[32] dummy, out UINT32[32] count);
+        method getMasterLoadCommands(in UINT32[32] dummy, out UINT32[32] count);
+        method getMasterLoadData(in UINT32[32] dummy, out UINT32[32] count);
+        method getMasterStoreCommands(in UINT32[32] dummy, out UINT32[32] count);
+        method getMasterStoreData(in UINT32[32] dummy, out UINT32[32] count);
+
+    };
+
+ };

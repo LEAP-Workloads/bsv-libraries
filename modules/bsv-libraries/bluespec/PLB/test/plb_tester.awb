@@ -1,0 +1,21 @@
+********************************************************************
+* PLB Test
+********************************************************************
+
+%AWB_START
+
+%name PLB Test
+%desc PLB test
+
+%provides connected_application
+%requires plb_device
+%requires plb_driver
+%requires plb_test_common
+	 
+%sources -t BSV -v PUBLIC PLBTester.bsv
+%sources -t BSV -v PUBLIC plb-common.bsv
+%sources -t H -v PUBLIC PLBTester.h
+%sources -t CPP -v PRIVATE PLBTester.cpp
+
+
+%AWB_END

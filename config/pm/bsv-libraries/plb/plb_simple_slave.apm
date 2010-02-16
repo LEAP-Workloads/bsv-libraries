@@ -1,0 +1,102 @@
+
+[Global]
+SaveParameters=0
+Description=Hello World Demo using hybrid streams
+File=plb_simple_slave
+Version=2.1
+Name=Hello World
+DefaultBenchmark=config/bm/bluespec/demos.cfx/benchmarks/null.cfg
+Type=HAsim
+Class=Asim::Model
+DefaultRunOpts=
+
+[Model]
+DefaultAttributes=hello unconnected hybrid project exe
+model=HW/SW Hybrid Project Foundation
+
+[Hybrid Project Common Utilities]
+File=config/pm/hasim/submodels/common/project-common-default.apm
+Packagehint=hasim
+
+[FPGA Environment]
+File=config/pm/hasim/submodels/fpgaenv/fpgaenv-hybrid-htg-v5-pcie.apm
+Packagehint=platforms
+
+[HW/SW Hybrid Project Foundation]
+File=modules/project/project-hybrid.awb
+Packagehint=platforms
+
+[HW/SW Hybrid Project Foundation/Requires]
+project_common=Hybrid Project Common Utilities
+fpgaenv=FPGA Environment
+application_env=Soft Connections Hybrid Application Environment
+
+[Soft Connections Hybrid Application Environment/Requires]
+platform_services=Platform Services
+soft_connections_lib=Soft Connections Library
+connected_application=PLB Test
+
+[Soft Connections Library]
+File=config/pm/hasim/submodels/common/soft-connections-lib.apm
+Packagehint=hasim
+
+[Platform Services]
+File=config/pm/hasim/submodels/platform-services/standard-platform-services.apm
+Packagehint=hasim
+
+[Soft Connections Hybrid Application Environment]
+File=modules/application-env/hybrid/soft-connections/application-env-hybrid-soft-conn.awb
+Packagehint=platforms
+
+[PLB Driver]
+File=modules/bsv-libraries/bluespec/PLB/test/PLBDriver/plb_driver.awb
+Packagehint=bsv-libraries
+
+[PLB Test]
+File=modules/bsv-libraries/bluespec/PLB/test/plb_tester.awb
+Packagehint=bsv-libraries
+
+[PLB Test/Requires]
+plb_driver=PLB Driver
+plb_test_common=PLB Test Common Files
+plb_device=PLB Slave Test
+
+[PLB Test Common Files]
+File=modules/bsv-libraries/bluespec/PLB/test/plb_test_common.awb
+Packagehint=bsv-libraries
+
+[PLB Common]
+File=modules/bsv-libraries/bluespec/PLB/common/plb_common.awb
+Packagehint=bsv-libraries
+
+[PLB Slave]
+File=modules/bsv-libraries/bluespec/PLB/src/Slave/plb_slave.awb
+Packagehint=bsv-libraries
+
+[PLB Slave Test/Requires]
+plb_slave=PLB Slave
+plb_common=PLB Common
+register_library=RegisterLibrary
+plb_master=PLB Master Multi
+rewind_fifo=RewindFIFO
+commit_fifo=CommitFIFO
+
+[RegisterLibrary]
+File=modules/bsv-libraries/bluespec/Register/src/register_library.awb
+Packagehint=bsv-libraries
+
+[PLB Slave Test]
+File=modules/bsv-libraries/bluespec/PLB/test/PLBDevice/simple_plb_slave_test.awb
+Packagehint=bsv-libraries
+
+[PLB Master Multi]
+File=modules/bsv-libraries/bluespec/PLB/src/Master/plb_master_multi.awb
+Packagehint=bsv-libraries
+
+[CommitFIFO]
+File=modules/bsv-libraries/bluespec/CommitFIFO/src/commit_fifo.awb
+Packagehint=bsv-libraries
+
+[RewindFIFO]
+File=modules/bsv-libraries/bluespec/RewindFIFO/src/rewind_fifo.awb
+Packagehint=bsv-libraries

@@ -38,6 +38,7 @@ Author: Kermin Fleming
 `include "asim/provides/librl_bsv_base.bsh"
 `include "asim/provides/rewind_fifo.bsh"
 `include "asim/provides/commit_fifo.bsh"
+`include "asim/provides/register_library.bsh"
 
 // Global Imports
 import GetPut::*;
@@ -45,6 +46,7 @@ import FIFO::*;
 import RegFile::*;
 import FIFOF::*;
 import Vector::*;
+import Clocks::*;
 
 typedef enum {   
   Idle,
@@ -62,17 +64,22 @@ typedef enum {
 
 typedef TMul#(4,BeatsPerBurst) OutputBufferSize;
 
-module mkPLBMaster (PLBMaster);
+module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
   Clock plbClock <- exposeCurrentClock();
   Reset plbReset <- exposeCurrentReset();
   // state for the actual magic memory hardware
-  FIFO#(BURST_REQUEST#(PLBAddr,PLBMaxBurst))  plbMasterCommandInfifo <- mkFIFO(); 
-  
+
+  SyncFIFOIfc#(BURST_REQUEST#(PLBAddr,PLBMaxBurst)) plbMasterCommandInfifo <- mkSyncFIFOToCC(2,externalClock,externalReset);
 
 
   // Output buffers
   CommitFIFOLevel#(BusWord,OutputBufferSize) outfifo <- mkCommitFIFOLevel;
   RewindFIFOLevel#(BusWord,OutputBufferSize) infifo <- mkRewindFIFOLevel;
+
+  // For now put the clock crossing as a seperate FIFO...
+  
+  SyncFIFOIfc#(BusWord) infifoCC <- mkSyncFIFOToCC(2,externalClock,externalReset);
+  SyncFIFOIfc#(BusWord) outfifoCC <- mkSyncFIFOFromCC(2,externalClock);
 
   
   Reg#(PLBAddr)                             rowAddrOffsetLoad <- mkReg(0);
@@ -121,6 +128,18 @@ module mkPLBMaster (PLBMaster);
   Wire#(Bit#(1)) sMErr_i <- mkBypassWire(); // on a read, during the data ack		
   Wire#(Bit#(1)) sMBusy_i <- mkBypassWire();
 
+
+  // Debug Registers 
+  Reg#(Bit#(32)) loadCommandCountReg <- mkReg(0);
+  Reg#(Bit#(32)) storeCommandCountReg <- mkReg(0);
+  Reg#(Bit#(32)) loadDataCountReg <- mkReg(0);
+  Reg#(Bit#(32)) storeDataCountReg <- mkReg(0);
+
+  ReadOnly#(Bit#(32)) loadCommandCountWire <- mkNullCrossingWire(externalClock,loadCommandCountReg._read);
+  ReadOnly#(Bit#(32)) storeCommandCountWire <- mkNullCrossingWire(externalClock,storeCommandCountReg._read);
+  ReadOnly#(Bit#(32)) loadDataCountWire <- mkNullCrossingWire(externalClock,loadDataCountReg._read);
+  ReadOnly#(Bit#(32)) storeDataCountWire <- mkNullCrossingWire(externalClock,storeDataCountReg._read);
+
   //  Outputs
 
 
@@ -167,6 +186,7 @@ module mkPLBMaster (PLBMaster);
     rowAddrOffsetLoad   <= truncate(command.addr()); // this is the log 
     lengthLoad <= command.size;        
     doingLoad <= True;
+    loadCommandCountReg <= loadCommandCountReg + 1;
   endrule
 
   rule startPageStore(cmd_in_first matches tagged WriteReq .command &&& !doingStore);
@@ -176,6 +196,7 @@ module mkPLBMaster (PLBMaster);
     rowAddrOffsetStore <= truncate(command.addr); 
     lengthStore <= command.size;        
     doingStore <= True;	
+    storeCommandCountReg <= storeCommandCountReg + 1;
   endrule
 
 
@@ -257,6 +278,7 @@ module mkPLBMaster (PLBMaster);
             outfifo.commit();// This signifies that the data is valid
 	    doingLoad <= False;
             stateLoad <= Idle;
+            loadDataCountReg <= loadDataCountReg + zeroExtend(lengthStore);
 	  end
 	else if(newloadDataCount == lengthLoad - 1) 
 	  begin
@@ -328,6 +350,7 @@ module mkPLBMaster (PLBMaster);
                 infifo.commit();
                 doingStore <= False;
                 stateStore <= Idle;                
+                storeDataCountReg <= storeDataCountReg + zeroExtend(lengthStore);
               end
             else
               begin
@@ -361,31 +384,41 @@ module mkPLBMaster (PLBMaster);
       end
   endrule
 
+  rule connectInfifo;
+    infifoCC.deq;
+    infifo.enq(infifoCC.first);
+  endrule
+
+  rule connectOutfifo;
+    outfifo.deq;
+    outfifoCC.enq(outfifo.first);
+  endrule
+
 
   interface BURST_MEMORY_IFC burstIfc;
     method ActionValue#(BusWord) readRsp();
-      outfifo.deq();
-      return outfifo.first();
+      outfifoCC.deq();
+      return outfifoCC.first();
     endmethod
 
     // Look at the read response value without popping it
     method BusWord peek();
-      return outfifo.first();
+      return outfifoCC.first();
     endmethod
 
     // Read response ready
     method Bool notEmpty();
-      return outfifo.notEmpty();
+      return outfifoCC.notEmpty();
     endmethod
 
     // Read request possible?
     method Bool notFull();
-      return outfifo.notFull;
+      return outfifoCC.notFull;
     endmethod
 
     // We must split the write request and response...
     method Action writeData(BusWord data); 
-      infifo.enq(data);
+      infifoCC.enq(data);
     endmethod
   
     method Action burstReq(BURST_REQUEST#(PLBAddr, PLBMaxBurst) burstReqIn);
@@ -394,7 +427,7 @@ module mkPLBMaster (PLBMaster);
 
     // Write request possible?
     method Bool writeNotFull();
-      return infifo.notFull();
+      return infifoCC.notFull();
     endmethod
   endinterface
 
@@ -526,4 +559,9 @@ module mkPLBMaster (PLBMaster);
     endmethod
 
   endinterface
+
+ interface loadCommandTotal = loadCommandCountWire;
+ interface storeCommandTotal = storeCommandCountWire;
+ interface loadDataTotal = loadDataCountWire;
+ interface storeDataTotal = storeDataCountWire;
 endmodule

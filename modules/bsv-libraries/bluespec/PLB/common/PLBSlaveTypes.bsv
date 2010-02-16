@@ -17,5 +17,9 @@ typedef struct {
 interface PLBSlave#(numeric type address_width, numeric type data_width);
   interface Client#(PLBRequest#(address_width, data_width),Bit#(data_width)) busClient;
   interface PLBSlaveWires#(address_width,data_width)   plbSlaveWires;
+  interface ReadOnly#(Bit#(32)) loadCommandCount;
+  interface ReadOnly#(Bit#(32)) storeCommandCount;
+  interface ReadOnly#(Bit#(32)) loadDataCount;
+  interface ReadOnly#(Bit#(32)) storeDataCount;
 endinterface
  

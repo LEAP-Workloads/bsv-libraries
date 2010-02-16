@@ -1,0 +1,13 @@
+
+%name PLB Driver
+%desc PLB Driver for testing 
+
+%provides plb_driver
+
+%sources -t BSV     -v PUBLIC  plb-driver-verilog-import.bsv
+%sources -t VERILOG -v PRIVATE plb_driver_verilog.v
+%sources -t VERILOG -v PRIVATE plb_driver_verilog_wrapper.v
+
+
+
+

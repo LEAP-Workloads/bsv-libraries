@@ -1,0 +1,19 @@
+********************************************************************
+* PLB Test Common
+********************************************************************
+
+%AWB_START
+
+%name PLB Test Common Files
+%desc PLB test
+
+%provides plb_test_common
+	 
+
+%param C_IP_INTR_NUM 1  "Number of interrupts"
+%param C_AWIDTH 32 "Address width"
+%param C_DWIDTH 64 "Data width"
+%param C_NUM_CS 1 "Chip selects"
+%param C_NUM_CE 2 "Chip enables"
+
+%AWB_END
