@@ -1,0 +1,10 @@
+# ***************
+#
+# H264 benchmarks
+#
+# ***************
+
+experiments = avalon commit_fifo crc reversal_buffer rewind_fifo stream_capture_fifo
+config/bm/bluespec/demos.cfx/benchmarks/null.cfg
+
+
