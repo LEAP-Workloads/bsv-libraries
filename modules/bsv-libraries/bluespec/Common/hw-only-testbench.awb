@@ -10,3 +10,5 @@
 %public  hw-only-testbench.bsv
 %private hw-only-testbench.cpp
 
+%param SYNTH_BOUNDARY mkConnectedApplication "name of synthesis boundary"
+
