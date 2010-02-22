@@ -1,3 +1,5 @@
+`include "register_library.bsh"
+
 interface Max#(type data_t);
   interface ReadOnly#(data_t) max;
   method Action inputSample(data_t sample);

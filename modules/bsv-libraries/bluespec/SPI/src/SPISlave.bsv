@@ -3,9 +3,10 @@ import ClientServer::*;
 import GetPut::*;
 import Clocks::*;
 
-import RegisterMapper::*;
-import FIFOUtility::*;
-import Debug::*;
+`include "register_mapper.bsh"
+`include "register_library.bsh"
+`include "fifo_utils.bsh"
+`include "debug_utils.bsh"
 
 Bool spiSlaveDebug = True;
 

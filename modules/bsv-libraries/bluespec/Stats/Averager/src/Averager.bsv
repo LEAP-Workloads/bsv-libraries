@@ -1,4 +1,4 @@
-import Register::*;
+`include "register_library.bsh"
 
 interface Averager#(type data_t);
   interface ReadOnly#(data_t) average;

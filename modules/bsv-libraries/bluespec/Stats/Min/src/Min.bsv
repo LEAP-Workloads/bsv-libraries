@@ -1,4 +1,4 @@
-import Register::*;
+`include "register_library.bsh"
 
 interface Min#(type data_t);
   interface ReadOnly#(data_t) min;
