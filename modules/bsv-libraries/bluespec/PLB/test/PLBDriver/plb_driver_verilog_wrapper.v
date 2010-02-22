@@ -1,3 +1,4 @@
+
 module plb_driver_verilog_wrapper
   (
     sys_clk_pin,
@@ -150,6 +151,8 @@ module plb_driver_verilog_wrapper
   input ftl_0_IP2Bus_IntrEventOut_pin_dummy_en;
   input sys_clk_gate_dummy;
 
+// Deal with the reset?
+   
  plb_driver_verilog p_d_v
   (
     .sys_clk_pin(sys_clk_pin),

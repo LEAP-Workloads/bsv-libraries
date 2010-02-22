@@ -7,6 +7,26 @@
 %sources -t BSV     -v PUBLIC  plb-driver-verilog-import.bsv
 %sources -t VERILOG -v PRIVATE plb_driver_verilog.v
 %sources -t VERILOG -v PRIVATE plb_driver_verilog_wrapper.v
+%sources -t NGC     -v PUBLIC  plb_dcm_0_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_docm_cntlr_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_docm_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_dsocm_bram_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_ftl_0_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_iocm_cntlr_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_iocm_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_isocm_bram_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_jtagppc_0_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_opb_mdm_0_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_opb_v20_0_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_plb2opb_bridge_0_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_plb_bram_if_cntlr_1_bram_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_plb_bram_if_cntlr_1_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_plb_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_ppc405_0_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_ppc405_1_wrapper.ngc
+%sources -t NGC     -v PUBLIC plb_reset_block_wrapper.ngc
+%sources -t BMM     -v PUBLIC plb_system.bmm
+
 
 
 
