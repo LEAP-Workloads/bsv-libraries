@@ -1,0 +1,34 @@
+Asterisk (*) preceding a constraint indicates it was not met.
+   This may be due to a setup or hold violation.
+
+------------------------------------------------------------------------------------------------------
+  Constraint                                |  Check  | Worst Case |  Best Case | Timing |   Timing   
+                                            |         |    Slack   | Achievable | Errors |    Score   
+------------------------------------------------------------------------------------------------------
+* TS_sys_clk_pin = PERIOD TIMEGRP "sys_clk_ | SETUP   |     7.206ns|     2.794ns|       0|           0
+  pin" 10 ns HIGH 50%                       | HOLD    |    -0.177ns|            |       1|         177
+------------------------------------------------------------------------------------------------------
+  TS_dcm_0_dcm_0_CLK0_BUF = PERIOD TIMEGRP  | SETUP   |     0.086ns|     9.914ns|       0|           0
+  "dcm_0_dcm_0_CLK0_BUF" TS_sys_clk_pin     | HOLD    |     0.255ns|            |       0|           0
+       HIGH 50%                             |         |            |            |        |            
+------------------------------------------------------------------------------------------------------
+  PATH "TS_RST1_path" TIG                   | SETUP   |         N/A|     3.582ns|     N/A|           0
+------------------------------------------------------------------------------------------------------
+
+
+Derived Constraint Report
+Derived Constraints for TS_sys_clk_pin
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths Analyzed       |
+|           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|TS_sys_clk_pin                 |     10.000ns|      2.794ns|      9.914ns|            1|            0|            5|        19324|
+| TS_dcm_0_dcm_0_CLK0_BUF       |     10.000ns|      9.914ns|          N/A|            0|            0|        19324|            0|
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+1 constraint not met.
+INFO:Timing:2761 - N/A entries in the Constraints list may indicate that the 
+   constraint does not cover any paths or that it has no requested value.
+
+

@@ -1,0 +1,4 @@
+verilog work "../../hdl/verilog/bus_sm.v"
+verilog work "../../hdl/verilog/bus_controller.v"
+verilog work "../../hdl/verilog/buffer.v"
+verilog work "../../hdl/verilog/user_logic.v"

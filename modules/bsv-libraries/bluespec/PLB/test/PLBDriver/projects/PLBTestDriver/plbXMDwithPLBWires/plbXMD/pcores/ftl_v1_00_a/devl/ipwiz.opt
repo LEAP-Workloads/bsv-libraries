@@ -1,0 +1,13 @@
+-batch 
+-create ftl 
+-ver 1.00.a 
+-dir "C:\Code\Research2\hw\XUP_Linux" 
+-lang verilog 
+-bus plb ms 
+-rstmir 
+-ipmst 
+-isc 3 
+-intrn 1 3 
+-xps 
+-ise 
+-driver 

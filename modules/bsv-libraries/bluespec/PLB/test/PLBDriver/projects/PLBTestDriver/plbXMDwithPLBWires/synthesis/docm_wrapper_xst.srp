@@ -1,0 +1,252 @@
+Release 10.1.03 - xst K.39 (lin64)
+Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
+--> 
+PMSPEC -- Overriding Xilinx file </usr/local/Xilinx/10.1/EDK/virtex2p/data/virtex2p.acd> with local file </usr/local/Xilinx/10.1/ISE/virtex2p/data/virtex2p.acd>
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+     9.1) Device utilization summary
+     9.2) Partition Resource Summary
+     9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "docm_wrapper_xst.prj"
+
+---- Target Parameters
+Target Device                      : xc2vp30ff896-7
+Output File Name                   : "../implementation/docm_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : docm_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+Netlist Hierarchy                  : as_optimized
+Optimization Effort                : 1
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation/docm_wrapper}
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/dsocm_v10_v2_00_b/hdl/vhdl/and_or_mux.vhd" in Library dsocm_v10_v2_00_b.
+Entity <and_or_mux> compiled.
+Entity <and_or_mux> (Architecture <IMP>) compiled.
+Compiling vhdl file "/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/dsocm_v10_v2_00_b/hdl/vhdl/dsocm_v10.vhd" in Library dsocm_v10_v2_00_b.
+Entity <dsocm_v10> compiled.
+Entity <dsocm_v10> (Architecture <IMP>) compiled.
+Compiling vhdl file "/home/kfleming/plbXMD/hdl/docm_wrapper.vhd" in Library work.
+Entity <docm_wrapper> compiled.
+Entity <docm_wrapper> (Architecture <STRUCTURE>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <docm_wrapper> in library <work> (architecture <STRUCTURE>).
+
+Analyzing hierarchy for entity <dsocm_v10> in library <dsocm_v10_v2_00_b> (architecture <IMP>) with generics.
+	C_DSARCVALUE = "10000000"
+	C_DSCNTLVALUE = "10000001"
+	C_FIXED_LATENCY = '1'
+	C_NUM_MASTERS = 1
+	C_NUM_SLAVES = 1
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <docm_wrapper> in library <work> (Architecture <STRUCTURE>).
+Entity <docm_wrapper> analyzed. Unit <docm_wrapper> generated.
+
+Analyzing generic Entity <dsocm_v10> in library <dsocm_v10_v2_00_b> (Architecture <IMP>).
+	C_DSARCVALUE = "10000000"
+	C_DSCNTLVALUE = "10000001"
+	C_FIXED_LATENCY = '1'
+	C_NUM_MASTERS = 1
+	C_NUM_SLAVES = 1
+Entity <dsocm_v10> analyzed. Unit <dsocm_v10> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <dsocm_v10>.
+    Related source file is "/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/dsocm_v10_v2_00_b/hdl/vhdl/dsocm_v10.vhd".
+WARNING:Xst:647 - Input <S_DSOCMSLAVESELECT<0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <DSOCM_Clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:646 - Signal <slave_complete> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <BRAMDSOCMRDDBUS_i> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+Unit <dsocm_v10> synthesized.
+
+
+Synthesizing Unit <docm_wrapper>.
+    Related source file is "/home/kfleming/plbXMD/hdl/docm_wrapper.vhd".
+Unit <docm_wrapper> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Loading device for application Rf_Device from file '2vp30.nph' in environment /usr/local/Xilinx/10.1/ISE:/usr/local/Xilinx/10.1/EDK.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <docm_wrapper> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                           Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+Top Level Output File Name         : ../implementation/docm_wrapper.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 210
+
+Cell Usage :
+# BELS                             : 2
+#      GND                         : 1
+#      VCC                         : 1
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of Slices:                        0  out of  13696     0%  
+ Number of IOs:                         210
+ Number of bonded IOBs:                   0  out of    556     0%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+No clock signals found in this design
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: No path found
+   Minimum input arrival time before clock: No path found
+   Maximum output required time after clock: No path found
+   Maximum combinational path delay: 0.000ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 95 / 95
+-------------------------------------------------------------------------
+Delay:               0.000ns (Levels of Logic = 0)
+  Source:            M_DSOCMBUSY (PAD)
+  Destination:       DSOCMBUSY (PAD)
+
+  Data Path: M_DSOCMBUSY to DSOCMBUSY
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    ----------------------------------------
+    Total                      0.000ns (0.000ns logic, 0.000ns route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 14.00 secs
+Total CPU time to Xst completion: 12.55 secs
+ 
+--> 
+
+
+Total memory usage is 422096 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    4 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

@@ -1,0 +1,391 @@
+
+----------------------------------------------------------------------------
+--                            Design Analysis                             --
+----------------------------------------------------------------------------
+Analyze pcore ftl ...
+
+INFO:MDT - IP2Bus_AddrAck is not available in plb_ipif_v2_01_a, delete from IPIC
+   list...
+INFO:MDT - IP2Bus_Busy is not available in plb_ipif_v2_01_a, delete from IPIC
+   list...
+
+----------------------------------------------------------------------------
+--                            File Generation                             --
+----------------------------------------------------------------------------
+Creating HDL source directory ...
+Generating top peripheral VHDL template ...
+Generating stub user logic Verilog template ...
+HDL templates successfully generated ...
+Creating data directory ...
+Generating XPS inteface files ...
+WARNING:HDLParsers:3497 - Ignoring Verilog File
+   "C:/Code/Research2/hw/XUP_Linux/pcores/ftl_v1_00_a/data/../hdl/verilog/user_l
+   ogic.v"
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/proc_commo
+n_pkg.vhd" in Library proc_common_v1_00_b.
+Package <proc_common_pkg> compiled.
+WARNING:HDLParsers:3534 -
+   "C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/proc_co
+   mmon_pkg.vhd" Line 364. In the function Get_RLOC_Name, not all control paths
+   contain a return statement.
+WARNING:HDLParsers:3534 -
+   "C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/proc_co
+   mmon_pkg.vhd" Line 379. In the function Get_Reg_File_Area, not all control
+   paths contain a return statement.
+Package body <proc_common_pkg> compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/or_muxcy.v
+hd" in Library proc_common_v1_00_b.
+Entity <or_muxcy> compiled.
+Entity <or_muxcy> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/family.vhd
+" in Library proc_common_v1_00_b.
+Package <family> compiled.
+Package body <family> compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/or_gate.vh
+d" in Library proc_common_v1_00_b.
+Entity <or_gate> compiled.
+Entity <or_gate> (Architecture <imp>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/pselect.vh
+d" in Library proc_common_v1_00_b.
+Entity <pselect> compiled.
+Entity <pselect> (Architecture <imp>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/valid_be.v
+hd" in Library proc_common_v1_00_b.
+Entity <valid_be> compiled.
+Entity <valid_be> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/ld_arith_r
+eg.vhd" in Library proc_common_v1_00_b.
+Entity <ld_arith_reg> compiled.
+Entity <ld_arith_reg> (Architecture <imp>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/ld_arith_r
+eg2.vhd" in Library proc_common_v1_00_b.
+Entity <ld_arith_reg2> compiled.
+Entity <ld_arith_reg2> (Architecture <imp>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/down_count
+er.vhd" in Library proc_common_v1_00_b.
+Entity <down_counter> compiled.
+Entity <down_counter> (Architecture <simulation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/srl_fifo.v
+hd" in Library proc_common_v1_00_b.
+Entity <SRL_FIFO> compiled.
+Entity <SRL_FIFO> (Architecture <IMP>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/srl_fifo2.
+vhd" in Library proc_common_v1_00_b.
+Entity <srl_fifo2> compiled.
+Entity <srl_fifo2> (Architecture <imp>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/proc_common_v1_00_b/hdl/vhdl/inferred_l
+ut4.vhd" in Library proc_common_v1_00_b.
+Entity <inferred_lut4> compiled.
+Entity <inferred_lut4> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/pf_counter_bi
+t.vhd" in Library plb_ipif_v2_01_a.
+Entity <pf_counter_bit> compiled.
+Entity <pf_counter_bit> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/ipif_common_v1_00_e/hdl/vhdl/ipif_pkg.v
+hd" in Library ipif_common_v1_00_e.
+Package <ipif_pkg> compiled.
+Package body <ipif_pkg> compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/pf_adder_bit.
+vhd" in Library plb_ipif_v2_01_a.
+Entity <pf_adder_bit> compiled.
+Entity <pf_adder_bit> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/pf_counter.vh
+d" in Library plb_ipif_v2_01_a.
+Entity <pf_counter> compiled.
+Entity <pf_counter> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/pf_occ_counte
+r.vhd" in Library plb_ipif_v2_01_a.
+Entity <pf_occ_counter> compiled.
+Entity <pf_occ_counter> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/dre_v1_00_a/hdl/vhdl/dre_support.vhd"
+in Library dre_v1_00_a.
+Entity <gen_shift_case> compiled.
+Entity <gen_shift_case> (Architecture <implementation>) compiled.
+Entity <mux8_1_x_n> compiled.
+Entity <mux8_1_x_n> (Architecture <implementation>) compiled.
+Entity <mux4_1_x_n> compiled.
+Entity <mux4_1_x_n> (Architecture <implementation>) compiled.
+Entity <mux2_1_x_n> compiled.
+Entity <mux2_1_x_n> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/ipif_common_v1_00_e/hdl/vhdl/dma_sg.vhd
+" in Library ipif_common_v1_00_e.
+Entity <dma_sg> compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/ipif_common_v1_00_e/hdl/vhdl/ctrl_reg.v
+hd" in Library ipif_common_v1_00_e.
+Entity <ctrl_reg> compiled.
+Entity <ctrl_reg> (Architecture <sim>) compiled.
+Entity <ctrl_reg_0_to_6> compiled.
+Entity <ctrl_reg_0_to_6> (Architecture <sim>) compiled.
+Entity <ctrl_reg_0_to_7> compiled.
+Entity <ctrl_reg_0_to_7> (Architecture <sim>) compiled.
+Entity <ctrl_reg_0_to_0> compiled.
+Entity <ctrl_reg_0_to_0> (Architecture <sim>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/ipif_common_v1_00_e/hdl/vhdl/burst_size
+_calc.vhd" in Library ipif_common_v1_00_e.
+Entity <burst_size_calc> compiled.
+Entity <burst_size_calc> (Architecture <imp>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/ipif_common_v1_00_e/hdl/vhdl/dma_sg_cmp
+.vhd" in Library ipif_common_v1_00_e.
+Package <dma_sg_cmp> compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/ipif_common_v1_00_e/hdl/vhdl/dma_sg_pkg
+.vhd" in Library ipif_common_v1_00_e.
+Package <dma_sg_pkg> compiled.
+Package body <dma_sg_pkg> compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/pf_occ_counte
+r_top.vhd" in Library plb_ipif_v2_01_a.
+Entity <pf_occ_counter_top> compiled.
+Entity <pf_occ_counter_top> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/pf_counter_to
+p.vhd" in Library plb_ipif_v2_01_a.
+Entity <pf_counter_top> compiled.
+Entity <pf_counter_top> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/pf_adder.vhd"
+in Library plb_ipif_v2_01_a.
+Entity <pf_adder> compiled.
+Entity <pf_adder> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/pf_dly1_mux.v
+hd" in Library plb_ipif_v2_01_a.
+Entity <pf_dly1_mux> compiled.
+Entity <pf_dly1_mux> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/dre_v1_00_a/hdl/vhdl/dre_64_top.vhd" in
+Library dre_v1_00_a.
+Entity <dre_64_top> compiled.
+Entity <dre_64_top> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/ipif_common_v1_00_e/hdl/vhdl/ipif_steer
+.vhd" in Library ipif_common_v1_00_e.
+Entity <IPIF_Steer> compiled.
+Entity <IPIF_Steer> (Architecture <IMP>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/ipif_common_v1_00_e/hdl/vhdl/interrupt_
+control.vhd" in Library ipif_common_v1_00_e.
+Entity <interrupt_control> compiled.
+Entity <interrupt_control> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/ipif_common_v1_00_e/hdl/vhdl/dma_sg_sim
+.vhd" in Library ipif_common_v1_00_e.
+Entity <dma_sg> (Architecture <sim>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/ipif_control_
+wr_dre.vhd" in Library plb_ipif_v2_01_a.
+Entity <ipif_control_wr_dre> compiled.
+Entity <ipif_control_wr_dre> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/wrpfifo_dp_cn
+tl.vhd" in Library plb_ipif_v2_01_a.
+Entity <wrpfifo_dp_cntl> compiled.
+Entity <wrpfifo_dp_cntl> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/pf_dpram_sele
+ct.vhd" in Library plb_ipif_v2_01_a.
+Entity <pf_dpram_select> compiled.
+Entity <pf_dpram_select> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/srl16_fifo.vh
+d" in Library plb_ipif_v2_01_a.
+Entity <srl16_fifo> compiled.
+Entity <srl16_fifo> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/ipif_control_
+rd.vhd" in Library plb_ipif_v2_01_a.
+Entity <ipif_control_rd> compiled.
+Entity <ipif_control_rd> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/rdpfifo_dp_cn
+tl.vhd" in Library plb_ipif_v2_01_a.
+Entity <rdpfifo_dp_cntl> compiled.
+Entity <rdpfifo_dp_cntl> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/address_decod
+er.vhd" in Library plb_ipif_v2_01_a.
+Entity <address_decoder> compiled.
+Entity <address_decoder> (Architecture <IMP>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/determinate_t
+imer.vhd" in Library plb_ipif_v2_01_a.
+Entity <determinate_timer> compiled.
+Entity <determinate_timer> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/addr_reg_cntr
+_brst.vhd" in Library plb_ipif_v2_01_a.
+Entity <addr_reg_cntr_brst> compiled.
+Entity <addr_reg_cntr_brst> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/plb_slave_att
+ach_dtime_dma.vhd" in Library plb_ipif_v2_01_a.
+Entity <plb_slave_attach_dtime_dma> compiled.
+Entity <plb_slave_attach_dtime_dma> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/ipif_reset.vh
+d" in Library plb_ipif_v2_01_a.
+Entity <ipif_reset> compiled.
+Entity <ipif_reset> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/plb_sesr_sear
+.vhd" in Library plb_ipif_v2_01_a.
+Entity <plb_sesr_sear> compiled.
+Entity <plb_sesr_sear> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/rdpfifo_top.v
+hd" in Library plb_ipif_v2_01_a.
+Entity <rdpfifo_top> compiled.
+Entity <rdpfifo_top> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/wrpfifo_top.v
+hd" in Library plb_ipif_v2_01_a.
+Entity <wrpfifo_top> compiled.
+Entity <wrpfifo_top> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/plb_dma_sg.vh
+d" in Library plb_ipif_v2_01_a.
+Entity <plb_dma_sg> compiled.
+Entity <plb_dma_sg> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/master_attach
+ment.vhd" in Library plb_ipif_v2_01_a.
+Entity <master_attachment> compiled.
+Entity <master_attachment> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/EDK91/hw/XilinxProcessorIPLib/pcores/plb_ipif_v2_01_a/hdl/vhdl/plb_ipif.vhd"
+in Library plb_ipif_v2_01_a.
+Entity <plb_ipif> compiled.
+Entity <plb_ipif> (Architecture <implementation>) compiled.
+Compiling vhdl file
+"C:/Code/Research2/hw/XUP_Linux/pcores/ftl_v1_00_a/data/../hdl/vhdl/ftl.vhd" in
+Library ftl_v1_00_a.
+Entity <ftl> compiled.
+Entity <ftl> (Architecture <IMP>) compiled.
+
+
+Analyzing HDL attributes ...
+INFO:MDT - IPTYPE set to value : PERIPHERAL
+INFO:MDT - IMP_NETLIST set to value : TRUE
+INFO:MDT - HDL set to value : VHDL
+WARNING:MDT - Unable to delete temparary XST project file
+   C:\Code\Research2\hw\XUP_Linux\pcores\ftl_v1_00_a\data\_ftl_xst.prj : 13
+XPS interface files successfully generated ...
+Creating development directory ...
+Generating command option file ...
+Generating readme file ...
+Development misc files successfully generated ...
+Creating projnav directory ...
+Generating ProjNav support files ...
+ProjNav support files successfully generated ...
+Creating synthesis directory ...
+Generating XST synthesis support files ...
+XST synthesis support files successfully generated ...
+No BFM simulation files will be generated at this time ...
+Creating software driver data directory ...
+Generating software driver XPS interface (mdd/tcl) files ...
+Software driver data definition file (.mdd) successfully generated ...
+Software driver data generation file (.tcl) successfully generated ...
+Creating software driver src directory ...
+Generating software driver template files ...
+Software driver compile file (Makefile) successfully generated ...
+output user master register(s) offset to software driver header ...
+output IPIF software reset/module identification register(s) offset to software
+driver header ...
+output IPIF interrupt register(s) offset to software driver header ...
+Software driver header file (.h) successfully generated ...
+Software driver source file (.c) successfully generated ...
+Software driver SelfTest file (.c) successfully generated ...
+Software driver template files successfully generated ...
+
+----------------------------------------------------------------------------
+--                              Final Report                              --
+----------------------------------------------------------------------------
+Thank you for using Create and Import Peripheral Wizard! Please find your
+peripheral hardware templates under
+C:\Code\Research2\hw\XUP_Linux/pcores/ftl_v1_00_a and peripheral software
+templates under C:\Code\Research2\hw\XUP_Linux/drivers/ftl_v1_00_a respectively.
+
+Peripheral Summary:
+
+  top name       : ftl
+  version        : 1.00.a
+  type           : PLB master slave
+  features       : slave attachement
+                   master attachement
+                   mir/rst register
+                   interrupt isc
+                   user master model
+
+Address Block Summary:
+
+  user logic mst : C_BASEADDR + 0x00000000
+                 : C_BASEADDR + 0x000000FF
+  mir/reset reg  : C_BASEADDR + 0x00000100
+                 : C_BASEADDR + 0x000001FF
+  interrupt      : C_BASEADDR + 0x00000200
+                 : C_BASEADDR + 0x000002FF
+
+File Summary
+
+  - HDL source -
+  C:\Code\Research2\hw\XUP_Linux/pcores/ftl_v1_00_a/hdl
+  top entity     : vhdl/ftl.vhd
+  user logic     : verilog/user_logic.v
+
+  - XPS interface -
+  C:\Code\Research2\hw\XUP_Linux/pcores/ftl_v1_00_a/data
+  mpd            : ftl_v2_1_0.mpd
+  pao            : ftl_v2_1_0.pao
+
+  - ISE project -
+  C:\Code\Research2\hw\XUP_Linux/pcores/ftl_v1_00_a/devl/projnav
+  ise project    : ftl.npl
+  cli command    : ftl.cli
+
+
+  - XST synthesis -
+  C:\Code\Research2\hw\XUP_Linux/pcores/ftl_v1_00_a/devl/synthesis
+  xst script     : ftl_xst.scr
+  xst project    : ftl_xst.prj
+
+  - Misc file -
+  C:\Code\Research2\hw\XUP_Linux/pcores/ftl_v1_00_a/devl
+  help           : README.txt
+  option         : ipwiz.opt
+  log            : ipwiz.log
+
+  - Driver source -
+  C:\Code\Research2\hw\XUP_Linux/drivers/ftl_v1_00_a/src
+  makefile       : Makefile
+  header         : ftl.h
+  source         : ftl.c
+  selftest       : ftl_selftest.c
+
+  - Driver interface -
+  C:\Code\Research2\hw\XUP_Linux/drivers/ftl_v1_00_a/data
+  mdd            : ftl_v2_1_0.mdd
+  tcl            : ftl_v2_1_0.tcl
+
+

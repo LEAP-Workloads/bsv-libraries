@@ -1,0 +1,5 @@
+MO bus_sm NULL ../../hdl/verilog/bus_sm.v vlg09/bus__sm.bin 1260507489
+MO buffer NULL ../../hdl/verilog/buffer.v vlg1E/buffer.bin 1260507489
+MO user_logic NULL ../../hdl/verilog/user_logic.v vlg08/user__logic.bin 1261541555
+MO scoreboard NULL ../../hdl/verilog/bus_sm.v vlg5C/scoreboard.bin 1260507489
+MO bus_controller NULL ../../hdl/verilog/bus_controller.v vlg11/bus__controller.bin 1260507489

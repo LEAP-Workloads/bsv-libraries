@@ -1,0 +1,274 @@
+Release 10.1.03 - platgen EDK_K_SP3.6 (lin64)
+Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
+
+Command Line: platgen -p xc2vp30ff896-7 -lang verilog -lp
+/home/kfleming/xilinx_xup/ system.mhs 
+
+Parse system.mhs ...
+
+Read MPD definitions ...
+WARNING:MDT - IPNAME:proc_sys_reset INSTANCE:reset_block -
+   /home/kfleming/plbXMD/system.mhs line 109 - deprecated core for architecture
+   'virtex2p'!
+WARNING:MDT - IPNAME:opb_mdm INSTANCE:opb_mdm_0 -
+   /home/kfleming/plbXMD/system.mhs line 230 - deprecated core for architecture
+   'virtex2p'!
+
+Overriding IP level properties ...
+
+Performing IP level DRCs on properties...
+
+Running DRC Tcl procedures for OPTION IPLEVEL_DRC_PROC...
+Address Map for Processor ppc405_0
+  (0b0000010000-0b0000010011) ppc405_0	
+  (0b0000100000-0b0000100011) ppc405_0	
+  (0000000000-0x00003fff) plb_bram_if_cntlr_1	plb
+  (0x10000000-0x1000ffff) opb_mdm_0	plb->plb2opb_bridge_0->opb_v20_0
+  (0x80000000-0x80003fff) docm_cntlr	docm
+  (0xffffc000-0xffffffff) iocm_cntlr	iocm
+Address Map for Processor ppc405_1
+  (0b0000010000-0b0000010011) ppc405_1	
+  (0b0000100000-0b0000100011) ppc405_1	
+
+Check platform address map ...
+
+Computing clock values...
+
+Overriding system level properties ...
+INFO:MDT - IPNAME:jtagppc_0 INSTANCE:jtagppc_cntlr -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/jtagppc_cntlr_v2_01
+   _c/data/jtagppc_cntlr_v2_1_0.mpd line 36 - tcl is overriding PARAMETER
+   C_NUM_PPC_USED value to 2
+INFO:MDT - IPNAME:iocm INSTANCE:isocm_v10 -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/isocm_v10_v2_00_b/d
+   ata/isocm_v10_v2_1_0.mpd line 36 - tcl is overriding PARAMETER C_ISARCVALUE
+   value to 0xFF
+INFO:MDT - IPNAME:isocm_bram INSTANCE:bram_block -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/
+   data/bram_block_v2_1_0.mpd line 36 - tool is overriding PARAMETER C_MEMSIZE
+   value to 0x4000
+INFO:MDT - IPNAME:isocm_bram INSTANCE:bram_block -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/
+   data/bram_block_v2_1_0.mpd line 37 - tool is overriding PARAMETER
+   C_PORT_DWIDTH value to 64
+INFO:MDT - IPNAME:isocm_bram INSTANCE:bram_block -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/
+   data/bram_block_v2_1_0.mpd line 39 - tool is overriding PARAMETER C_NUM_WE
+   value to 2
+INFO:MDT - IPNAME:docm INSTANCE:dsocm_v10 -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/dsocm_v10_v2_00_b/d
+   ata/dsocm_v10_v2_1_0.mpd line 36 - tcl is overriding PARAMETER C_DSARCVALUE
+   value to 0x80
+INFO:MDT - IPNAME:dsocm_bram INSTANCE:bram_block -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/
+   data/bram_block_v2_1_0.mpd line 36 - tool is overriding PARAMETER C_MEMSIZE
+   value to 0x4000
+INFO:MDT - IPNAME:plb INSTANCE:plb_v34 -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb_v34_v1_02_a/dat
+   a/plb_v34_v2_1_0.mpd line 40 - tool is overriding PARAMETER C_PLB_NUM_MASTERS
+   value to 3
+INFO:MDT - IPNAME:plb INSTANCE:plb_v34 -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb_v34_v1_02_a/dat
+   a/plb_v34_v2_1_0.mpd line 41 - tool is overriding PARAMETER C_PLB_NUM_SLAVES
+   value to 3
+INFO:MDT - IPNAME:plb_bram_if_cntlr_1 INSTANCE:plb_bram_if_cntlr -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb_bram_if_cntlr_v
+   1_00_b/data/plb_bram_if_cntlr_v2_1_0.mpd line 42 - tool is overriding
+   PARAMETER c_num_masters value to 3
+INFO:MDT - IPNAME:plb_bram_if_cntlr_1 INSTANCE:plb_bram_if_cntlr -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb_bram_if_cntlr_v
+   1_00_b/data/plb_bram_if_cntlr_v2_1_0.mpd line 49 - tool is overriding
+   PARAMETER c_plb_mid_width value to 2
+INFO:MDT - IPNAME:plb_bram_if_cntlr_1_bram INSTANCE:bram_block -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/
+   data/bram_block_v2_1_0.mpd line 36 - tool is overriding PARAMETER C_MEMSIZE
+   value to 0x4000
+INFO:MDT - IPNAME:plb_bram_if_cntlr_1_bram INSTANCE:bram_block -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/
+   data/bram_block_v2_1_0.mpd line 37 - tool is overriding PARAMETER
+   C_PORT_DWIDTH value to 64
+INFO:MDT - IPNAME:plb_bram_if_cntlr_1_bram INSTANCE:bram_block -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/
+   data/bram_block_v2_1_0.mpd line 39 - tool is overriding PARAMETER C_NUM_WE
+   value to 8
+INFO:MDT - IPNAME:plb2opb_bridge_0 INSTANCE:plb2opb_bridge -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb2opb_bridge_v1_0
+   1_a/data/plb2opb_bridge_v2_1_0.mpd line 49 - tool is overriding PARAMETER
+   C_PLB_NUM_MASTERS value to 3
+INFO:MDT - IPNAME:plb2opb_bridge_0 INSTANCE:plb2opb_bridge -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb2opb_bridge_v1_0
+   1_a/data/plb2opb_bridge_v2_1_0.mpd line 50 - tool is overriding PARAMETER
+   C_PLB_MID_WIDTH value to 2
+INFO:MDT - IPNAME:opb_v20_0 INSTANCE:opb_v20 -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_v20_v1_10_c/dat
+   a/opb_v20_v2_1_0.mpd line 38 - tool is overriding PARAMETER C_NUM_MASTERS
+   value to 1
+INFO:MDT - IPNAME:opb_v20_0 INSTANCE:opb_v20 -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_v20_v1_10_c/dat
+   a/opb_v20_v2_1_0.mpd line 39 - tool is overriding PARAMETER C_NUM_SLAVES
+   value to 1
+INFO:MDT - IPNAME:ftl_0 INSTANCE:ftl -
+   /home/kfleming/plbXMD/pcores/ftl_v1_00_a/data/ftl_v2_1_0.mpd line 27 - tool
+   is overriding PARAMETER C_PLB_NUM_MASTERS value to 3
+INFO:MDT - IPNAME:ftl_0 INSTANCE:ftl -
+   /home/kfleming/plbXMD/pcores/ftl_v1_00_a/data/ftl_v2_1_0.mpd line 28 - tool
+   is overriding PARAMETER C_PLB_MID_WIDTH value to 2
+
+Running system level Update ...
+
+Running UPDATE Tcl procedures for OPTION SYSLEVEL_UPDATE_PROC...
+
+Performing System level DRCs on properties...
+
+Running DRC Tcl procedures for OPTION SYSLEVEL_DRC_PROC...
+WARNING:MDT - : plb2opb_bridge_0 DCR bus interface is not set
+
+Check platform configuration ...
+IPNAME:isocm_v10 INSTANCE:iocm - /home/kfleming/plbXMD/system.mhs line 125 - 1
+master(s) : 1 slave(s)
+IPNAME:dsocm_v10 INSTANCE:docm - /home/kfleming/plbXMD/system.mhs line 150 - 1
+master(s) : 1 slave(s)
+IPNAME:plb_v34 INSTANCE:plb - /home/kfleming/plbXMD/system.mhs line 173 - 3
+master(s) : 3 slave(s)
+IPNAME:opb_v20 INSTANCE:opb_v20_0 - /home/kfleming/plbXMD/system.mhs line 223 -
+1 master(s) : 1 slave(s)
+
+Check port drivers...
+WARNING:MDT - PORT:Dbg_TDO_0 CONNECTOR:Dbg_TDO -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 68 - No driver found. Port will be driven to GND!
+WARNING:MDT - PORT:bscan_tdo1 CONNECTOR:bscan_tdo1 -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 121 - No driver found. Port will be driven to GND!
+WARNING:MDT - PORT:Debug_Rst CONNECTOR:Debug_Rst -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 52 - floating connection!
+WARNING:MDT - PORT:Ext_BRK CONNECTOR:Ext_BRK -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 53 - floating connection!
+WARNING:MDT - PORT:Ext_NM_BRK CONNECTOR:Ext_NM_BRK -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 54 - floating connection!
+WARNING:MDT - PORT:Dbg_Clk_0 CONNECTOR:Dbg_Clk -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 66 - floating connection!
+WARNING:MDT - PORT:Dbg_TDI_0 CONNECTOR:Dbg_TDI -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 67 - floating connection!
+WARNING:MDT - PORT:Dbg_Reg_En_0 CONNECTOR:Dbg_Reg_En -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 69 - floating connection!
+WARNING:MDT - PORT:Dbg_Capture_0 CONNECTOR:Dbg_Capture -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 70 - floating connection!
+WARNING:MDT - PORT:Dbg_Update_0 CONNECTOR:Dbg_Update -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 71 - floating connection!
+WARNING:MDT - PORT:bscan_tdi CONNECTOR:bscan_tdi -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 114 - floating connection!
+WARNING:MDT - PORT:bscan_reset CONNECTOR:bscan_reset -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 115 - floating connection!
+WARNING:MDT - PORT:bscan_shift CONNECTOR:bscan_shift -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 116 - floating connection!
+WARNING:MDT - PORT:bscan_update CONNECTOR:bscan_update -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 117 - floating connection!
+WARNING:MDT - PORT:bscan_capture CONNECTOR:bscan_capture -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 118 - floating connection!
+WARNING:MDT - PORT:bscan_sel1 CONNECTOR:bscan_sel1 -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 119 - floating connection!
+WARNING:MDT - PORT:bscan_drck1 CONNECTOR:bscan_drck1 -
+   /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/dat
+   a/opb_mdm_v2_1_0.mpd line 120 - floating connection!
+
+Performing Clock DRCs...
+
+
+Running UPDATE Tcl procedures for OPTION PLATGEN_SYSLEVEL_UPDATE_PROC...
+
+Modify defaults ...
+
+Creating stub ...
+
+Processing licensed instances ...
+Completion time: 0.00 seconds
+
+Creating hardware output directories ...
+
+Managing hardware (BBD-specified) netlist files ...
+
+Managing cache ...
+IPNAME:ppc405 INSTANCE:ppc405_0 - /home/kfleming/plbXMD/system.mhs line 76 -
+Copying cache implementation netlist
+IPNAME:ppc405 INSTANCE:ppc405_1 - /home/kfleming/plbXMD/system.mhs line 96 -
+Copying cache implementation netlist
+IPNAME:jtagppc_cntlr INSTANCE:jtagppc_0 - /home/kfleming/plbXMD/system.mhs line
+102 - Copying cache implementation netlist
+IPNAME:proc_sys_reset INSTANCE:reset_block - /home/kfleming/plbXMD/system.mhs
+line 109 - Copying cache implementation netlist
+IPNAME:isocm_v10 INSTANCE:iocm - /home/kfleming/plbXMD/system.mhs line 125 -
+Copying cache implementation netlist
+IPNAME:isbram_if_cntlr INSTANCE:iocm_cntlr - /home/kfleming/plbXMD/system.mhs
+line 133 - Copying cache implementation netlist
+IPNAME:bram_block INSTANCE:isocm_bram - /home/kfleming/plbXMD/system.mhs line
+143 - Copying cache implementation netlist
+IPNAME:dsocm_v10 INSTANCE:docm - /home/kfleming/plbXMD/system.mhs line 150 -
+Copying cache implementation netlist
+IPNAME:dsbram_if_cntlr INSTANCE:docm_cntlr - /home/kfleming/plbXMD/system.mhs
+line 158 - Copying cache implementation netlist
+IPNAME:bram_block INSTANCE:dsocm_bram - /home/kfleming/plbXMD/system.mhs line
+167 - Copying cache implementation netlist
+IPNAME:plb_v34 INSTANCE:plb - /home/kfleming/plbXMD/system.mhs line 173 -
+Copying cache implementation netlist
+IPNAME:plb_bram_if_cntlr INSTANCE:plb_bram_if_cntlr_1 -
+/home/kfleming/plbXMD/system.mhs line 183 - Copying cache implementation netlist
+IPNAME:bram_block INSTANCE:plb_bram_if_cntlr_1_bram -
+/home/kfleming/plbXMD/system.mhs line 193 - Copying cache implementation netlist
+IPNAME:dcm_module INSTANCE:dcm_0 - /home/kfleming/plbXMD/system.mhs line 199 -
+Copying cache implementation netlist
+IPNAME:plb2opb_bridge INSTANCE:plb2opb_bridge_0 -
+/home/kfleming/plbXMD/system.mhs line 214 - Copying cache implementation netlist
+IPNAME:opb_v20 INSTANCE:opb_v20_0 - /home/kfleming/plbXMD/system.mhs line 223 -
+Copying cache implementation netlist
+IPNAME:opb_mdm INSTANCE:opb_mdm_0 - /home/kfleming/plbXMD/system.mhs line 230 -
+Copying cache implementation netlist
+
+Elaborating instances ...
+IPNAME:bram_block INSTANCE:isocm_bram - /home/kfleming/plbXMD/system.mhs line
+143 - elaborating IP
+IPNAME:bram_block INSTANCE:dsocm_bram - /home/kfleming/plbXMD/system.mhs line
+167 - elaborating IP
+IPNAME:bram_block INSTANCE:plb_bram_if_cntlr_1_bram -
+/home/kfleming/plbXMD/system.mhs line 193 - elaborating IP
+
+Writing HDL for elaborated instances ...
+
+Inserting wrapper level ...
+Completion time: 0.00 seconds
+
+Constructing platform-level connectivity ...
+Completion time: 1.00 seconds
+
+Writing (top-level) BMM ...
+
+Writing (top-level and wrappers) HDL ...
+
+Generating synthesis project file ...
+
+Running XST synthesis ...
+INFO:MDT - The following instances are synthesized with XST. The MPD option
+   IMP_NETLIST=TRUE indicates that a NGC file is to be produced using XST
+   synthesis. IMP_NETLIST=FALSE (default) instances are not synthesized.
+INSTANCE:ftl_0 - /home/kfleming/plbXMD/system.mhs line 238 - Running XST
+synthesis
+
+Running NGCBUILD ...
+
+Rebuilding cache ...
+
+Total run time: 50.00 seconds

@@ -1,0 +1,2 @@
+verilog work "../../hdl/verilog/user_logic.v"
+vhdl ftl_v1_00_a "../../hdl/vhdl/ftl.vhd"

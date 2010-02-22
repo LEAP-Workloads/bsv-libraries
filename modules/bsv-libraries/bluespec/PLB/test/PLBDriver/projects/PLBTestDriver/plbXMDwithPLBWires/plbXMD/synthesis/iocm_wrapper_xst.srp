@@ -1,0 +1,251 @@
+Release 10.1.03 - xst K.39 (lin64)
+Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
+--> 
+PMSPEC -- Overriding Xilinx file </usr/local/Xilinx/10.1/EDK/virtex2p/data/virtex2p.acd> with local file </usr/local/Xilinx/10.1/ISE/virtex2p/data/virtex2p.acd>
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+     9.1) Device utilization summary
+     9.2) Partition Resource Summary
+     9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "iocm_wrapper_xst.prj"
+
+---- Target Parameters
+Target Device                      : xc2vp30ff896-7
+Output File Name                   : "../implementation/iocm_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : iocm_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+Netlist Hierarchy                  : as_optimized
+Optimization Effort                : 1
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation/iocm_wrapper}
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/isocm_v10_v2_00_b/hdl/vhdl/and_or_mux.vhd" in Library isocm_v10_v2_00_b.
+Entity <and_or_mux> compiled.
+Entity <and_or_mux> (Architecture <IMP>) compiled.
+Compiling vhdl file "/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/isocm_v10_v2_00_b/hdl/vhdl/isocm_v10.vhd" in Library isocm_v10_v2_00_b.
+Entity <isocm_v10> compiled.
+Entity <isocm_v10> (Architecture <IMP>) compiled.
+Compiling vhdl file "/home/kfleming/plbXMD/hdl/iocm_wrapper.vhd" in Library work.
+Entity <iocm_wrapper> compiled.
+Entity <iocm_wrapper> (Architecture <STRUCTURE>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <iocm_wrapper> in library <work> (architecture <STRUCTURE>).
+
+Analyzing hierarchy for entity <isocm_v10> in library <isocm_v10_v2_00_b> (architecture <IMP>) with generics.
+	C_ISARCVALUE = "11111111"
+	C_ISCNTLVALUE = "10000001"
+	C_NUM_MASTERS = 1
+	C_NUM_SLAVES = 1
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <iocm_wrapper> in library <work> (Architecture <STRUCTURE>).
+Entity <iocm_wrapper> analyzed. Unit <iocm_wrapper> generated.
+
+Analyzing generic Entity <isocm_v10> in library <isocm_v10_v2_00_b> (Architecture <IMP>).
+	C_ISARCVALUE = "11111111"
+	C_ISCNTLVALUE = "10000001"
+	C_NUM_MASTERS = 1
+	C_NUM_SLAVES = 1
+Entity <isocm_v10> analyzed. Unit <isocm_v10> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <isocm_v10>.
+    Related source file is "/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/isocm_v10_v2_00_b/hdl/vhdl/isocm_v10.vhd".
+WARNING:Xst:647 - Input <S_ISOCMSLAVESELECT<0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_ISOCMDCRSLAVESELECT<0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ISOCM_Clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:1780 - Signal <BRAMISOCMRDDBUS_i> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <BRAMISOCMDCRRDDBUS_i> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+Unit <isocm_v10> synthesized.
+
+
+Synthesizing Unit <iocm_wrapper>.
+    Related source file is "/home/kfleming/plbXMD/hdl/iocm_wrapper.vhd".
+Unit <iocm_wrapper> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Loading device for application Rf_Device from file '2vp30.nph' in environment /usr/local/Xilinx/10.1/ISE:/usr/local/Xilinx/10.1/EDK.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <iocm_wrapper> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                           Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+Top Level Output File Name         : ../implementation/iocm_wrapper.ngc
+Output Format                      : ngc
+Optimization Goal                  : speed
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 373
+
+Cell Usage :
+# BELS                             : 2
+#      GND                         : 1
+#      VCC                         : 1
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp30ff896-7 
+
+ Number of Slices:                        0  out of  13696     0%  
+ Number of IOs:                         373
+ Number of bonded IOBs:                   0  out of    556     0%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+No clock signals found in this design
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: No path found
+   Minimum input arrival time before clock: No path found
+   Maximum output required time after clock: No path found
+   Maximum combinational path delay: 0.000ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 177 / 177
+-------------------------------------------------------------------------
+Delay:               0.000ns (Levels of Logic = 0)
+  Source:            M_ISOCMBRAMEVENWRITEEN (PAD)
+  Destination:       ISOCMBRAMEVENWRITEEN (PAD)
+
+  Data Path: M_ISOCMBRAMEVENWRITEEN to ISOCMBRAMEVENWRITEEN
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    ----------------------------------------
+    Total                      0.000ns (0.000ns logic, 0.000ns route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 15.00 secs
+Total CPU time to Xst completion: 13.00 secs
+ 
+--> 
+
+
+Total memory usage is 422120 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    5 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+
