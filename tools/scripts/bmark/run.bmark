@@ -390,50 +390,50 @@ sub ExecModel($) {
     ## writing to a pipe.)
     ##
 
-    my $pty = new IO::Pty;
-    my $slave = $pty->slave();
+#     my $pty = new IO::Pty;
+#     my $slave = $pty->slave();
 
-    my $pid = fork();
-    die "Couldn't fork: $!" unless defined $pid;
+#     my $pid = fork();
+#     die "Couldn't fork: $!" unless defined $pid;
 
-    if (! $pid) {
-        # Child process is the monitoring process
-        $pty->make_slave_controlling_terminal();
+#     if (! $pid) {
+#         # Child process is the monitoring process
+#         $pty->make_slave_controlling_terminal();
 
-        if (! open(LOG, ">hardware.out")) {
-            print STDERR "Error opening log file hardware.out\n";
-        }
+#         if (! open(LOG, ">hardware.out")) {
+#             print STDERR "Error opening log file hardware.out\n";
+#         }
 
-        # Unbuffered I/O loop
-        while (1) {
-            my $buf;
-            my $n = sysread($slave, $buf, 4096);
+#         # Unbuffered I/O loop
+#         while (1) {
+#             my $buf;
+#             my $n = sysread($slave, $buf, 4096);
 
-            last if ($n == 0);
+#             last if ($n == 0);
 
-            syswrite(STDOUT, $buf);
-            syswrite(LOG, $buf);
-        }
+#             syswrite(STDOUT, $buf);
+#             syswrite(LOG, $buf);
+#         }
 
-        close(LOG);
-        exit(0);
-    }
+#         close(LOG);
+#         exit(0);
+#     }
 
-    # Bind new PTY to STDOUT (but save old STDOUT)
-    $pty->close_slave();
-    open(my $oldOut, ">&", STDOUT) or die $!;
-    open(STDOUT, ">&", $pty) or die $!;
+#     # Bind new PTY to STDOUT (but save old STDOUT)
+#     $pty->close_slave();
+#     open(my $oldOut, ">&", STDOUT) or die $!;
+#     open(STDOUT, ">&", $pty) or die $!;
 
     # Run model
-    my $result = system("${cmd} 2>&1");
+    my $result = system("${cmd} 2>&1 | tee hardware.out");
 
     # Send ^d to end child logging thread
     print "\cD";
 
     # Return to normal STDOUT
-    close(STDOUT);
-    open(STDOUT, ">&", $oldOut) or die $!;
-    close($oldOut);
+#     close(STDOUT);
+#     open(STDOUT, ">&", $oldOut) or die $!;
+#     close($oldOut);
 
     # Compute exit status of model
     my $status = 0;
