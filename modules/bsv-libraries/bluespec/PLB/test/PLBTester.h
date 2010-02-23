@@ -1,4 +1,4 @@
-/
+//
 // INTEL CONFIDENTIAL
 // Copyright (c) 2008 Intel Corp.  Recipient is granted a non-sublicensable 
 // copyright license under Intel copyrights to copy and distribute this code 
@@ -24,7 +24,7 @@ typedef class CONNECTED_APPLICATION_CLASS* CONNECTED_APPLICATION;
 class CONNECTED_APPLICATION_CLASS : public PLATFORMS_MODULE_CLASS
 {
  private:
-  GORDONWRAPPERSERVICERRR_CLIENT_STUB clientStub;
+  PLBDEBUGRRR_CLIENT_STUB clientStub;
 
  public:
   CONNECTED_APPLICATION_CLASS(VIRTUAL_PLATFORM vp);
