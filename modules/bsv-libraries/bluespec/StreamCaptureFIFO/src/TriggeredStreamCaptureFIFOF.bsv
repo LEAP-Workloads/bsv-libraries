@@ -1,9 +1,6 @@
-import FIFOF::*;
+`include "asim/provides/stream_capture_fifo.bsh"
 
-// typedef enum {
-//   Filling,
-//   Draining
-// } State deriving (Bits,Eq);
+import FIFOF::*;
 
 interface TriggeredStreamCaptureFIFOF#(type data_t);
   interface FIFOF#(data_t) fifof;

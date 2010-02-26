@@ -1,14 +1,8 @@
+`include "asim/provides/stream_capture_fifo.bsh"
+
 import FIFOF::*;
 
 import BRAMFIFO::*;
-
-// local includes
-//`include "asim/provides/librl_bsv_storage.bsh"
-
-typedef enum {
-  Filling,
-  Draining
-} State deriving (Bits,Eq);
 
 module mkStreamCaptureFIFOF#(Integer streamSize) (FIFOF#(data_t))
   provisos(Bits#(data_t, data_sz),

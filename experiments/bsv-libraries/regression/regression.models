@@ -1,6 +1,6 @@
 # ***************
 #
-# H264 models
+# BSV library models
 #
 # ***************
 
@@ -12,6 +12,6 @@ crc   config/pm/bsv-libraries/crc/crc_exe.apm      --bluesim="-m 1000000000"
 
 reversal_buffer   config/pm/bsv-libraries/reversal_buffer/reversal_buffer_exe.apm      --bluesim="-m 1000000000"
 
-rewind_fifo   config/pm/bsv-libraries/rewind_fifo/rewind_fifo.apm      --bluesim="-m 1000000000"
+rewind_fifo   config/pm/bsv-libraries/rewind_fifo/rewind_fifo_exe.apm      --bluesim="-m 1000000000"
 
 stream_capture_fifo   config/pm/bsv-libraries/stream_capture_fifo/stream_capture_fifo_exe.apm      --bluesim="-m 1000000000"

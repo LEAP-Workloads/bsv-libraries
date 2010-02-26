@@ -9,6 +9,7 @@
 %provides stream_capture_fifo
 
 %sources -t BSV -v PUBLIC StreamCaptureFIFO.bsv
+%sources -t BSV -v PUBLIC StreamCaptureFIFOCommon.bsv
 %sources -t BSV -v PUBLIC TriggeredStreamCaptureFIFOF.bsv
 
 %AWB_END

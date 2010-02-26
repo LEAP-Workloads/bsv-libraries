@@ -1,10 +1,9 @@
 # ***************
 #
-# H264 benchmarks
+# BSV library benchmarks
 #
 # ***************
 
 experiments = avalon commit_fifo crc reversal_buffer rewind_fifo stream_capture_fifo
-config/bm/bluespec/demos.cfx/benchmarks/null.cfg
-
+config/bm/bsv-libraries/pass_check.cfx/benchmarks/pass_check.cfg
 
