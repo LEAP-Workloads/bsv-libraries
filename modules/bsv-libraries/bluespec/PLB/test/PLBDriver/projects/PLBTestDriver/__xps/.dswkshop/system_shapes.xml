@@ -1,4 +1,4 @@
-<EDKSYSTEM ARCH="virtex2p" EDKVERSION="10.1.03" PART="xc2vp30ff896-7" SRC="/home/kfleming/plbTest/src/bsv-libraries/modules/bsv-libraries/bluespec/PLB/test/PLBDriver/projects/PLBTestDriver/system.xmp" TIMESTAMP="Mon Feb 22 21:14:09 2010&#xA;">
+<EDKSYSTEM ARCH="virtex2p" EDKVERSION="10.1.03" PART="xc2vp30ff896-7" SRC="/home/kfleming/libImport/src/bsv-libraries/modules/bsv-libraries/bluespec/PLB/test/PLBDriver/projects/PLBTestDriver/system.xmp" TIMESTAMP="Mon Mar  1 13:24:52 2010&#xA;">
 
   <EXTERNALPORTS>
     <PORT DIR="O" GROUP="A" INDEX="7" MHS_INDEX="0" NAME="fpga_0_net_gnd_pin" SIGNAME="net_gnd"/>
@@ -9,57 +9,11 @@
     <PORT DIR="O" GROUP="A" INDEX="5" MHS_INDEX="5" NAME="fpga_0_net_gnd_5_pin" SIGNAME="net_gnd"/>
     <PORT DIR="O" GROUP="A" INDEX="6" MHS_INDEX="6" NAME="fpga_0_net_gnd_6_pin" SIGNAME="net_gnd"/>
     <PORT CLKFREQUENCY="100000000" DIR="I" GROUP="A" INDEX="0" MHS_INDEX="7" NAME="sys_clk_pin" SIGIS="CLK" SIGNAME="dcm_clk_s"/>
-    <PORT DIR="I" GROUP="C" INDEX="54" MHS_INDEX="8" NAME="sys_rst_pin" RSTPOLARITY="0" SIGIS="RST" SIGNAME="sys_rst_s"/>
-    <PORT DIR="I" GROUP="B" INDEX="14" MHS_INDEX="9" NAME="ftl_0_IP2Bus_WrAckOut_pin" SIGNAME="ftl_0_IP2Bus_WrAckOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="11" MHS_INDEX="10" NAME="ftl_0_IP2Bus_RdAckOut_pin" SIGNAME="ftl_0_IP2Bus_RdAckOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="13" MHS_INDEX="11" NAME="ftl_0_IP2Bus_ToutSupOut_pin" SIGNAME="ftl_0_IP2Bus_ToutSupOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="9" MHS_INDEX="12" NAME="ftl_0_IP2Bus_ErrorOut_pin" SIGNAME="ftl_0_IP2Bus_ErrorOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="12" MHS_INDEX="13" NAME="ftl_0_IP2Bus_RetryOut_pin" SIGNAME="ftl_0_IP2Bus_RetryOut"/>
-    <PORT DIR="I" ENDIAN="BIG" GROUP="B" INDEX="8" LSB="0" MHS_INDEX="14" MSB="63" NAME="ftl_0_IP2Bus_DataOut_pin" SIGNAME="ftl_0_IP2Bus_DataOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="41" MHS_INDEX="15" NAME="ftl_0_Bus2IP_WrReqOut_pin" SIGNAME="ftl_0_Bus2IP_WrReqOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="38" MHS_INDEX="16" NAME="ftl_0_Bus2IP_RdReqOut_pin" SIGNAME="ftl_0_Bus2IP_RdReqOut"/>
-    <PORT DIR="O" ENDIAN="LITTLE" GROUP="B" INDEX="40" LSB="0" MHS_INDEX="17" MSB="1" NAME="ftl_0_Bus2IP_WrCEOut_pin" SIGNAME="ftl_0_Bus2IP_WrCEOut"/>
-    <PORT DIR="O" ENDIAN="BIG" GROUP="B" INDEX="37" LSB="0" MHS_INDEX="18" MSB="1" NAME="ftl_0_Bus2IP_RdCEOut_pin" SIGNAME="ftl_0_Bus2IP_RdCEOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="34" MHS_INDEX="19" NAME="ftl_0_Bus2IP_CSOut_pin" SIGNAME="ftl_0_Bus2IP_CSOut"/>
-    <PORT DIR="O" ENDIAN="LITTLE" GROUP="B" INDEX="33" LSB="0" MHS_INDEX="20" MSB="7" NAME="ftl_0_Bus2IP_BEOut_pin" SIGNAME="ftl_0_Bus2IP_BEOut"/>
-    <PORT DIR="O" ENDIAN="BIG" GROUP="B" INDEX="36" LSB="0" MHS_INDEX="21" MSB="63" NAME="ftl_0_Bus2IP_DataOut_pin" SIGNAME="ftl_0_Bus2IP_DataOut"/>
-    <PORT DIR="O" ENDIAN="LITTLE" GROUP="B" INDEX="32" LSB="0" MHS_INDEX="22" MSB="31" NAME="ftl_0_Bus2IP_AddrOut_pin" SIGNAME="ftl_0_Bus2IP_AddrOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="10" MHS_INDEX="23" NAME="ftl_0_IP2Bus_IntrEventOut_pin" SIGNAME="ftl_0_IP2Bus_IntrEventOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="39" MHS_INDEX="24" NAME="ftl_0_Bus2IP_ResetOut_pin" SIGNAME="ftl_0_Bus2IP_ResetOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="35" MHS_INDEX="25" NAME="ftl_0_Bus2IP_ClkOut_pin" SIGNAME="ftl_0_Bus2IP_ClkOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="26" MHS_INDEX="26" NAME="ftl_0_M_rdBurstOut_pin" SIGNAME="ftl_0_M_rdBurstOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="30" MHS_INDEX="27" NAME="ftl_0_M_wrBurstOut_pin" SIGNAME="ftl_0_M_wrBurstOut"/>
-    <PORT DIR="I" ENDIAN="BIG" GROUP="B" INDEX="31" LSB="0" MHS_INDEX="28" MSB="63" NAME="ftl_0_M_wrDBusOut_pin" SIGNAME="ftl_0_M_wrDBusOut"/>
-    <PORT DIR="I" ENDIAN="LITTLE" GROUP="B" INDEX="15" LSB="0" MHS_INDEX="29" MSB="31" NAME="ftl_0_M_ABusOut_pin" SIGNAME="ftl_0_M_ABusOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="19" MHS_INDEX="30" NAME="ftl_0_M_abortOut_pin" SIGNAME="ftl_0_M_abortOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="23" MHS_INDEX="31" NAME="ftl_0_M_lockErrOut_pin" SIGNAME="ftl_0_M_lockErrOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="24" MHS_INDEX="32" NAME="ftl_0_M_orderedOut_pin" SIGNAME="ftl_0_M_orderedOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="22" MHS_INDEX="33" NAME="ftl_0_M_guardedOut_pin" SIGNAME="ftl_0_M_guardedOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="21" MHS_INDEX="34" NAME="ftl_0_M_compressOut_pin" SIGNAME="ftl_0_M_compressOut"/>
-    <PORT DIR="I" ENDIAN="BIG" GROUP="B" INDEX="29" LSB="0" MHS_INDEX="35" MSB="2" NAME="ftl_0_M_typeOut_pin" SIGNAME="ftl_0_M_typeOut"/>
-    <PORT DIR="I" ENDIAN="LITTLE" GROUP="B" INDEX="28" LSB="0" MHS_INDEX="36" MSB="3" NAME="ftl_0_M_sizeOut_pin" SIGNAME="ftl_0_M_sizeOut"/>
-    <PORT DIR="I" ENDIAN="BIG" GROUP="B" INDEX="17" LSB="0" MHS_INDEX="37" MSB="1" NAME="ftl_0_M_MSizeOut_pin" SIGNAME="ftl_0_M_MSizeOut"/>
-    <PORT DIR="I" ENDIAN="LITTLE" GROUP="B" INDEX="16" LSB="0" MHS_INDEX="38" MSB="7" NAME="ftl_0_M_BEOut_pin" SIGNAME="ftl_0_M_BEOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="18" MHS_INDEX="39" NAME="ftl_0_M_RNWOut_pin" SIGNAME="ftl_0_M_RNWOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="20" MHS_INDEX="40" NAME="ftl_0_M_busLockOut_pin" SIGNAME="ftl_0_M_busLockOut"/>
-    <PORT DIR="I" ENDIAN="BIG" GROUP="B" INDEX="25" LSB="0" MHS_INDEX="41" MSB="1" NAME="ftl_0_M_priorityOut_pin" SIGNAME="ftl_0_M_priorityOut"/>
-    <PORT DIR="I" GROUP="B" INDEX="27" MHS_INDEX="42" NAME="ftl_0_M_requestOut_pin" SIGNAME="ftl_0_M_requestOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="52" MHS_INDEX="43" NAME="ftl_0_PLB_MWrBTermOut_pin" SIGNAME="ftl_0_PLB_MWrBTermOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="46" MHS_INDEX="44" NAME="ftl_0_PLB_MRdBTermOut_pin" SIGNAME="ftl_0_PLB_MRdBTermOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="47" MHS_INDEX="45" NAME="ftl_0_PLB_MRdDAckOut_pin" SIGNAME="ftl_0_PLB_MRdDAckOut"/>
-    <PORT DIR="O" ENDIAN="LITTLE" GROUP="B" INDEX="49" LSB="0" MHS_INDEX="46" MSB="3" NAME="ftl_0_PLB_MRdWdAddrOut_pin" SIGNAME="ftl_0_PLB_MRdWdAddrOut"/>
-    <PORT DIR="O" ENDIAN="BIG" GROUP="B" INDEX="48" LSB="0" MHS_INDEX="47" MSB="63" NAME="ftl_0_PLB_MRdDBusOut_pin" SIGNAME="ftl_0_PLB_MRdDBusOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="53" MHS_INDEX="48" NAME="ftl_0_PLB_MWrDAckOut_pin" SIGNAME="ftl_0_PLB_MWrDAckOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="45" MHS_INDEX="49" NAME="ftl_0_PLB_MErrOut_pin" SIGNAME="ftl_0_PLB_MErrOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="44" MHS_INDEX="50" NAME="ftl_0_PLB_MBusyOut_pin" SIGNAME="ftl_0_PLB_MBusyOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="50" MHS_INDEX="51" NAME="ftl_0_PLB_MRearbitrateOut_pin" SIGNAME="ftl_0_PLB_MRearbitrateOut"/>
-    <PORT DIR="O" ENDIAN="LITTLE" GROUP="B" INDEX="51" LSB="0" MHS_INDEX="52" MSB="1" NAME="ftl_0_PLB_MSSizeOut_pin" SIGNAME="ftl_0_PLB_MSSizeOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="43" MHS_INDEX="53" NAME="ftl_0_PLB_MAddrAckOut_pin" SIGNAME="ftl_0_PLB_MAddrAckOut"/>
-    <PORT DIR="O" GROUP="B" INDEX="42" MHS_INDEX="54" NAME="ftl_0_IP2INTC_Irpt_pin" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="ftl_0_IP2INTC_Irpt"/>
+    <PORT DIR="I" GROUP="B" INDEX="8" MHS_INDEX="8" NAME="sys_rst_pin" RSTPOLARITY="0" SIGIS="RST" SIGNAME="sys_rst_s"/>
   </EXTERNALPORTS>
 
   <MODULES>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/cpu_ppc405_v1_10_b/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/ppc405_v2_00_c/doc/ppc405.pdf" HWVERSION="2.00.c" INSTANCE="plb_ppc405_0" IPTYPE="PROCESSOR" IS_PLACED="TRUE" MHS_INDEX="0" MODCLASS="PROCESSOR" MODTYPE="ppc405">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/cpu_ppc405_v1_10_b/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/ppc405_v2_00_c/doc/ppc405.pdf" HWVERSION="2.00.c" INSTANCE="plb_ppc405_0" IPTYPE="PROCESSOR" IS_PLACED="TRUE" MHS_INDEX="0" MODCLASS="PROCESSOR" MODTYPE="ppc405">
       <DESCRIPTION TYPE="SHORT">PowerPC 405 Virtex-II Pro</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">A wrapper to instantiate the PowerPC 405 Processor Block primitive</DESCRIPTION>
       <PARAMETER ADDRESS="BASE" ADDR_TYPE="REGISTER" MPD_INDEX="0" NAME="C_ISOCM_DCR_BASEADDR" VALUE="0b0000010000"/>
@@ -212,12 +166,12 @@
       <PORT DIR="O" MPD_INDEX="139" NAME="C405TRCTRIGGEREVENTTYPE" SIGNAME="__NOC__" VECFORMULA="[0:10]"/>
       <PORT DIR="I" MPD_INDEX="140" NAME="TRCC405TRACEDISABLE" SIGNAME="__NOC__"/>
       <PORT DIR="I" MPD_INDEX="141" NAME="TRCC405TRIGGEREVENTIN" SIGNAME="__NOC__"/>
-      <BUSINTERFACE BIFRANK="TARGET" BIF_X="1" BIF_Y="1" BUSNAME="jtagppc_0_0" BUSSTD="XIL" BUS_STD="XIL_JTAGPPC" MPD_INDEX="5" NAME="JTAGPPC" ORIENTED="EAST"/>
       <BUSINTERFACE BIFRANK="MASTER" BIF_X="1" BIF_Y="0" BUSNAME="plb_iocm" BUSSTD="OCM" BUS_STD="ISOCM" IS_INSTRUCTION="TRUE" MPD_INDEX="4" NAME="ISOCM" ORIENTED="EAST"/>
       <BUSINTERFACE BIFRANK="MASTER" BIF_X="0" BIF_Y="0" BUSNAME="plb_docm" BUSSTD="OCM" BUS_STD="DSOCM" IS_DATA="TRUE" MPD_INDEX="3" NAME="DSOCM" ORIENTED="WEST"/>
-      <BUSINTERFACE BIFRANK="MASTER" BIF_X="1" BIF_Y="2" BUSNAME="plb_plb" BUSSTD="PLB" BUS_STD="PLB" MPD_INDEX="2" NAME="IPLB" ORIENTED="EAST"/>
-      <BUSINTERFACE BIFRANK="MASTER" BIF_X="0" BIF_Y="2" BUSNAME="plb_plb" BUSSTD="PLB" BUS_STD="PLB" MPD_INDEX="1" NAME="DPLB" ORIENTED="WEST"/>
+      <BUSINTERFACE BIFRANK="MASTER" BIF_X="1" BIF_Y="1" BUSNAME="plb_plb" BUSSTD="PLB" BUS_STD="PLB" MPD_INDEX="2" NAME="IPLB" ORIENTED="EAST"/>
+      <BUSINTERFACE BIFRANK="MASTER" BIF_X="0" BIF_Y="1" BUSNAME="plb_plb" BUSSTD="PLB" BUS_STD="PLB" MPD_INDEX="1" NAME="DPLB" ORIENTED="WEST"/>
       <BUSINTERFACE BIFRANK="MASTER" BUSNAME="__NOC__" BUSSTD="DCR" BUS_STD="DCR" MPD_INDEX="0" NAME="MDCR"/>
+      <BUSINTERFACE BIFRANK="TARGET" BUSNAME="__NOC__" BUSSTD="XIL" BUS_STD="XIL_JTAGPPC" MPD_INDEX="5" NAME="JTAGPPC"/>
       <MEMORYMAP>
         <MEMRANGE BASE="0b0000010000" BASENAME="C_ISOCM_DCR_BASEADDR" BASEVALUE="16" HIGH="0b0000010011" HIGHNAME="C_ISOCM_DCR_HIGHADDR" HIGHVALUE="19" MINSIZE="4" SIZE="4" SIZEABRV="4">
           <MEMBUSINTERFACES>
@@ -231,7 +185,7 @@
         </MEMRANGE>
       </MEMORYMAP>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/cpu_ppc405_v1_10_b/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/ppc405_v2_00_c/doc/ppc405.pdf" HWVERSION="2.00.c" INSTANCE="plb_ppc405_1" IPTYPE="PROCESSOR" IS_PLACED="TRUE" MHS_INDEX="1" MODCLASS="PROCESSOR" MODTYPE="ppc405">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/cpu_ppc405_v1_10_b/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/ppc405_v2_00_c/doc/ppc405.pdf" HWVERSION="2.00.c" INSTANCE="plb_ppc405_1" IPTYPE="PROCESSOR" IS_PLACED="TRUE" MHS_INDEX="1" MODCLASS="PROCESSOR" MODTYPE="ppc405">
       <DESCRIPTION TYPE="SHORT">PowerPC 405 Virtex-II Pro</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">A wrapper to instantiate the PowerPC 405 Processor Block primitive</DESCRIPTION>
       <PARAMETER ADDRESS="BASE" ADDR_TYPE="REGISTER" MPD_INDEX="0" NAME="C_ISOCM_DCR_BASEADDR" VALUE="0b0000010000"/>
@@ -384,12 +338,12 @@
       <PORT DIR="O" MPD_INDEX="139" NAME="C405TRCTRIGGEREVENTTYPE" SIGNAME="__NOC__" VECFORMULA="[0:10]"/>
       <PORT DIR="I" MPD_INDEX="140" NAME="TRCC405TRACEDISABLE" SIGNAME="__NOC__"/>
       <PORT DIR="I" MPD_INDEX="141" NAME="TRCC405TRIGGEREVENTIN" SIGNAME="__NOC__"/>
-      <BUSINTERFACE BIFRANK="TARGET" BIF_X="0" BIF_Y="0" BUSNAME="jtagppc_0_1" BUSSTD="XIL" BUS_STD="XIL_JTAGPPC" MPD_INDEX="5" NAME="JTAGPPC" ORIENTED="WEST"/>
       <BUSINTERFACE BIFRANK="MASTER" BUSNAME="__NOC__" BUSSTD="DCR" BUS_STD="DCR" MPD_INDEX="0" NAME="MDCR"/>
       <BUSINTERFACE BIFRANK="MASTER" BUSNAME="__NOC__" BUSSTD="PLB" BUS_STD="PLB" MPD_INDEX="1" NAME="DPLB"/>
       <BUSINTERFACE BIFRANK="MASTER" BUSNAME="__NOC__" BUSSTD="PLB" BUS_STD="PLB" MPD_INDEX="2" NAME="IPLB"/>
       <BUSINTERFACE BIFRANK="MASTER" BUSNAME="__NOC__" BUSSTD="OCM" BUS_STD="DSOCM" IS_DATA="TRUE" MPD_INDEX="3" NAME="DSOCM"/>
       <BUSINTERFACE BIFRANK="MASTER" BUSNAME="__NOC__" BUSSTD="OCM" BUS_STD="ISOCM" IS_INSTRUCTION="TRUE" MPD_INDEX="4" NAME="ISOCM"/>
+      <BUSINTERFACE BIFRANK="TARGET" BUSNAME="__NOC__" BUSSTD="XIL" BUS_STD="XIL_JTAGPPC" MPD_INDEX="5" NAME="JTAGPPC"/>
       <MEMORYMAP>
         <MEMRANGE BASE="0b0000010000" BASENAME="C_ISOCM_DCR_BASEADDR" BASEVALUE="16" HIGH="0b0000010011" HIGHNAME="C_ISOCM_DCR_HIGHADDR" HIGHVALUE="19" MINSIZE="4" SIZE="4" SIZEABRV="4">
           <MEMBUSINTERFACES>
@@ -403,32 +357,7 @@
         </MEMRANGE>
       </MEMORYMAP>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/jtagppc_cntlr_v2_01_c/doc/jtagppc_cntlr.pdf" HWVERSION="2.01.c" INSTANCE="plb_jtagppc_0" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="2" MODCLASS="PERIPHERAL" MODTYPE="jtagppc_cntlr">
-      <DESCRIPTION TYPE="SHORT">PowerPC JTAG Controller</DESCRIPTION>
-      <DESCRIPTION TYPE="LONG">JTAGPPC wrapper allows the PowerPC to connect to the JTAG chain of the FPGA.</DESCRIPTION>
-      <PARAMETER MPD_INDEX="0" NAME="C_DEVICE" VALUE="X2VP4"/>
-      <PARAMETER MPD_INDEX="1" NAME="C_NUM_PPC_USED" VALUE="0"/>
-      <PORT DIR="I" MPD_INDEX="0" NAME="TRSTNEG" SIGNAME="__NOC__"/>
-      <PORT DIR="I" MPD_INDEX="1" NAME="HALTNEG0" SIGNAME="__NOC__"/>
-      <PORT DIR="O" MPD_INDEX="2" NAME="DBGC405DEBUGHALT0" SIGNAME="__NOC__"/>
-      <PORT DIR="I" MPD_INDEX="3" NAME="HALTNEG1" SIGNAME="__NOC__"/>
-      <PORT DIR="O" MPD_INDEX="4" NAME="DBGC405DEBUGHALT1" SIGNAME="__NOC__"/>
-      <PORT DIR="I" MPD_INDEX="5" NAME="C405JTGTDO0" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="6" NAME="C405JTGTDOEN0" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="7" NAME="JTGC405TCK0" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="8" NAME="JTGC405TDI0" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="9" NAME="JTGC405TMS0" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="10" NAME="JTGC405TRSTNEG0" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="11" NAME="C405JTGTDO1" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="12" NAME="C405JTGTDOEN1" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="13" NAME="JTGC405TCK1" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="14" NAME="JTGC405TDI1" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="15" NAME="JTGC405TMS1" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="16" NAME="JTGC405TRSTNEG1" SIGNAME="__DEF__"/>
-      <BUSINTERFACE BIFRANK="INITIATOR" BIF_X="0" BIF_Y="0" BUSNAME="jtagppc_0_0" BUSSTD="XIL" BUS_STD="XIL_JTAGPPC" MPD_INDEX="0" NAME="JTAGPPC0" ORIENTED="EAST"/>
-      <BUSINTERFACE BIFRANK="INITIATOR" BIF_X="1" BIF_Y="0" BUSNAME="jtagppc_0_1" BUSSTD="XIL" BUS_STD="XIL_JTAGPPC" MPD_INDEX="1" NAME="JTAGPPC1" ORIENTED="WEST"/>
-    </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_sys_reset_v1_00_a/doc/proc_sys_reset.pdf" GROUP="C" HWVERSION="1.00.a" INSTANCE="plb_reset_block" IPTYPE="PERIPHERAL" MHS_INDEX="3" MODCLASS="IP" MODTYPE="proc_sys_reset">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/proc_sys_reset_v1_00_a/doc/proc_sys_reset.pdf" GROUP="B" HWVERSION="1.00.a" INSTANCE="plb_reset_block" IPTYPE="PERIPHERAL" MHS_INDEX="2" MODCLASS="IP" MODTYPE="proc_sys_reset">
       <DESCRIPTION TYPE="SHORT">Processor System Reset Module</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">Reset management module</DESCRIPTION>
       <PARAMETER MPD_INDEX="0" NAME="C_EXT_RST_WIDTH" VALUE="4"/>
@@ -450,7 +379,7 @@
       <PORT DIR="I" MPD_INDEX="2" NAME="Aux_Reset_In" SIGNAME="__NOC__"/>
       <PORT DIR="O" MPD_INDEX="11" NAME="Peripheral_Reset" SIGNAME="__NOC__" VECFORMULA="[0:C_NUM_PERP_RST-1]"/>
     </MODULE>
-    <MODULE BUSSTD="OCM" BUS_STD="ISOCM" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/isocm_v10_v2_00_b/doc/isocm_v10.pdf" HWVERSION="2.00.b" INSTANCE="plb_iocm" IPTYPE="BUS" IS_PLACED="TRUE" MHS_INDEX="4" MODCLASS="BUS" MODTYPE="isocm_v10">
+    <MODULE BUSSTD="OCM" BUS_STD="ISOCM" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/isocm_v10_v2_00_b/doc/isocm_v10.pdf" HWVERSION="2.00.b" INSTANCE="plb_iocm" IPTYPE="BUS" IS_PLACED="TRUE" MHS_INDEX="3" MODCLASS="BUS" MODTYPE="isocm_v10">
       <DESCRIPTION TYPE="SHORT">Instruction-Side On-Chip Memory (OCM) Bus 1.0</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">Instruction-side On-Chip Memory(OCM) bus interconnect core</DESCRIPTION>
       <PARAMETER MPD_INDEX="0" NAME="C_NUM_MASTERS" VALUE="1"/>
@@ -487,7 +416,7 @@
       <PORT DIR="O" MPD_INDEX="27" NAME="ISOCMDCRBRAMRDSELECT" SIGNAME="__DEF__"/>
       <PORT DIR="O" MPD_INDEX="28" NAME="BRAMISOCMDCRRDDBUS" SIGNAME="__DEF__" VECFORMULA="[0:31]"/>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/isbram_if_cntlr_v3_00_b/doc/isbram_if_cntlr.pdf" HWVERSION="3.00.b" INSTANCE="plb_iocm_cntlr" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="5" MODCLASS="MEMORY_CNTLR" MODTYPE="isbram_if_cntlr">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/isbram_if_cntlr_v3_00_b/doc/isbram_if_cntlr.pdf" HWVERSION="3.00.b" INSTANCE="plb_iocm_cntlr" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="4" MODCLASS="MEMORY_CNTLR" MODTYPE="isbram_if_cntlr">
       <DESCRIPTION TYPE="SHORT">Instruction-Side OCM BRAM Controller</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">BRAM_Block connects to the ISOCM V10 Bus for Virtex-II Pro PowerPC 405 based embedded systems.</DESCRIPTION>
       <PARAMETER ADDRESS="BASE" ADDR_TYPE="MEMORY" CHANGEDBY="USER" MPD_INDEX="0" NAME="C_BASEADDR" VALUE="0xffffc000"/>
@@ -534,7 +463,7 @@
         </MEMRANGE>
       </MEMORYMAP>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/doc/bram_block.pdf" HWVERSION="1.00.a" INSTANCE="plb_isocm_bram" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="6" MODCLASS="MEMORY" MODTYPE="bram_block">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/doc/bram_block.pdf" HWVERSION="1.00.a" INSTANCE="plb_isocm_bram" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="5" MODCLASS="MEMORY" MODTYPE="bram_block">
       <DESCRIPTION TYPE="SHORT">Block RAM (BRAM) Block</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">The BRAM Block is a configurable memory module that attaches to a variety of BRAM Interface Controllers.</DESCRIPTION>
       <PARAMETER MPD_INDEX="0" NAME="C_MEMSIZE" VALUE="2048"/>
@@ -559,7 +488,7 @@
       <BUSINTERFACE BIFRANK="TARGET" BIF_X="0" BIF_Y="0" BUSNAME="isocm_porta" BUSSTD="XIL" BUS_STD="XIL_BRAM" IS_INTCONN="TRUE" MPD_INDEX="0" NAME="PORTA"/>
       <BUSINTERFACE BIFRANK="TARGET" BIF_X="1" BIF_Y="0" BUSNAME="isocm_portb" BUSSTD="XIL" BUS_STD="XIL_BRAM" IS_INTCONN="TRUE" MPD_INDEX="1" NAME="PORTB"/>
     </MODULE>
-    <MODULE BUSSTD="OCM" BUS_STD="DSOCM" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/dsocm_v10_v2_00_b/doc/dsocm_v10.pdf" HWVERSION="2.00.b" INSTANCE="plb_docm" IPTYPE="BUS" IS_PLACED="TRUE" MHS_INDEX="7" MODCLASS="BUS" MODTYPE="dsocm_v10">
+    <MODULE BUSSTD="OCM" BUS_STD="DSOCM" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/dsocm_v10_v2_00_b/doc/dsocm_v10.pdf" HWVERSION="2.00.b" INSTANCE="plb_docm" IPTYPE="BUS" IS_PLACED="TRUE" MHS_INDEX="6" MODCLASS="BUS" MODTYPE="dsocm_v10">
       <DESCRIPTION TYPE="SHORT">Data-Side On-Chip Memory (OCM) Bus 1.0</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">Data-Side On-Chip Memory(OCM) bus interconnect core</DESCRIPTION>
       <PARAMETER MPD_INDEX="0" NAME="C_NUM_MASTERS" VALUE="1"/>
@@ -592,7 +521,7 @@
       <PORT DIR="O" MPD_INDEX="22" NAME="DSOCMWRADDRVALID" SIGNAME="__DEF__"/>
       <PORT DIR="O" MPD_INDEX="23" NAME="DSOCMRWCOMPLETE" SIGNAME="__DEF__"/>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/dsbram_if_cntlr_v3_00_b/doc/dsbram_if_cntlr.pdf" HWVERSION="3.00.b" INSTANCE="plb_docm_cntlr" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="8" MODCLASS="MEMORY_CNTLR" MODTYPE="dsbram_if_cntlr">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/dsbram_if_cntlr_v3_00_b/doc/dsbram_if_cntlr.pdf" HWVERSION="3.00.b" INSTANCE="plb_docm_cntlr" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="7" MODCLASS="MEMORY_CNTLR" MODTYPE="dsbram_if_cntlr">
       <DESCRIPTION TYPE="SHORT">Data-Side OCM BRAM Controller</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">BRAM_Block connects to the DSOCM V10 Bus for Virtex-II Pro PowerPC 405 based embedded systems.</DESCRIPTION>
       <PARAMETER ADDRESS="BASE" ADDR_TYPE="MEMORY" CHANGEDBY="USER" MPD_INDEX="0" NAME="C_BASEADDR" VALUE="0x80000000"/>
@@ -625,7 +554,7 @@
         </MEMRANGE>
       </MEMORYMAP>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/doc/bram_block.pdf" HWVERSION="1.00.a" INSTANCE="plb_dsocm_bram" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="9" MODCLASS="MEMORY" MODTYPE="bram_block">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/doc/bram_block.pdf" HWVERSION="1.00.a" INSTANCE="plb_dsocm_bram" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="8" MODCLASS="MEMORY" MODTYPE="bram_block">
       <DESCRIPTION TYPE="SHORT">Block RAM (BRAM) Block</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">The BRAM Block is a configurable memory module that attaches to a variety of BRAM Interface Controllers.</DESCRIPTION>
       <PARAMETER MPD_INDEX="0" NAME="C_MEMSIZE" VALUE="2048"/>
@@ -650,7 +579,7 @@
       <BUSINTERFACE BIFRANK="TARGET" BIF_X="1" BIF_Y="0" BUSNAME="dsocm_porta" BUSSTD="XIL" BUS_STD="XIL_BRAM" IS_INTCONN="TRUE" MPD_INDEX="0" NAME="PORTA"/>
       <BUSINTERFACE BIFRANK="TARGET" BUSNAME="__NOC__" BUSSTD="XIL" BUS_STD="XIL_BRAM" MPD_INDEX="1" NAME="PORTB"/>
     </MODULE>
-    <MODULE BUSINDEX="0" BUSSTD="PLB" BUS_STD="PLB" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb_v34_v1_02_a/doc/plb_v34.pdf" HWVERSION="1.02.a" INSTANCE="plb_plb" IPTYPE="BUS" IS_PLACED="TRUE" MHS_INDEX="10" MODCLASS="BUS" MODTYPE="plb_v34">
+    <MODULE BUSINDEX="0" BUSSTD="PLB" BUS_STD="PLB" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb_v34_v1_02_a/doc/plb_v34.pdf" HWVERSION="1.02.a" INSTANCE="plb_plb" IPTYPE="BUS" IS_PLACED="TRUE" MHS_INDEX="9" MODCLASS="BUS" MODTYPE="plb_v34">
       <DESCRIPTION TYPE="SHORT">Processor Local Bus (PLB) 3.4</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">'Xilinx 64-bit Processor Local Bus (PLB) consists of a bus control unit, a watchdog timer, and separate address, write, and read data path units with a a three-cycle only arbitration feature'</DESCRIPTION>
       <PARAMETER MPD_INDEX="0" NAME="C_PLB_NUM_MASTERS" VALUE="4"/>
@@ -766,7 +695,7 @@
         </MEMRANGE>
       </MEMORYMAP>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/bram_v1_00_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb_bram_if_cntlr_v1_00_b/doc/plb_bram_if_cntlr.pdf" HWVERSION="1.00.b" INSTANCE="plb_plb_bram_if_cntlr_1" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="11" MODCLASS="MEMORY_CNTLR" MODTYPE="plb_bram_if_cntlr">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/bram_v1_00_a/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb_bram_if_cntlr_v1_00_b/doc/plb_bram_if_cntlr.pdf" HWVERSION="1.00.b" INSTANCE="plb_plb_bram_if_cntlr_1" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="10" MODCLASS="MEMORY_CNTLR" MODTYPE="plb_bram_if_cntlr">
       <DESCRIPTION TYPE="SHORT">PLB BRAM Controller</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">Attaches BRAM to the PLB bus</DESCRIPTION>
       <PARAMETER MPD_INDEX="0" NAME="c_num_masters" VALUE="8"/>
@@ -833,7 +762,7 @@
         </MEMRANGE>
       </MEMORYMAP>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/doc/bram_block.pdf" HWVERSION="1.00.a" INSTANCE="plb_plb_bram_if_cntlr_1_bram" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="12" MODCLASS="MEMORY" MODTYPE="bram_block">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/bram_block_v1_00_a/doc/bram_block.pdf" HWVERSION="1.00.a" INSTANCE="plb_plb_bram_if_cntlr_1_bram" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="11" MODCLASS="MEMORY" MODTYPE="bram_block">
       <DESCRIPTION TYPE="SHORT">Block RAM (BRAM) Block</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">The BRAM Block is a configurable memory module that attaches to a variety of BRAM Interface Controllers.</DESCRIPTION>
       <PARAMETER MPD_INDEX="0" NAME="C_MEMSIZE" VALUE="2048"/>
@@ -858,7 +787,7 @@
       <BUSINTERFACE BIFRANK="TARGET" BIF_X="1" BIF_Y="0" BUSNAME="plb_bram_if_cntlr_1_port" BUSSTD="XIL" BUS_STD="XIL_BRAM" IS_INTCONN="TRUE" MPD_INDEX="0" NAME="PORTA"/>
       <BUSINTERFACE BIFRANK="TARGET" BUSNAME="__NOC__" BUSSTD="XIL" BUS_STD="XIL_BRAM" MPD_INDEX="1" NAME="PORTB"/>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/dcm_module_v1_00_d/doc/dcm_module.pdf" GROUP="A" HWVERSION="1.00.d" INSTANCE="plb_dcm_0" IPTYPE="PERIPHERAL" MHS_INDEX="13" MODCLASS="IP" MODTYPE="dcm_module">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/dcm_module_v1_00_d/doc/dcm_module.pdf" GROUP="A" HWVERSION="1.00.d" INSTANCE="plb_dcm_0" IPTYPE="PERIPHERAL" MHS_INDEX="12" MODCLASS="IP" MODTYPE="dcm_module">
       <DESCRIPTION TYPE="SHORT">Digital Clock Manager (DCM)</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">The digital clock manager module is a wrapper around the DCM primitive which allows it to be used in the EDK tool suite.</DESCRIPTION>
       <PARAMETER MPD_INDEX="0" NAME="C_DFS_FREQUENCY_MODE" VALUE="LOW"/>
@@ -908,7 +837,7 @@
       <PORT DIR="O" MPD_INDEX="16" NAME="STATUS" SIGNAME="__NOC__" VECFORMULA="[7:0]"/>
       <PORT DIR="O" MPD_INDEX="18" NAME="PSDONE" SIGNAME="__NOC__"/>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/plb2opb_v1_00_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb2opb_bridge_v1_01_a/doc/plb2opb_bridge.pdf" HWVERSION="1.01.a" INSTANCE="plb_plb2opb_bridge_0" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="14" MODCLASS="BUS_BRIDGE" MODTYPE="plb2opb_bridge">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/plb2opb_v1_00_a/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/plb2opb_bridge_v1_01_a/doc/plb2opb_bridge.pdf" HWVERSION="1.01.a" INSTANCE="plb_plb2opb_bridge_0" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="13" MODCLASS="BUS_BRIDGE" MODTYPE="plb2opb_bridge">
       <DESCRIPTION TYPE="SHORT">PLB to OPB Bridge</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">Processor Local Bus (PLB) to On-chip Peripheral Bus(OPB) Bridge</DESCRIPTION>
       <PARAMETER MPD_INDEX="0" NAME="C_NO_PLB_BURST" VALUE="0"/>
@@ -1030,7 +959,7 @@
         </MEMRANGE>
       </MEMORYMAP>
     </MODULE>
-    <MODULE BUSINDEX="1" BUSSTD="OPB" BUS_STD="OPB" DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/opbarb_v1_02_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_v20_v1_10_c/doc/opb_v20.pdf" HWVERSION="1.10.c" INSTANCE="plb_opb_v20_0" IPTYPE="BUS" IS_PLACED="TRUE" MHS_INDEX="15" MODCLASS="BUS" MODTYPE="opb_v20">
+    <MODULE BUSINDEX="1" BUSSTD="OPB" BUS_STD="OPB" DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/opbarb_v1_02_a/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_v20_v1_10_c/doc/opb_v20.pdf" HWVERSION="1.10.c" INSTANCE="plb_opb_v20_0" IPTYPE="BUS" IS_PLACED="TRUE" MHS_INDEX="14" MODCLASS="BUS" MODTYPE="opb_v20">
       <DESCRIPTION TYPE="SHORT">On-chip Peripheral Bus (OPB) 2.0</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">OPB_V20 On-Chip Peripheral Bus V2.0 with OPB Arbiter (OPB_V20)</DESCRIPTION>
       <PARAMETER ADDRESS="BASE" ADDR_TYPE="REGISTER" MPD_INDEX="0" NAME="C_BASEADDR" VALUE="0xFFFFFFFF"/>
@@ -1106,7 +1035,7 @@
         <MEMRANGE BASE="0xFFFFFFFF" BASENAME="C_BASEADDR" BASEVALUE="4294967295" HIGH="0x00000000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0" ISVALID="FALSE" MINSIZE="0x200" SIZE="0" SIZEABRV="U"/>
       </MEMORYMAP>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/uartlite_v1_13_a/doc/html/api/index.html" DOC_IP="/usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/doc/opb_mdm.pdf" HWVERSION="2.00.a" INSTANCE="plb_opb_mdm_0" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="16" MODCLASS="DEBUG" MODTYPE="opb_mdm">
+    <MODULE DOC_DRIVER="/home/kfleming/xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/uartlite_v1_13_a/doc/html/api/index.html" DOC_IP="/home/kfleming/xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/opb_mdm_v2_00_a/doc/opb_mdm.pdf" HWVERSION="2.00.a" INSTANCE="plb_opb_mdm_0" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="15" MODCLASS="DEBUG" MODTYPE="opb_mdm">
       <DESCRIPTION TYPE="SHORT">OPB Microprocessor Debug Module (MDM)</DESCRIPTION>
       <DESCRIPTION TYPE="LONG">MicroBlaze Debug Module with OPB interface</DESCRIPTION>
       <PARAMETER ADDRESS="BASE" ADDR_TYPE="REGISTER" CHANGEDBY="USER" MPD_INDEX="0" NAME="C_BASEADDR" VALUE="0x10000000"/>
@@ -1116,7 +1045,7 @@
       <PARAMETER MPD_INDEX="4" NAME="C_FAMILY" VALUE="virtex2"/>
       <PARAMETER MPD_INDEX="5" NAME="C_MB_DBG_PORTS" VALUE="1"/>
       <PARAMETER MPD_INDEX="6" NAME="C_USE_UART" VALUE="1"/>
-      <PARAMETER MPD_INDEX="7" NAME="C_UART_WIDTH" VALUE="32"/>
+      <PARAMETER CHANGEDBY="USER" MPD_INDEX="7" NAME="C_UART_WIDTH" VALUE="8"/>
       <PARAMETER MPD_INDEX="8" NAME="C_WRITE_FSL_PORTS" VALUE="0"/>
       <PORT DIR="I" MPD_INDEX="0" NAME="OPB_Clk" SIGIS="CLK" SIGNAME="__DEF__"/>
       <PORT DIR="I" MPD_INDEX="1" NAME="OPB_Rst" SIGIS="RST" SIGNAME="__DEF__"/>
@@ -1213,144 +1142,12 @@
         </MEMRANGE>
       </MEMORYMAP>
     </MODULE>
-    <MODULE DOC_DRIVER="/usr/local/Xilinx/10.1/EDK/sw/XilinxProcessorIPLib/drivers/generic_v1_00_a/doc/html/api/index.html" GROUP="B" HWVERSION="1.00.a" INSTANCE="plb_ftl_0" IPTYPE="PERIPHERAL" IS_PLACED="TRUE" MHS_INDEX="17" MODCLASS="PERIPHERAL" MODTYPE="ftl">
-      <DESCRIPTION TYPE="SHORT">FTL</DESCRIPTION>
-      <PARAMETER ADDRESS="BASE" ADDR_TYPE="REGISTER" MPD_INDEX="0" NAME="C_BASEADDR" VALUE="0xffffffff"/>
-      <PARAMETER ADDRESS="HIGH" ADDR_TYPE="REGISTER" MPD_INDEX="1" NAME="C_HIGHADDR" VALUE="0x00000000"/>
-      <PARAMETER MPD_INDEX="2" NAME="C_PLB_AWIDTH" VALUE="32"/>
-      <PARAMETER MPD_INDEX="3" NAME="C_PLB_DWIDTH" VALUE="64"/>
-      <PARAMETER MPD_INDEX="4" NAME="C_PLB_NUM_MASTERS" VALUE="8"/>
-      <PARAMETER MPD_INDEX="5" NAME="C_PLB_MID_WIDTH" VALUE="3"/>
-      <PARAMETER MPD_INDEX="6" NAME="C_USER_ID_CODE" VALUE="3"/>
-      <PARAMETER MPD_INDEX="7" NAME="C_FAMILY" VALUE="virtex2p"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="112" NAME="IP2Bus_WrAckOut" SIGNAME="ftl_0_IP2Bus_WrAckOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="111" NAME="IP2Bus_RdAckOut" SIGNAME="ftl_0_IP2Bus_RdAckOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="110" NAME="IP2Bus_ToutSupOut" SIGNAME="ftl_0_IP2Bus_ToutSupOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="109" NAME="IP2Bus_ErrorOut" SIGNAME="ftl_0_IP2Bus_ErrorOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="108" NAME="IP2Bus_RetryOut" SIGNAME="ftl_0_IP2Bus_RetryOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="107" NAME="IP2Bus_DataOut" SIGNAME="ftl_0_IP2Bus_DataOut" VECFORMULA="[0 : (C_PLB_DWIDTH-1)]"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="106" NAME="Bus2IP_WrReqOut" SIGNAME="ftl_0_Bus2IP_WrReqOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="105" NAME="Bus2IP_RdReqOut" SIGNAME="ftl_0_Bus2IP_RdReqOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="104" NAME="Bus2IP_WrCEOut" SIGNAME="ftl_0_Bus2IP_WrCEOut" VECFORMULA="[0 : 1]"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="103" NAME="Bus2IP_RdCEOut" SIGNAME="ftl_0_Bus2IP_RdCEOut" VECFORMULA="[0 : 1]"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="102" NAME="Bus2IP_CSOut" SIGNAME="ftl_0_Bus2IP_CSOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="101" NAME="Bus2IP_BEOut" SIGNAME="ftl_0_Bus2IP_BEOut" VECFORMULA="[0 : ((C_PLB_DWIDTH/8)-1)]"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="100" NAME="Bus2IP_DataOut" SIGNAME="ftl_0_Bus2IP_DataOut" VECFORMULA="[0 : (C_PLB_DWIDTH-1)]"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="99" NAME="Bus2IP_AddrOut" SIGNAME="ftl_0_Bus2IP_AddrOut" VECFORMULA="[0 : (C_PLB_AWIDTH-1)]"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="98" NAME="IP2Bus_IntrEventOut" SIGNAME="ftl_0_IP2Bus_IntrEventOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="97" NAME="Bus2IP_ResetOut" SIGNAME="ftl_0_Bus2IP_ResetOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="96" NAME="Bus2IP_ClkOut" SIGNAME="ftl_0_Bus2IP_ClkOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="95" NAME="M_rdBurstOut" SIGNAME="ftl_0_M_rdBurstOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="94" NAME="M_wrBurstOut" SIGNAME="ftl_0_M_wrBurstOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="93" NAME="M_wrDBusOut" SIGNAME="ftl_0_M_wrDBusOut" VECFORMULA="[0:63]"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="92" NAME="M_ABusOut" SIGNAME="ftl_0_M_ABusOut" VECFORMULA="[0:31]"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="91" NAME="M_abortOut" SIGNAME="ftl_0_M_abortOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="90" NAME="M_lockErrOut" SIGNAME="ftl_0_M_lockErrOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="89" NAME="M_orderedOut" SIGNAME="ftl_0_M_orderedOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="88" NAME="M_guardedOut" SIGNAME="ftl_0_M_guardedOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="87" NAME="M_compressOut" SIGNAME="ftl_0_M_compressOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="86" NAME="M_typeOut" SIGNAME="ftl_0_M_typeOut" VECFORMULA="[0:2]"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="85" NAME="M_sizeOut" SIGNAME="ftl_0_M_sizeOut" VECFORMULA="[0:3]"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="84" NAME="M_MSizeOut" SIGNAME="ftl_0_M_MSizeOut" VECFORMULA="[0:1]"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="83" NAME="M_BEOut" SIGNAME="ftl_0_M_BEOut" VECFORMULA="[0:7]"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="82" NAME="M_RNWOut" SIGNAME="ftl_0_M_RNWOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="81" NAME="M_busLockOut" SIGNAME="ftl_0_M_busLockOut"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="80" NAME="M_priorityOut" SIGNAME="ftl_0_M_priorityOut" VECFORMULA="[0:1]"/>
-      <PORT DIR="I" INMHS="TRUE" MPD_INDEX="79" NAME="M_requestOut" SIGNAME="ftl_0_M_requestOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="78" NAME="PLB_MWrBTermOut" SIGNAME="ftl_0_PLB_MWrBTermOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="77" NAME="PLB_MRdBTermOut" SIGNAME="ftl_0_PLB_MRdBTermOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="76" NAME="PLB_MRdDAckOut" SIGNAME="ftl_0_PLB_MRdDAckOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="75" NAME="PLB_MRdWdAddrOut" SIGNAME="ftl_0_PLB_MRdWdAddrOut" VECFORMULA="[0:3]"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="74" NAME="PLB_MRdDBusOut" SIGNAME="ftl_0_PLB_MRdDBusOut" VECFORMULA="[0:63]"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="73" NAME="PLB_MWrDAckOut" SIGNAME="ftl_0_PLB_MWrDAckOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="72" NAME="PLB_MErrOut" SIGNAME="ftl_0_PLB_MErrOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="71" NAME="PLB_MBusyOut" SIGNAME="ftl_0_PLB_MBusyOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="70" NAME="PLB_MRearbitrateOut" SIGNAME="ftl_0_PLB_MRearbitrateOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="69" NAME="PLB_MSSizeOut" SIGNAME="ftl_0_PLB_MSSizeOut" VECFORMULA="[0:1]"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="68" NAME="PLB_MAddrAckOut" SIGNAME="ftl_0_PLB_MAddrAckOut"/>
-      <PORT DIR="O" INMHS="TRUE" MPD_INDEX="67" NAME="IP2INTC_Irpt" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="ftl_0_IP2INTC_Irpt"/>
-      <PORT DIR="I" MPD_INDEX="0" NAME="PLB_Clk" SIGIS="CLK" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="1" NAME="PLB_Rst" SIGIS="RST" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="2" NAME="Sl_addrAck" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="3" NAME="Sl_MBusy" SIGNAME="__DEF__" VECFORMULA="[0:(C_PLB_NUM_MASTERS-1)]"/>
-      <PORT DIR="O" MPD_INDEX="4" NAME="Sl_MErr" SIGNAME="__DEF__" VECFORMULA="[0:(C_PLB_NUM_MASTERS-1)]"/>
-      <PORT DIR="O" MPD_INDEX="5" NAME="Sl_rdBTerm" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="6" NAME="Sl_rdComp" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="7" NAME="Sl_rdDAck" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="8" NAME="Sl_rdDBus" SIGNAME="__DEF__" VECFORMULA="[0:(C_PLB_DWIDTH-1)]"/>
-      <PORT DIR="O" MPD_INDEX="9" NAME="Sl_rdWdAddr" SIGNAME="__DEF__" VECFORMULA="[0:3]"/>
-      <PORT DIR="O" MPD_INDEX="10" NAME="Sl_rearbitrate" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="11" NAME="Sl_SSize" SIGNAME="__DEF__" VECFORMULA="[0:1]"/>
-      <PORT DIR="O" MPD_INDEX="12" NAME="Sl_wait" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="13" NAME="Sl_wrBTerm" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="14" NAME="Sl_wrComp" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="15" NAME="Sl_wrDAck" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="16" NAME="PLB_abort" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="17" NAME="PLB_ABus" SIGNAME="__DEF__" VECFORMULA="[0:(C_PLB_AWIDTH-1)]"/>
-      <PORT DIR="I" MPD_INDEX="18" NAME="PLB_BE" SIGNAME="__DEF__" VECFORMULA="[0:((C_PLB_DWIDTH/8)-1)]"/>
-      <PORT DIR="I" MPD_INDEX="19" NAME="PLB_busLock" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="20" NAME="PLB_compress" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="21" NAME="PLB_guarded" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="22" NAME="PLB_lockErr" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="23" NAME="PLB_masterID" SIGNAME="__DEF__" VECFORMULA="[0:(C_PLB_MID_WIDTH-1)]"/>
-      <PORT DIR="I" MPD_INDEX="24" NAME="PLB_MSize" SIGNAME="__DEF__" VECFORMULA="[0:1]"/>
-      <PORT DIR="I" MPD_INDEX="25" NAME="PLB_ordered" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="26" NAME="PLB_PAValid" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="27" NAME="PLB_pendPri" SIGNAME="__DEF__" VECFORMULA="[0:1]"/>
-      <PORT DIR="I" MPD_INDEX="28" NAME="PLB_pendReq" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="29" NAME="PLB_rdBurst" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="30" NAME="PLB_rdPrim" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="31" NAME="PLB_reqPri" SIGNAME="__DEF__" VECFORMULA="[0:1]"/>
-      <PORT DIR="I" MPD_INDEX="32" NAME="PLB_RNW" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="33" NAME="PLB_SAValid" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="34" NAME="PLB_size" SIGNAME="__DEF__" VECFORMULA="[0:3]"/>
-      <PORT DIR="I" MPD_INDEX="35" NAME="PLB_type" SIGNAME="__DEF__" VECFORMULA="[0:2]"/>
-      <PORT DIR="I" MPD_INDEX="36" NAME="PLB_wrBurst" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="37" NAME="PLB_wrDBus" SIGNAME="__DEF__" VECFORMULA="[0:(C_PLB_DWIDTH-1)]"/>
-      <PORT DIR="I" MPD_INDEX="38" NAME="PLB_wrPrim" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="39" NAME="M_abort" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="40" NAME="M_ABus" SIGNAME="__DEF__" VECFORMULA="[0:(C_PLB_AWIDTH-1)]"/>
-      <PORT DIR="O" MPD_INDEX="41" NAME="M_BE" SIGNAME="__DEF__" VECFORMULA="[0:((C_PLB_DWIDTH/8)-1)]"/>
-      <PORT DIR="O" MPD_INDEX="42" NAME="M_busLock" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="43" NAME="M_compress" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="44" NAME="M_guarded" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="45" NAME="M_lockErr" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="46" NAME="M_MSize" SIGNAME="__DEF__" VECFORMULA="[0:1]"/>
-      <PORT DIR="O" MPD_INDEX="47" NAME="M_ordered" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="48" NAME="M_priority" SIGNAME="__DEF__" VECFORMULA="[0:1]"/>
-      <PORT DIR="O" MPD_INDEX="49" NAME="M_rdBurst" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="50" NAME="M_request" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="51" NAME="M_RNW" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="52" NAME="M_size" SIGNAME="__DEF__" VECFORMULA="[0:3]"/>
-      <PORT DIR="O" MPD_INDEX="53" NAME="M_type" SIGNAME="__DEF__" VECFORMULA="[0:2]"/>
-      <PORT DIR="O" MPD_INDEX="54" NAME="M_wrBurst" SIGNAME="__DEF__"/>
-      <PORT DIR="O" MPD_INDEX="55" NAME="M_wrDBus" SIGNAME="__DEF__" VECFORMULA="[0:(C_PLB_DWIDTH-1)]"/>
-      <PORT DIR="I" MPD_INDEX="56" NAME="PLB_MBusy" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="57" NAME="PLB_MErr" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="58" NAME="PLB_MWrBTerm" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="59" NAME="PLB_MWrDAck" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="60" NAME="PLB_MAddrAck" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="61" NAME="PLB_MRdBTerm" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="62" NAME="PLB_MRdDAck" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="63" NAME="PLB_MRdDBus" SIGNAME="__DEF__" VECFORMULA="[0:(C_PLB_DWIDTH-1)]"/>
-      <PORT DIR="I" MPD_INDEX="64" NAME="PLB_MRdWdAddr" SIGNAME="__DEF__" VECFORMULA="[0:3]"/>
-      <PORT DIR="I" MPD_INDEX="65" NAME="PLB_MRearbitrate" SIGNAME="__DEF__"/>
-      <PORT DIR="I" MPD_INDEX="66" NAME="PLB_MSSize" SIGNAME="__DEF__" VECFORMULA="[0:1]"/>
-      <BUSINTERFACE BIFRANK="MASTER_SLAVE" BIF_X="1" BIF_Y="0" BUSNAME="plb_plb" BUSSTD="PLB" BUS_STD="PLB" MPD_INDEX="0" NAME="MSPLB"/>
-      <MEMORYMAP>
-        <MEMRANGE BASE="0xffffffff" BASENAME="C_BASEADDR" BASEVALUE="4294967295" HIGH="0x00000000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0" MINSIZE="0x400" SIZE="0" SIZEABRV="U">
-          <MEMBUSINTERFACES>
-            <MEMBUSINTERFACE NAME="MSPLB"/>
-          </MEMBUSINTERFACES>
-        </MEMRANGE>
-      </MEMORYMAP>
-    </MODULE>
   </MODULES>
 
-  <BLKDSHAPES STACK_HORIZ_WIDTH="5">
+  <BLKDSHAPES STACK_HORIZ_WIDTH="3">
     <PROCSHAPES>
-      <MODULE BIFS_H="3" BIFS_W="2" INSTANCE="plb_ppc405_0" IS_ABVSBS="TRUE" SHAPE_VERTI_INDEX="2" STACK_HORIZ_INDEX="1"/>
-      <MODULE BIFS_H="1" BIFS_W="2" INSTANCE="plb_ppc405_1" IS_ABVSBS="TRUE" SHAPE_VERTI_INDEX="0" STACK_HORIZ_INDEX="3"/>
+      <MODULE BIFS_H="2" BIFS_W="2" INSTANCE="plb_ppc405_0" IS_ABVSBS="TRUE" SHAPE_VERTI_INDEX="2" STACK_HORIZ_INDEX="0"/>
+      <MODULE BIFS_H="0" BIFS_W="2" INSTANCE="plb_ppc405_1" IS_ABVSBS="TRUE" SHAPE_VERTI_INDEX="0" STACK_HORIZ_INDEX="1"/>
     </PROCSHAPES>
     <IPBUCKET MODS_H="1" MODS_W="2">
       <MODULE INSTANCE="plb_reset_block" IS_PLACED="TRUE" MODTYPE="proc_sys_reset"/>
@@ -1361,7 +1158,7 @@
       <MODULE INSTANCE="plb_opb_v20_0"/>
     </SBSSHAPES>
     <SBSBUCKETS>
-      <SBSBUCKET BUSINDEX="1" BUSNAME="plb_opb_v20_0" BUSSTD="OPB" IS_BLWSBS="TRUE" MODS_H="1" MODS_W="1" SHAPE_VERTI_INDEX="3" STACK_HORIZ_INDEX="1">
+      <SBSBUCKET BUSINDEX="1" BUSNAME="plb_opb_v20_0" BUSSTD="OPB" IS_BLWSBS="TRUE" MODS_H="1" MODS_W="1" SHAPE_VERTI_INDEX="3" STACK_HORIZ_INDEX="0">
         <MODULE INSTANCE="plb_opb_mdm_0" MODTYPE="opb_mdm"/>
       </SBSBUCKET>
     </SBSBUCKETS>
@@ -1380,67 +1177,47 @@
       <MODULE INSTANCE="plb_docm"/>
     </P2PSHAPES>
     <CMPLXSHAPES>
-      <CMPLXSHAPE IS_ABVSBS="TRUE" MODCLASS="MEMORY_UNIT" MODS_H="2" MODS_W="1" SHAPE_ID="0" SHAPE_VERTI_INDEX="1" STACK_HORIZ_INDEX="1">
+      <CMPLXSHAPE IS_ABVSBS="TRUE" MODCLASS="MEMORY_UNIT" MODS_H="2" MODS_W="1" SHAPE_ID="0" SHAPE_VERTI_INDEX="1" STACK_HORIZ_INDEX="0">
         <MODULE BIFS_H="2" BIFS_W="2" INSTANCE="plb_iocm_cntlr" MODCLASS="MEMORY_CNTLR" ORIENTED="CENTER"/>
         <MODULE BIFS_H="1" BIFS_W="2" INSTANCE="plb_isocm_bram" MODCLASS="MEMORY"/>
       </CMPLXSHAPE>
-      <CMPLXSHAPE IS_ABVSBS="TRUE" MODCLASS="MEMORY_UNIT" MODS_H="2" MODS_W="1" SHAPE_ID="1" SHAPE_VERTI_INDEX="0" STACK_HORIZ_INDEX="1">
+      <CMPLXSHAPE IS_ABVSBS="TRUE" MODCLASS="MEMORY_UNIT" MODS_H="2" MODS_W="1" SHAPE_ID="1" SHAPE_VERTI_INDEX="0" STACK_HORIZ_INDEX="0">
         <MODULE BIFS_H="1" BIFS_W="2" INSTANCE="plb_docm_cntlr" MODCLASS="MEMORY_CNTLR" ORIENTED="CENTER"/>
         <MODULE BIFS_H="1" BIFS_W="2" INSTANCE="plb_dsocm_bram" MODCLASS="MEMORY"/>
       </CMPLXSHAPE>
-      <CMPLXSHAPE IS_BLWSBS="TRUE" MODCLASS="MEMORY_UNIT" MODS_H="2" MODS_W="1" SHAPE_ID="2" SHAPE_VERTI_INDEX="0" STACK_HORIZ_INDEX="4">
+      <CMPLXSHAPE IS_BLWSBS="TRUE" MODCLASS="MEMORY_UNIT" MODS_H="2" MODS_W="1" SHAPE_ID="2" SHAPE_VERTI_INDEX="0" STACK_HORIZ_INDEX="2">
         <MODULE BIFS_H="1" BIFS_W="2" INSTANCE="plb_plb_bram_if_cntlr_1" MODCLASS="MEMORY_CNTLR" ORIENTED="CENTER"/>
         <MODULE BIFS_H="1" BIFS_W="2" INSTANCE="plb_plb_bram_if_cntlr_1_bram" MODCLASS="MEMORY"/>
       </CMPLXSHAPE>
-      <CMPLXSHAPE IS_BLWSBS="TRUE" IS_MULTISTK="TRUE" MODCLASS="PERIPHERAL" MODS_H="1" MODS_W="1" SHAPE_ID="3" SHAPE_VERTI_INDEX="0" STACK_HORIZ_INDEX="2">
-        <MODULE BIFS_H="1" BIFS_W="2" INSTANCE="plb_jtagppc_0" MODCLASS="PERIPHERAL"/>
-      </CMPLXSHAPE>
-      <CMPLXSHAPE IS_ABVSBS="TRUE" MODCLASS="PERIPHERAL" MODS_H="1" MODS_W="1" SHAPE_ID="4" SHAPE_VERTI_INDEX="0" STACK_HORIZ_INDEX="0">
-        <MODULE BIFS_H="1" BIFS_W="2" INSTANCE="plb_ftl_0" MODCLASS="PERIPHERAL"/>
-      </CMPLXSHAPE>
     </CMPLXSHAPES>
     <BCLANESPACES>
-      <BCLANESPACE BUSLANES_W="2" EAST="0"/>
-      <BCLANESPACE BUSLANES_W="4" EAST="1" WEST="0">
-        <BUSCONNLANE BUSLANE_X="2" BUSNAME="plb_docm" BUSSTD="OCM" IS_ABVSBS="TRUE" IS_MEMCONN="TRUE" ORIENTED="EAST" STACK_HORIZ_INDEX="1">
+      <BCLANESPACE BUSLANES_W="4" EAST="0">
+        <BUSCONNLANE BUSLANE_X="2" BUSNAME="plb_docm" BUSSTD="OCM" IS_ABVSBS="TRUE" IS_MEMCONN="TRUE" ORIENTED="EAST" STACK_HORIZ_INDEX="0">
           <BUSCONN BIF_Y="0" BUSINTERFACE="DSOCM" INSTANCE="plb_ppc405_0" IS_PROCCONN="TRUE"/>
           <BUSCONN BUSINTERFACE="DSOCM" BUSSTD="OCM" INSTANCE="plb_docm_cntlr"/>
         </BUSCONNLANE>
-        <BUSCONNLANE BUSLANE_X="2" BUSNAME="plb_plb" BUSSTD="PLB" IS_BLWSBS="TRUE" IS_SBSCONN="TRUE" ORIENTED="EAST" STACK_HORIZ_INDEX="1">
-          <BUSCONN BIF_Y="2" BUSINTERFACE="DPLB" INSTANCE="plb_ppc405_0" IS_PROCCONN="TRUE"/>
+        <BUSCONNLANE BUSLANE_X="2" BUSNAME="plb_plb" BUSSTD="PLB" IS_BLWSBS="TRUE" IS_SBSCONN="TRUE" ORIENTED="EAST" STACK_HORIZ_INDEX="0">
+          <BUSCONN BIF_Y="1" BUSINTERFACE="DPLB" INSTANCE="plb_ppc405_0" IS_PROCCONN="TRUE"/>
         </BUSCONNLANE>
-        <BUSCONNLANE BUSLANE_X="1" BUSNAME="plb_opb_v20_0" BUSSTD="OPB" IS_BKTCONN="TRUE" IS_BLWSBS="TRUE" ORIENTED="EAST" STACK_HORIZ_INDEX="1">
+        <BUSCONNLANE BUSLANE_X="1" BUSNAME="plb_opb_v20_0" BUSSTD="OPB" IS_BKTCONN="TRUE" IS_BLWSBS="TRUE" ORIENTED="EAST" STACK_HORIZ_INDEX="0">
           <BUSCONN BIFRANK="SLAVE" BUSINTERFACE="SOPB"/>
         </BUSCONNLANE>
-        <BUSCONNLANE BUSLANE_X="1" BUSNAME="plb_plb" BUSSTD="PLB" IS_ABVSBS="TRUE" IS_SBSCONN="TRUE" ORIENTED="WEST" STACK_HORIZ_INDEX="0">
-          <BUSCONN BIF_Y="0" BUSINTERFACE="MSPLB" INSTANCE="plb_ftl_0"/>
-        </BUSCONNLANE>
       </BCLANESPACE>
-      <BCLANESPACE BUSLANES_W="4" EAST="2" WEST="1">
-        <BUSCONNLANE BUSLANE_X="2" BUSNAME="jtagppc_0_0" BUSSTD="XIL" IS_BLWSBS="TRUE" IS_MULTISTK="TRUE">
-          <BUSCONN BIF_Y="1" BUSINTERFACE="JTAGPPC" INSTANCE="plb_ppc405_0" IS_PROCCONN="TRUE"/>
-          <BUSCONN BIF_Y="0" BUSINTERFACE="JTAGPPC0" BUSSTD="XIL" INSTANCE="plb_jtagppc_0"/>
-        </BUSCONNLANE>
-        <BUSCONNLANE BUSLANE_X="1" BUSNAME="plb_iocm" BUSSTD="OCM" IS_ABVSBS="TRUE" IS_MEMCONN="TRUE" ORIENTED="WEST" STACK_HORIZ_INDEX="1">
+      <BCLANESPACE BUSLANES_W="3" EAST="1" WEST="0">
+        <BUSCONNLANE BUSLANE_X="1" BUSNAME="plb_iocm" BUSSTD="OCM" IS_ABVSBS="TRUE" IS_MEMCONN="TRUE" ORIENTED="WEST" STACK_HORIZ_INDEX="0">
           <BUSCONN BIF_Y="0" BUSINTERFACE="ISOCM" INSTANCE="plb_ppc405_0" IS_PROCCONN="TRUE"/>
           <BUSCONN BUSINTERFACE="ISOCM" BUSSTD="OCM" INSTANCE="plb_iocm_cntlr"/>
         </BUSCONNLANE>
-        <BUSCONNLANE BUSLANE_X="1" BUSNAME="plb_plb" BUSSTD="PLB" IS_BLWSBS="TRUE" IS_SBSCONN="TRUE" ORIENTED="WEST" STACK_HORIZ_INDEX="1">
-          <BUSCONN BIF_Y="2" BUSINTERFACE="IPLB" INSTANCE="plb_ppc405_0" IS_PROCCONN="TRUE"/>
+        <BUSCONNLANE BUSLANE_X="1" BUSNAME="plb_plb" BUSSTD="PLB" IS_BLWSBS="TRUE" IS_SBSCONN="TRUE" ORIENTED="WEST" STACK_HORIZ_INDEX="0">
+          <BUSCONN BIF_Y="1" BUSINTERFACE="IPLB" INSTANCE="plb_ppc405_0" IS_PROCCONN="TRUE"/>
         </BUSCONNLANE>
       </BCLANESPACE>
-      <BCLANESPACE BUSLANES_W="3" EAST="3" WEST="2">
-        <BUSCONNLANE BUSLANE_X="1" BUSNAME="jtagppc_0_1" BUSSTD="XIL" IS_BLWSBS="TRUE" IS_MULTISTK="TRUE">
-          <BUSCONN BIF_Y="0" BUSINTERFACE="JTAGPPC" INSTANCE="plb_ppc405_1" IS_PROCCONN="TRUE"/>
-          <BUSCONN BIF_Y="0" BUSINTERFACE="JTAGPPC1" BUSSTD="XIL" INSTANCE="plb_jtagppc_0"/>
-        </BUSCONNLANE>
-      </BCLANESPACE>
-      <BCLANESPACE BUSLANES_W="3" EAST="4" WEST="3">
-        <BUSCONNLANE BUSLANE_X="1" BUSNAME="plb_plb" BUSSTD="PLB" IS_BLWSBS="TRUE" IS_SBSCONN="TRUE" ORIENTED="EAST" STACK_HORIZ_INDEX="4">
+      <BCLANESPACE BUSLANES_W="3" EAST="2" WEST="1">
+        <BUSCONNLANE BUSLANE_X="1" BUSNAME="plb_plb" BUSSTD="PLB" IS_BLWSBS="TRUE" IS_SBSCONN="TRUE" ORIENTED="EAST" STACK_HORIZ_INDEX="2">
           <BUSCONN BIF_Y="0" BUSINTERFACE="SPLB" INSTANCE="plb_plb_bram_if_cntlr_1"/>
         </BUSCONNLANE>
       </BCLANESPACE>
-      <BCLANESPACE BUSLANES_W="2" WEST="4"/>
+      <BCLANESPACE BUSLANES_W="2" WEST="2"/>
     </BCLANESPACES>
   </BLKDSHAPES>
 

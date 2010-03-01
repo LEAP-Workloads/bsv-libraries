@@ -193,18 +193,6 @@ module plb_driver_verilog
   wire isocm_portb_BRAM_EN;
   wire isocm_portb_BRAM_Rst;
   wire [0:1] isocm_portb_BRAM_WEN;
-  wire jtagppc_0_0_C405JTGTDO;
-  wire jtagppc_0_0_C405JTGTDOEN;
-  wire jtagppc_0_0_JTGC405TCK;
-  wire jtagppc_0_0_JTGC405TDI;
-  wire jtagppc_0_0_JTGC405TMS;
-  wire jtagppc_0_0_JTGC405TRSTNEG;
-  wire jtagppc_0_1_C405JTGTDO;
-  wire jtagppc_0_1_C405JTGTDOEN;
-  wire jtagppc_0_1_JTGC405TCK;
-  wire jtagppc_0_1_JTGC405TDI;
-  wire jtagppc_0_1_JTGC405TMS;
-  wire jtagppc_0_1_JTGC405TRSTNEG;
   wire net_gnd0;
   wire [0:0] net_gnd1;
   wire [0:1] net_gnd2;
@@ -549,15 +537,15 @@ module plb_driver_verilog
       .C405JTGEXTEST (  ),
       .C405JTGPGMOUT (  ),
       .C405JTGSHIFTDR (  ),
-      .C405JTGTDO ( jtagppc_0_0_C405JTGTDO ),
-      .C405JTGTDOEN ( jtagppc_0_0_C405JTGTDOEN ),
+      .C405JTGTDO (  ),
+      .C405JTGTDOEN (  ),
       .C405JTGUPDATEDR (  ),
       .MCBJTAGEN ( net_vcc0 ),
       .JTGC405BNDSCANTDO ( net_gnd0 ),
-      .JTGC405TCK ( jtagppc_0_0_JTGC405TCK ),
-      .JTGC405TDI ( jtagppc_0_0_JTGC405TDI ),
-      .JTGC405TMS ( jtagppc_0_0_JTGC405TMS ),
-      .JTGC405TRSTNEG ( jtagppc_0_0_JTGC405TRSTNEG ),
+      .JTGC405TCK ( net_gnd0 ),
+      .JTGC405TDI ( net_gnd0 ),
+      .JTGC405TMS ( net_gnd0 ),
+      .JTGC405TRSTNEG ( net_gnd0 ),
       .C405DBGMSRWE (  ),
       .C405DBGSTOPACK (  ),
       .C405DBGWBCOMPLETE (  ),
@@ -695,15 +683,15 @@ module plb_driver_verilog
       .C405JTGEXTEST (  ),
       .C405JTGPGMOUT (  ),
       .C405JTGSHIFTDR (  ),
-      .C405JTGTDO ( jtagppc_0_1_C405JTGTDO ),
-      .C405JTGTDOEN ( jtagppc_0_1_C405JTGTDOEN ),
+      .C405JTGTDO (  ),
+      .C405JTGTDOEN (  ),
       .C405JTGUPDATEDR (  ),
       .MCBJTAGEN ( net_vcc0 ),
       .JTGC405BNDSCANTDO ( net_gnd0 ),
-      .JTGC405TCK ( jtagppc_0_1_JTGC405TCK ),
-      .JTGC405TDI ( jtagppc_0_1_JTGC405TDI ),
-      .JTGC405TMS ( jtagppc_0_1_JTGC405TMS ),
-      .JTGC405TRSTNEG ( jtagppc_0_1_JTGC405TRSTNEG ),
+      .JTGC405TCK ( net_gnd0 ),
+      .JTGC405TDI ( net_gnd0 ),
+      .JTGC405TMS ( net_gnd0 ),
+      .JTGC405TRSTNEG ( net_gnd0 ),
       .C405DBGMSRWE (  ),
       .C405DBGSTOPACK (  ),
       .C405DBGWBCOMPLETE (  ),
@@ -720,27 +708,6 @@ module plb_driver_verilog
       .C405TRCTRIGGEREVENTTYPE (  ),
       .TRCC405TRACEDISABLE ( net_gnd0 ),
       .TRCC405TRIGGEREVENTIN ( net_gnd0 )
-    );
-
-  plb_jtagppc_0_wrapper
-    plb_jtagppc_0 (
-      .TRSTNEG ( net_vcc0 ),
-      .HALTNEG0 ( net_vcc0 ),
-      .DBGC405DEBUGHALT0 (  ),
-      .HALTNEG1 ( net_vcc0 ),
-      .DBGC405DEBUGHALT1 (  ),
-      .C405JTGTDO0 ( jtagppc_0_0_C405JTGTDO ),
-      .C405JTGTDOEN0 ( jtagppc_0_0_C405JTGTDOEN ),
-      .JTGC405TCK0 ( jtagppc_0_0_JTGC405TCK ),
-      .JTGC405TDI0 ( jtagppc_0_0_JTGC405TDI ),
-      .JTGC405TMS0 ( jtagppc_0_0_JTGC405TMS ),
-      .JTGC405TRSTNEG0 ( jtagppc_0_0_JTGC405TRSTNEG ),
-      .C405JTGTDO1 ( jtagppc_0_1_C405JTGTDO ),
-      .C405JTGTDOEN1 ( jtagppc_0_1_C405JTGTDOEN ),
-      .JTGC405TCK1 ( jtagppc_0_1_JTGC405TCK ),
-      .JTGC405TDI1 ( jtagppc_0_1_JTGC405TDI ),
-      .JTGC405TMS1 ( jtagppc_0_1_JTGC405TMS ),
-      .JTGC405TRSTNEG1 ( jtagppc_0_1_JTGC405TRSTNEG )
     );
 
   plb_reset_block_wrapper
@@ -1428,7 +1395,6 @@ endmodule
 
 // synthesis attribute BOX_TYPE of plb_ppc405_0_wrapper is black_box;
 // synthesis attribute BOX_TYPE of plb_ppc405_1_wrapper is black_box;
-// synthesis attribute BOX_TYPE of plb_jtagppc_0_wrapper is black_box;
 // synthesis attribute BOX_TYPE of plb_reset_block_wrapper is black_box;
 // synthesis attribute BOX_TYPE of plb_iocm_wrapper is black_box;
 // synthesis attribute BOX_TYPE of plb_iocm_cntlr_wrapper is black_box;
@@ -2021,45 +1987,6 @@ module plb_ppc405_1_wrapper
   output [0:10] C405TRCTRIGGEREVENTTYPE;
   input TRCC405TRACEDISABLE;
   input TRCC405TRIGGEREVENTIN;
-endmodule
-
-module plb_jtagppc_0_wrapper
-  (
-    TRSTNEG,
-    HALTNEG0,
-    DBGC405DEBUGHALT0,
-    HALTNEG1,
-    DBGC405DEBUGHALT1,
-    C405JTGTDO0,
-    C405JTGTDOEN0,
-    JTGC405TCK0,
-    JTGC405TDI0,
-    JTGC405TMS0,
-    JTGC405TRSTNEG0,
-    C405JTGTDO1,
-    C405JTGTDOEN1,
-    JTGC405TCK1,
-    JTGC405TDI1,
-    JTGC405TMS1,
-    JTGC405TRSTNEG1
-  );
-  input TRSTNEG;
-  input HALTNEG0;
-  output DBGC405DEBUGHALT0;
-  input HALTNEG1;
-  output DBGC405DEBUGHALT1;
-  input C405JTGTDO0;
-  input C405JTGTDOEN0;
-  output JTGC405TCK0;
-  output JTGC405TDI0;
-  output JTGC405TMS0;
-  output JTGC405TRSTNEG0;
-  input C405JTGTDO1;
-  input C405JTGTDOEN1;
-  output JTGC405TCK1;
-  output JTGC405TDI1;
-  output JTGC405TMS1;
-  output JTGC405TRSTNEG1;
 endmodule
 
 module plb_reset_block_wrapper

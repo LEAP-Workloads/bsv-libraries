@@ -71,15 +71,11 @@ int main (void) {
     */
   // print out the data 
 	
-//   testMem(0x00000000);/
-//	testMem(0x00001000);
-//  testMem(0x00002000);
-//	testMem(0x00003000);
-   testMem(0x00010000);
-   testMem(0x00011000);
-	testMem(0x00013000);
-   testMem(0x00014000);
- 
+   testMem(0x00000000);
+	testMem(0x00001000);
+   testMem(0x00002000);
+	testMem(0x00003000);
+   testMem(0x00004000);
    /*
     * Disable cache and reinitialize it so that other
     * applications can be run with no problems
