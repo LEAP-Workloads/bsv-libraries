@@ -129,6 +129,9 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
   Wire#(Bit#(1)) sMBusy_i <- mkBypassWire();
 
 
+  // OutputWire
+  Wire#(Bit#(64)) outputWire <- mkDWire(0);
+
   // Debug Registers 
   Reg#(Bit#(32)) loadCommandCountReg <- mkReg(0);
   Reg#(Bit#(32)) storeCommandCountReg <- mkReg(0);
@@ -146,7 +149,7 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
   PLBAddr mABus_o = addressOffset; // Our address Address Bus, we extend to compensate for word 
 
   
-  Bit#(64)mWrDBus_o   = infifo.first();
+  Bit#(64)mWrDBus_o   = outputWire; 
   Bit#(1) mRequest_o  = request & ~mRst_i; // Request
   Bit#(1) mBusLock_o  = 1'b0 & ~mRst_i; // Bus lock
   Bit#(1) mRdBurst_o  = rdBurst & ~mRst_i; // read burst 
@@ -176,6 +179,11 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
 
   let storeDataAvailable =  infifo.isGreaterThan(zeroExtend(lengthStore));
   let loadBufferAvailable = outfifo.isGreaterThan(fromInteger(valueof(OutputBufferSize)) - zeroExtend(lengthLoad));
+
+  // Drive output wire
+  rule driveOut;
+   outputWire <= infifo.first();
+  endrule
 
   //Check for buffer space
  

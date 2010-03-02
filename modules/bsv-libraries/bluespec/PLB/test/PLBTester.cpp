@@ -33,7 +33,14 @@ CONNECTED_APPLICATION_CLASS::Main()
     sleep(2);
     OUT_TYPE_getSlaveLoadCommands countSlaveLoadCommands = clientStub->getSlaveLoadCommands(0);
     OUT_TYPE_getSlaveLoadData countSlaveLoadData = clientStub->getSlaveLoadData(0);
-    printf("countSlaveLoadCommands %d countSlaveLoadData %d\n", countSlaveLoadCommands, countSlaveLoadData);
+    OUT_TYPE_getSlaveStoreCommands countSlaveStoreCommands = clientStub->getSlaveStoreCommands(0);
+    OUT_TYPE_getSlaveStoreData countSlaveStoreData = clientStub->getSlaveStoreData(0);
+    OUT_TYPE_getSlaveTotalCommands countSlaveTotalCommands = clientStub->getSlaveTotalCommands(0);
+
+    printf("countSlaveLoadCommands %d countSlaveLoadData %d ", countSlaveLoadCommands, countSlaveLoadData);
+    printf("countSlaveStoreCommands %d countSlaveStoreData %d\n", countSlaveStoreCommands, countSlaveStoreData);
+    printf("countSlaveTotalCommands %d\n", countSlaveTotalCommands);
+
   }
 
 

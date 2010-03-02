@@ -22,6 +22,12 @@ module [CONNECTED_MODULE]  mkConnectPLBDebugger#( ServerStub_PLBDEBUGRRR server_
     server_stub.sendResponse_getSlaveStoreCommands(plbSlave.storeCommandCount()); 
   endrule
 
+  rule getSlaveTotalCommands;
+    let nullResp <- server_stub.acceptRequest_getSlaveTotalCommands();
+    server_stub.sendResponse_getSlaveTotalCommands(plbSlave.totalCommandCount()); 
+  endrule
+
+
   rule getSlaveLoadData;
     let nullResp <- server_stub.acceptRequest_getSlaveLoadData();
     server_stub.sendResponse_getSlaveLoadData(plbSlave.loadDataCount()); 
@@ -41,6 +47,7 @@ module [CONNECTED_MODULE]  mkConnectPLBDebugger#( ServerStub_PLBDEBUGRRR server_
     let nullResp <- server_stub.acceptRequest_getMasterStoreCommands();
     server_stub.sendResponse_getMasterStoreCommands(plbMaster.storeCommandTotal()); 
   endrule
+
 
   rule getMasterLoadData;
     let nullResp <- server_stub.acceptRequest_getMasterLoadData();

@@ -23,11 +23,13 @@ module mkPLBSlave#(Clock externalClock, Reset externalReset) (PLBSlave#(address_
 
   Reg#(Bit#(32)) loadCommandCountReg <- mkReg(0);
   Reg#(Bit#(32)) storeCommandCountReg <- mkReg(0);
+  Reg#(Bit#(32)) totalCommandCountReg <- mkReg(0);
   Reg#(Bit#(32)) loadDataCountReg <- mkReg(0);
   Reg#(Bit#(32)) storeDataCountReg <- mkReg(0);
 
  ReadOnly#(Bit#(32)) loadCommandCountWire <- mkNullCrossingWire(externalClock,loadCommandCountReg._read);
   ReadOnly#(Bit#(32)) storeCommandCountWire <- mkNullCrossingWire(externalClock,storeCommandCountReg._read);
+  ReadOnly#(Bit#(32)) totalCommandCountWire <- mkNullCrossingWire(externalClock,totalCommandCountReg._read);
   ReadOnly#(Bit#(32)) loadDataCountWire <- mkNullCrossingWire(externalClock,loadDataCountReg._read);
   ReadOnly#(Bit#(32)) storeDataCountWire <- mkNullCrossingWire(externalClock,storeDataCountReg._read);
 
@@ -63,6 +65,7 @@ module mkPLBSlave#(Clock externalClock, Reset externalReset) (PLBSlave#(address_
         storeCommandCountReg <= storeCommandCountReg + 1;
         wrAckOutValue <= 1;
       end
+    totalCommandCountReg <= totalCommandCountReg + 1;
   endrule
 
   rule produceResponse;
@@ -74,6 +77,7 @@ module mkPLBSlave#(Clock externalClock, Reset externalReset) (PLBSlave#(address_
     loadDataCountReg <= loadDataCountReg + 1;
   endrule
 
+ 
   interface PLBSlaveWires plbSlaveWires;
     method Action sABus(Bit#(address_width) addr); // Address Bus
       addressInValue <= addr; 
@@ -83,23 +87,23 @@ module mkPLBSlave#(Clock externalClock, Reset externalReset) (PLBSlave#(address_
       beInValue <= be;
     endmethod
 
-    method Action sCS(Bit#(1) cs);  // Bus lock
+    method Action sCS(Bit#(1) cs);  
       csInValue <= cs;
     endmethod
 
-    method Action sRdCE(Bit#(2) rdCE);  // Bus lock
+    method Action sRdCE(Bit#(2) rdCE); 
       noAction; //Not needed?
     endmethod
 
-    method Action sWrCE(Bit#(2) wrCE);  // Bus lock
+    method Action sWrCE(Bit#(2) wrCE); 
       noAction; //Not needed
     endmethod
 
-    method Action sRdReq(Bit#(1) rdReq);  // Bus lock
+    method Action sRdReq(Bit#(1) rdReq);
       rdReqInValue <= rdReq;
     endmethod
 
-    method Action sWrReq(Bit#(1) wrReq);  // Bus lock
+    method Action sWrReq(Bit#(1) wrReq);
       wrReqInValue <= wrReq;
     endmethod
 
@@ -155,6 +159,7 @@ module mkPLBSlave#(Clock externalClock, Reset externalReset) (PLBSlave#(address_
 
  interface loadCommandCount = loadCommandCountWire;
  interface storeCommandCount = storeCommandCountWire;
+ interface totalCommandCount = totalCommandCountWire;
  interface loadDataCount = loadDataCountWire;
  interface storeDataCount = storeDataCountWire;
 

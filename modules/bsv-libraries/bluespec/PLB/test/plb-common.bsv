@@ -6,10 +6,10 @@ import Connectable::*;
 
 instance Connectable#(PLB_DRIVER,PLB_DEVICE);
   module mkConnection#(PLB_DRIVER driver, PLB_DEVICE device) ();
+    (* no_implicit_conditions *)
+    rule driveWiresDevice;
 
-    rule driveWires;
 
-      driver.inIP2Bus_IntrEvent(0);
       device.plbSlaveWires.sABus(driver.outBus2IP_Addr());
       device.plbSlaveWires.sDataIn(driver.outBus2IP_Data());
       device.plbSlaveWires.sBE(driver.outBus2IP_BE);
@@ -18,12 +18,6 @@ instance Connectable#(PLB_DRIVER,PLB_DEVICE);
       device.plbSlaveWires.sWrCE(driver.outBus2IP_WrCE);
       device.plbSlaveWires.sRdReq(driver.outBus2IP_RdReq);
       device.plbSlaveWires.sWrReq(driver.outBus2IP_WrReq);
-      driver.inIP2Bus_Data(device.plbSlaveWires.sDataOut());
-      driver.inIP2Bus_Retry(device.plbSlaveWires.sRetry());
-      driver.inIP2Bus_Error(device.plbSlaveWires.sError());
-      driver.inIP2Bus_TinSup(device.plbSlaveWires.sToutSup());
-      driver.inIP2Bus_RdAck(device.plbSlaveWires.sRdAck());
-      driver.inIP2Bus_WrAck(device.plbSlaveWires.sWrAck());
 
       device.plbMasterWires.mAddrAck(driver.outPLB_MAddrAck());
       device.plbMasterWires.mSSize(driver.outPLB_MSSize());
@@ -36,7 +30,17 @@ instance Connectable#(PLB_DRIVER,PLB_DEVICE);
       device.plbMasterWires.mRdDAck(driver.outPLB_MRdDAck());
       device.plbMasterWires.mRdBTerm(driver.outPLB_MRdBTerm());
       device.plbMasterWires.mWrBTerm(driver.outPLB_MWrBTerm());
+ 
+    endrule
 
+    rule driveWiresDriver;
+      driver.inIP2Bus_IntrEvent(0);
+      driver.inIP2Bus_Data(device.plbSlaveWires.sDataOut());
+      driver.inIP2Bus_Retry(device.plbSlaveWires.sRetry());
+      driver.inIP2Bus_Error(device.plbSlaveWires.sError());
+      driver.inIP2Bus_TinSup(device.plbSlaveWires.sToutSup());
+      driver.inIP2Bus_RdAck(device.plbSlaveWires.sRdAck());
+      driver.inIP2Bus_WrAck(device.plbSlaveWires.sWrAck());
       driver.inM_request(device.plbMasterWires.mRequest());
       driver.inM_priority(device.plbMasterWires.mPriority());
       driver.inM_busLock(device.plbMasterWires.mBusLock());
@@ -54,7 +58,6 @@ instance Connectable#(PLB_DRIVER,PLB_DEVICE);
       driver.inM_wrDBus(device.plbMasterWires.mWrDBus());
       driver.inM_wrBurst(device.plbMasterWires.mWrBurst());
       driver.inM_rdBurst(device.plbMasterWires.mRdBurst());
- 
     endrule
 
   endmodule

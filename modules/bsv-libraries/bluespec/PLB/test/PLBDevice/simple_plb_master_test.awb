@@ -1,0 +1,24 @@
+********************************************************************
+* PLB Slave Test
+********************************************************************
+
+%AWB_START
+
+%name PLB Simple Master Test
+%desc PLB Simple Slave Test
+
+%provides plb_device
+%requires plb_common
+%requires plb_slave
+%requires plb_master
+%requires rewind_fifo
+%requires commit_fifo
+%requires register_library
+	 
+%sources -t BSV -v PUBLIC SimplePLBMasterTest.bsv
+%sources -t BSV -v PUBLIC PLBDeviceTypes.bsv
+%sources -t BSV -v PUBLIC PLBDebug.bsv
+%sources -t RRR -v PUBLIC plb-debug.rrr
+
+
+%AWB_END

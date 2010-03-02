@@ -151,7 +151,11 @@ module plb_driver_verilog_wrapper
   input ftl_0_IP2Bus_IntrEventOut_pin_dummy_en;
   input sys_clk_gate_dummy;
 
-// Deal with the reset?
+ // PLB reset is active high, bluespec is active low
+ wire device_reset;  
+ assign ftl_0_Bus2IP_ResetOut_pin = ~device_reset;
+   
+      
    
  plb_driver_verilog p_d_v
   (
@@ -172,7 +176,7 @@ module plb_driver_verilog_wrapper
     .ftl_0_Bus2IP_DataOut_pin(ftl_0_Bus2IP_DataOut_pin),
     .ftl_0_Bus2IP_AddrOut_pin(ftl_0_Bus2IP_AddrOut_pin),
     .ftl_0_IP2Bus_IntrEventOut_pin(ftl_0_IP2Bus_IntrEventOut_pin),
-    .ftl_0_Bus2IP_ResetOut_pin(ftl_0_Bus2IP_ResetOut_pin),
+    .ftl_0_Bus2IP_ResetOut_pin(device_reset),
     .ftl_0_Bus2IP_ClkOut_pin(ftl_0_Bus2IP_ClkOut_pin),
     .ftl_0_M_rdBurstOut_pin(ftl_0_M_rdBurstOut_pin),
     .ftl_0_M_wrBurstOut_pin(ftl_0_M_wrBurstOut_pin),

@@ -19,6 +19,7 @@ interface PLBSlave#(numeric type address_width, numeric type data_width);
   interface PLBSlaveWires#(address_width,data_width)   plbSlaveWires;
   interface ReadOnly#(Bit#(32)) loadCommandCount;
   interface ReadOnly#(Bit#(32)) storeCommandCount;
+  interface ReadOnly#(Bit#(32)) totalCommandCount;
   interface ReadOnly#(Bit#(32)) loadDataCount;
   interface ReadOnly#(Bit#(32)) storeDataCount;
 endinterface

@@ -64,11 +64,11 @@ module mkPLBMaster (PLBMaster);
   
 
   // Output buffer
-  RegFile#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))),BusWord)                            storeBuffer <- mkRegFileFull();   
+  RegFile#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))),BusWord)             storeBuffer <- mkRegFileFull();
 
   
   // Input buffer
-  RegFile#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))),BusWord)                            loadBuffer <- mkRegFileFull();   
+  RegFile#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))),BusWord)             loadBuffer <- mkRegFileFull();   
 
   
   Reg#(PLBAddr)                              rowAddrOffsetLoad <- mkReg(0);
