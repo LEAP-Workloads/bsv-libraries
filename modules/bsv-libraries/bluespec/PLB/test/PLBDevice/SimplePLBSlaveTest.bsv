@@ -36,6 +36,13 @@ module [CONNECTED_MODULE]  mkPLBDevice#(Clock plbClock, Reset plbReset) (PLB_DEV
   
   RegBE#(BusWord,8) hostCommand1 <- mkRegBE(0);
   RegBE#(BusWord,8) hostCommand2 <- mkRegBE(0);
+  RegBE#(BusWord,8) hostCommand3 <- mkRegBE(0);
+
+
+  rule handleEndCheck;
+    let nullResp <- server_stub.acceptRequest_getTestStatus();
+    server_stub.sendResponse_getTestStatus(truncate(hostCommand3.read));
+  endrule
 
   rule handleSlave;
     let req <- plbSlave.busClient.request.get();
@@ -47,26 +54,30 @@ module [CONNECTED_MODULE]  mkPLBDevice#(Clock plbClock, Reset plbReset) (PLB_DEV
     if(req.command == PLBWrite) 
       begin
         case (regAddr)
-          'h0: begin
+          0: begin
                hostCommand1.write(req.data,req.be);
              end
-          'h1: begin
+          1: begin
                hostCommand2.write(req.data,req.be);
              end
+          2: begin
+               hostCommand3.write(req.data,req.be);
+             end
+
         endcase
       end
     else
       begin
         case (regAddr)
-          'h0: begin
+          0: begin
                plbSlave.busClient.response.put(hostCommand1.read());
              end
-          'h1: begin
+          1: begin
                plbSlave.busClient.response.put(hostCommand2.read());
              end
            default: begin
                //Default to prevent deadlocks   
-               plbSlave.busClient.response.put(zeroExtend(req.addr));     
+               plbSlave.busClient.response.put(zeroExtend({wordAddr,3'b000}));     
              end
         endcase
       end

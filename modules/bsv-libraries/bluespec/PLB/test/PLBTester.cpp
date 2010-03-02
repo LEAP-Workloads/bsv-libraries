@@ -41,6 +41,14 @@ CONNECTED_APPLICATION_CLASS::Main()
     printf("countSlaveStoreCommands %d countSlaveStoreData %d\n", countSlaveStoreCommands, countSlaveStoreData);
     printf("countSlaveTotalCommands %d\n", countSlaveTotalCommands);
 
+    // Check for finish
+    if(clientStub->getTestStatus(0) == 0xaaaaaaaa) {
+      printf("PASSED\n"); 
+      break;
+    } else if(clientStub->getTestStatus(0) == 0xffffffff) {
+      printf("FAILED\n"); 
+      break;
+    }
   }
 
 

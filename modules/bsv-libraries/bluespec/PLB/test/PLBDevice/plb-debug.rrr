@@ -11,7 +11,7 @@ service PLBDEBUGRRR
         method getMasterLoadData(in UINT32[32] dummy, out UINT32[32] count);
         method getMasterStoreCommands(in UINT32[32] dummy, out UINT32[32] count);
         method getMasterStoreData(in UINT32[32] dummy, out UINT32[32] count);
-
+        method getTestStatus(in UINT32[32] dummy, out UINT32[32] count);
     };
 
  };

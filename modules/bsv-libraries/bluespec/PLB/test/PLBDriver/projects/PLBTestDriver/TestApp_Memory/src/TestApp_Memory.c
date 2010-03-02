@@ -38,31 +38,87 @@
 
 //====================================================
 
-void testMem (volatile int *data){
-	  int i = 0;
+int testMem (volatile long long *data){
+	  long long i = 0;
      
-	  xil_printf("start mem test\n");
+	  //xil_printf("start mem test\n");
 	  
 	  for (i = 0; i < 16; i = i + 1) {
-   	  xil_printf("Initial %x: %x\n", data+i, *(data+i));
+   	  //xil_printf("Initial %x: %x\n", data+i, *(data+i));
 	     *(data+i) = data+i;  
 	  }
-	  xil_printf("begin read back\n");
+	  //xil_printf("begin read back\n");
 	  for (i = 0; i < 16; i = i + 1) {
 	     if(*(data+i) != data+i) {
           xil_printf("Failed to write %x: expected %x got %x\n", data+i, data+i, *(data+i));
+          return 1;			
         }	
         else{ 
-          xil_printf("Success to write %x: expected %x got %x\n", data+i, data+i, *(data+i));        }		  
+          //xil_printf("Success to write %x: expected %x got %x\n", data+i, data+i, *(data+i));        }		  
+        }
 	  }	  
-	 xil_printf("test complete\n"); 
+	 //xil_printf("test complete\n"); 
+	 return 0;
 }
 
+int testReadableRegs (){
+	  long long i = 0,j = 0, data = 0x00004018;
+     volatile long long *ptr = 0x00004018;
+	  
+	  //xil_printf("start mem test\n");
+	  
+     for(j = 0; j < 100000; j = j +1) {
+       //xil_printf("begin read back\n");
+	    for (i = 0; i < 8; i = i + 2) {
+	       if(*(ptr+i) != data+8*i) {
+            xil_printf("Failed to write %x: expected %x%x got %x%x\n", ptr+i, data+8*i, *(ptr+i));
+				return 1;
+          }	
+          else{ 
+            //xil_printf("Success to write %x: expected %x%x got %x%x\n", ptr+i, data+8*i, *(ptr+i));		  
+          }
+	    }	
+     }		 
+	 //xil_printf("test complete\n"); 
+  return 0;
+}
 
+int testWritableRegs() {
+  long long i;
+  volatile long long *regA = 0x00004000;
+  volatile long long *regB = 0x00004008;
+  for(i=0; i<0x100000; i=i+1) {
+    *regA = 2*i;
+	 *regB = *regA + 6;
+	 *regA = *regA - 3;
+	 if((*regB != 2*i+6) || (*regA != 2*i - 3)) {
+	   xil_printf("RegA g: %x%x e: %x%x RegB g: %x%x e: %x%x\n",*regA, 2*i - 3, *regB, 2*i+6);
+	   return 1;	
+	 }
+  }
+  return 0;
+}
+
+int testCharWrite() {
+  long long i;
+  volatile long long *regA = 0x00004000;
+  volatile char *regStr = 0x00004000;
+  char * test = "0123456789abcdef"; 
+  for(i=0; i<16; i=i+1) {
+     regStr[i]=test[i];
+  }
+  for(i=0; i<16; i=i+1) {
+     if(regStr[i] != test[i]) {
+	    xil_printf("RegA[%d]: %x, expected %x\n",regStr[i],test[i]);
+	    return 1;
+	  } 
+  }  
+  return 0;
+}
 
 int main (void) {
-
-
+   int error = 0;
+   volatile int *resultReg = 0x00004010;
    print("-- Entering main() --\r\n");
 
    /*
@@ -71,16 +127,27 @@ int main (void) {
     */
   // print out the data 
 	
-   testMem(0x00000000);
-   testMem(0x00004000);
-   testMem(0x00005000);
-   /*
+   error |= testMem(0x00000000);
+
+   error |= testWritableRegs();
+   error |= testReadableRegs();
+   error |= testCharWrite();
+   
+	/*
     * Disable cache and reinitialize it so that other
     * applications can be run with no problems
     */
 
+   xil_printf("Passed if 0: %x\n", error);
 
-
+   if(error) {
+	   *resultReg = 0xffffffff;
+		*(resultReg+1) = 0xffffffff;
+	} else {
+	   *resultReg = 0xaaaaaaaa;
+	   *(resultReg+1) = 0xaaaaaaaa;		
+	}
+	
    print("-- Exiting main() --\r\n");
    return 0;
 

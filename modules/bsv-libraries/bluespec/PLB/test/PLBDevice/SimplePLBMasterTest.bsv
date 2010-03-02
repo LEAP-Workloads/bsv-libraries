@@ -34,6 +34,46 @@ module [CONNECTED_MODULE]  mkPLBDevice#(Clock plbClock, Reset plbReset) (PLB_DEV
   ServerStub_PLBDEBUGRRR server_stub <- mkServerStub_PLBDEBUGRRR();  
 
   mkConnectPLBDebugger(server_stub, plbMaster, plbSlave); 
+
+  RegBE#(BusWord,8) hostCommand1 <- mkRegBE(0);
+  RegBE#(BusWord,8) hostCommand2 <- mkRegBE(0);
+
+  rule handleSlave;
+    let req <- plbSlave.busClient.request.get();
+    PLBBusWordAddress wordAddr = truncateLSB(req.addr);
+ 
+     // We care only about the bottom 4 bits of words
+    Bit#(4) regAddr = truncate(wordAddr); 
+   
+    if(req.command == PLBWrite) 
+      begin
+        case (regAddr)
+          0: begin
+               hostCommand1.write(req.data,req.be);
+             end
+          1: begin
+               hostCommand2.write(req.data,req.be);
+             end
+        endcase
+      end
+    else
+      begin
+        case (regAddr)
+          0: begin
+               plbSlave.busClient.response.put(hostCommand1.read());
+             end
+          1: begin
+               plbSlave.busClient.response.put(hostCommand2.read());
+             end
+           default: begin
+               //Default to prevent deadlocks   
+               plbSlave.busClient.response.put(zeroExtend(req.addr));     
+             end
+        endcase
+      end
+  endrule
+
+
   
   // Old master tester code...
   Reg#(TesterState) state <- mkReg(Idle);
@@ -44,8 +84,9 @@ module [CONNECTED_MODULE]  mkPLBDevice#(Clock plbClock, Reset plbReset) (PLB_DEV
   FIFO#(BusWord) dataFIFO <- mkSizedFIFO(32);
   Reg#(Bool) evenZero <- mkReg(True);
  
-  rule grabInstruction(state == Idle);
+  rule grabInstruction(state == Idle && hostCommand1.read != 0);
     // Throw an RRR in here at some point....
+    hostCommand1.write(0,~0); 
     baseRegLoad <= truncate(0); // BRAM is at 0
     baseRegStore <= truncate(0);
     state <= Running;
