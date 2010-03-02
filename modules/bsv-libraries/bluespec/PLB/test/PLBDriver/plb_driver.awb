@@ -26,7 +26,8 @@
 %sources -t NGC     -v PUBLIC plb_ppc405_1_wrapper.ngc
 %sources -t NGC     -v PUBLIC plb_reset_block_wrapper.ngc
 %sources -t BMM     -v PUBLIC plb_system.bmm
-%sources -t ELF     -v PUBLIC plb.elf
+
+
 
 
 
