@@ -25,19 +25,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 Author: Kermin Fleming
 */
 
-/* This file implements a PLB bus master.  The bus master operates on static 
-   sized bursts.  It is written in such a way that read/write bursts may be 
-   overlapped, if the bus and target slave support such a feature. There's also
-   support for pipelining of read and write requests.  The master is 
-   parameterized by BeatsPerBurst (burst length) and BusWord (bus width), 
-   which allow it to be used for various applications.   
+/* This file implements a PLB bus master.  The bus master operates on dynamic
+   sized bursts.  It is unsafe because terminated requests are not retried.
 */
 
 
 `include "asim/provides/plb_common.bsh"
 `include "asim/provides/librl_bsv_base.bsh"
-`include "asim/provides/rewind_fifo.bsh"
-`include "asim/provides/commit_fifo.bsh"
 `include "asim/provides/register_library.bsh"
 
 // Global Imports
@@ -45,9 +39,9 @@ import GetPut::*;
 import FIFO::*;
 import RegFile::*;
 import FIFOF::*;
+import FIFOLevel::*;
 import Vector::*;
 import Clocks::*;
-
 
 
 module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
@@ -58,14 +52,11 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
   SyncFIFOIfc#(BURST_REQUEST#(PLBAddr,PLBMaxBurst)) plbMasterCommandInfifo <- mkSyncFIFOToCC(2,externalClock,externalReset);
 
 
-  // Output buffers
-  CommitFIFOLevel#(BusWord,OutputBufferSize) outfifo <- mkCommitFIFOLevel;
-  RewindFIFOLevel#(BusWord,OutputBufferSize) infifo <- mkRewindFIFOLevel;
 
   // For now put the clock crossing as a seperate FIFO...
-  
-  SyncFIFOIfc#(BusWord) infifoCC <- mkSyncFIFOToCC(2,externalClock,externalReset);
-  SyncFIFOIfc#(BusWord) outfifoCC <- mkSyncFIFOFromCC(2,externalClock);
+  SyncFIFOCountIfc#(BusWord,OutputBufferSize) infifo <- mkSyncFIFOCount(externalClock, externalReset, plbClock);   
+  SyncFIFOCountIfc#(BusWord,OutputBufferSize) outfifo <-mkSyncFIFOCount(plbClock, plbReset, externalClock);     
+
 
   
   Reg#(PLBAddr)                             rowAddrOffsetLoad <- mkReg(0);
@@ -92,8 +83,8 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
   Reg#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))))              storeDataCount <-mkReg(0);// If you change this examine mWrDBus_o
   Reg#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))))      loadDataCount_plus2 <- mkReg(2);
   Reg#(Bit#(TAdd#(1,TLog#(BeatsPerBurst))))      storeDataCount_plus2 <-mkReg(2);  
-  Reg#(Bit#(BytesPerBusWord))               mBE <- mkReg(0);   
-  Reg#(Bit#(4))                             mSize <- mkReg(0);   
+  Reg#(Bit#(BytesPerBusWord))               mBE <- mkReg(0); 
+  Reg#(Bit#(4))                             mSize <- mkReg(0); 
   Reg#(Bool)                                doAckinIdle <- mkReg(False);
 
   Reg#(Bit#(1))                             rdBurst <- mkReg(0);
@@ -136,15 +127,12 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
   ReadOnly#(Bit#(32)) storeCommandCompletedCountWire <- mkNullCrossingWire(externalClock,storeCommandCompletedCountReg._read);
   ReadOnly#(Bit#(32)) loadDataCountWire <- mkNullCrossingWire(externalClock,loadDataCountReg._read);
   ReadOnly#(Bit#(32)) storeDataCountWire <- mkNullCrossingWire(externalClock,storeDataCountReg._read);
-  ReadOnly#(Bit#(32)) loadBufferCountWire <- mkNullCrossingWire(externalClock,zeroExtend(outfifo.count));
-  ReadOnly#(Bit#(32)) storeBufferCountWire <- mkNullCrossingWire(externalClock,zeroExtend(infifo.count));
   ReadOnly#(Bit#(32)) errorCountWire <- mkNullCrossingWire(externalClock,errorCountReg._read);
   ReadOnly#(Bit#(16)) storeDAcksCountWire <- mkNullCrossingWire(externalClock,storeDAcksCountReg._read);
   ReadOnly#(Bit#(16)) storeAAcksCountWire <- mkNullCrossingWire(externalClock,storeAAcksCountReg._read);
   ReadOnly#(StateRequest) requestStateWire <- mkNullCrossingWire(externalClock,stateRequest._read);
   ReadOnly#(StateTransfer) storeStateWire <- mkNullCrossingWire(externalClock,stateStore._read);
   ReadOnly#(StateTransfer) loadStateWire <- mkNullCrossingWire(externalClock,stateLoad._read);
-
 
   //  Outputs
 
@@ -175,13 +163,13 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
   
   BURST_REQUEST#(PLBAddr,PLBMaxBurst) cmd_in_first = plbMasterCommandInfifo.first();
 
-  let newloadDataCount  =  loadDataCount + 1;
-  let newstoreDataCount = storeDataCount + 1;
-  let newloadDataCount_plus2  =  loadDataCount_plus2 + 1;
-  let newstoreDataCount_plus2 = storeDataCount_plus2 + 1;
+  PLBLength newloadDataCount  =  loadDataCount + 1;
+  PLBLength newstoreDataCount = storeDataCount + 1;
+  PLBLength newloadDataCount_plus2  =  loadDataCount_plus2 + 1;
+  PLBLength newstoreDataCount_plus2 = storeDataCount_plus2 + 1;
 
-  let storeDataAvailable =  infifo.isGreaterThan(zeroExtend(lengthStore - 1));
-  let loadBufferAvailable = outfifo.isLessThan(fromInteger(valueof(OutputBufferSize)) - zeroExtend(lengthLoad));
+  let storeDataAvailable =  infifo.dCount() >= (zeroExtend(unpack(lengthStore)));
+  let loadBufferAvailable = outfifo.sCount() < (fromInteger(valueof(OutputBufferSize)) - zeroExtend(unpack(lengthLoad)));
 
   // Drive output wire
   rule driveOut;
@@ -218,9 +206,7 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
     stateRequest <= RequestingLoad;
     rnw <= 1'b1; // We're reading
     mSize <= (lengthLoad == 1)?4'b0000:4'b1011;
-    mBE <= (lengthLoad == 1)?8'b11111111:8'b00000000;
-    loadDataCount <= 0;
-    loadDataCount_plus2 <= 2;
+    mBE <=(lengthLoad == 1)?8'b11111111:8'b00000000;
   endrule
 
   // Store page idle is somehow running!!!
@@ -230,11 +216,9 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
     stateRequest <= RequestingStore;
     // Write burst is asserted with the write request
     wrBurst <= (lengthStore == 1)?1'b0:1'b1;
-    rnw <= 1'b0; // We're writing
     mSize <= (lengthStore == 1)?4'b0000:4'b1011;
     mBE <=(lengthStore == 1)?8'b11111111:8'b00000000;
-    storeDataCount <= 0;
-    storeDataCount_plus2 <= 2;
+    rnw <= 1'b0; // We're writing
   endrule
 
   rule loadPage_Requesting(doingLoad && stateRequest == RequestingLoad && stateLoad == Idle);
@@ -247,14 +231,14 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
     if(mAddrAck_i == 1 )
       begin
         stateRequest <= Idle;
+        request <= 1'b0;
 	// Check for error conditions  
 	if(mRearbitrate_i == 1) 
 	  begin
 	    // Got terminated by the bus
 	    $display("Terminated by BUS @ %d",$time);
 	    stateLoad <= Idle;
-	    rdBurst <= 1'b0; // if we're rearbing this should be off. It may be off anyway? 
-	    request <= 1'b0;
+	    rdBurst <= 1'b0; // if we're rearbing this should be off. It may be off anyway? 	
 	  end 
         else
 	  begin
@@ -263,8 +247,7 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
 	    // Not permissible to assert burst until after addrAck p. 35
             // Do not drive burst if length == 1
 	    rdBurst <= (lengthLoad == 1)?1'b0:1'b1; 
-	    // Set down request, as we are not request pipelining
-	    request <= 1'b0;
+	    // Set down request, as we are not request pipelining	
 	  end
       end
   endrule    
@@ -273,12 +256,12 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
   rule loadPage_Data(doingLoad && stateLoad == Data);
     if(((mRdBTerm_i == 1) && (loadDataCount_plus2 < lengthLoad)) || (mErr_i == 1))
       begin
+        errorCountReg <= errorCountReg + 1;
 	// We got terminated / Errored 
 	rdBurst <= 1'b0;
 	loadDataCount <= 0;
  	loadDataCount_plus2 <= 2;   	
 	stateLoad <= Idle;  
-        outfifo.abort();           
       end
     else if(mRdDAck_i == 1)
       begin
@@ -288,8 +271,8 @@ module mkPLBMaster#(Clock externalClock, Reset externalReset) (PLBMaster);
 	if(newloadDataCount == lengthLoad)
 	  begin
 	    //We're now done reading... what should we do?
-            outfifo.commit();// This signifies that the data is valid
             loadCommandCompletedCountReg <= loadCommandCompletedCountReg + 1;
+
 	    doingLoad <= False;
             stateLoad <= Idle;
             loadDataCountReg <= loadDataCountReg + zeroExtend(lengthLoad);
@@ -316,7 +299,6 @@ action
       // Data transfer complete
       if(mBusy_i == 0) 
         begin
-          infifo.commit();
           doingStore <= False;
           stateStore <= Idle;                
           storeDataCountReg <= storeDataCountReg + zeroExtend(lengthStore);
@@ -340,16 +322,13 @@ action
     end
 endaction
 endfunction
-
-
   
   rule storePage_Requesting(doingStore && stateRequest == RequestingStore && stateStore == Idle);
     // We've just requested the bus and are waiting for an ack
-
     if(mAddrAck_i == 1 )
       begin
-        storeAAcksCountReg <= storeAAcksCountReg + 1;
         stateRequest <= Idle; 
+        storeAAcksCountReg <= storeAAcksCountReg + 1;
 	// Check for error conditions
 	if(mRearbitrate_i == 1)
 	  begin
@@ -371,7 +350,9 @@ endfunction
                 handleWrDAck();
 	      end
             else
-	      begin            
+	      begin
+                storeDataCount <= 0;
+                storeDataCount_plus2 <= 2;
 		stateStore <= Data;
 	      end                             
 	  end
@@ -379,21 +360,19 @@ endfunction
   endrule
 
 
-
   rule storePage_Data(doingStore && stateStore == Data);
     if(((mWrBTerm_i == 1) && (storeDataCount_plus2 < lengthStore)) || (mErr_i == 1))
       begin
-	// We got terminated / Errored 
         errorCountReg <= errorCountReg + 1;
+	// We got terminated / Errored 
 	wrBurst <= 1'b0;
 	storeDataCount <= 0;
         storeDataCount_plus2 <= 2;
 	stateStore <= Idle; // Can't burst for a cycle p. 30             
-        infifo.rewind();
       end
     else if(mWrDAck_i == 1)
       begin
-        handleWrDAck();
+        handleWrDAck();	
       end
   endrule
 
@@ -406,53 +385,43 @@ endfunction
 	storeDataCount <= 0; // may not be necessary
         storeDataCount_plus2 <= 2; 
 	stateStore <= Idle; // Can't burst for a cycle p. 30     
-        infifo.rewind();        
       end    
     else if(mBusy_i == 0)
       begin
         storeCommandCompletedCountReg <= storeCommandCompletedCountReg + 1;
         storeDataCountReg <= storeDataCountReg + zeroExtend(lengthStore);
-        infifo.commit();
         doingStore <= False;
         stateStore <= Idle;
+	storeDataCount <= 0; // may not be necessary
+        storeDataCount_plus2 <= 2; 
       end
-  endrule
-
-  rule connectInfifo;
-    infifoCC.deq;
-    infifo.enq(infifoCC.first);
-  endrule
-
-  rule connectOutfifo;
-    outfifo.deq;
-    outfifoCC.enq(outfifo.first);
   endrule
 
 
   interface BURST_MEMORY_IFC burstIfc;
     method ActionValue#(BusWord) readRsp();
-      outfifoCC.deq();
-      return outfifoCC.first();
+      outfifo.deq();
+      return outfifo.first();
     endmethod
 
     // Look at the read response value without popping it
     method BusWord peek();
-      return outfifoCC.first();
+      return outfifo.first();
     endmethod
 
     // Read response ready
     method Bool notEmpty();
-      return outfifoCC.notEmpty();
+      return outfifo.dNotEmpty();
     endmethod
 
     // Read request possible?
     method Bool notFull();
-      return outfifoCC.notFull;
+      return outfifo.dNotFull;
     endmethod
 
     // We must split the write request and response...
     method Action writeData(BusWord data); 
-      infifoCC.enq(data);
+      infifo.enq(data);
     endmethod
   
     method Action burstReq(BURST_REQUEST#(PLBAddr, PLBMaxBurst) burstReqIn);
@@ -461,7 +430,7 @@ endfunction
 
     // Write request possible?
     method Bool writeNotFull();
-      return infifoCC.notFull();
+      return infifo.sNotFull();
     endmethod
   endinterface
 
@@ -603,8 +572,8 @@ endfunction
  interface storeAAcksCount = storeAAcksCountWire;
  interface storeDAcksCount = storeDAcksCountWire;
  interface errorCount = errorCountWire;
- interface storeBufferCount = storeBufferCountWire;
- interface loadBufferCount = loadBufferCountWire;
+ interface storeBufferCount = readOnly(zeroExtend(pack(infifo.sCount())));
+ interface loadBufferCount = readOnly(zeroExtend(pack(outfifo.dCount())));
  interface requestState = requestStateWire;
  interface loadState = loadStateWire;
  interface storeState = storeStateWire;

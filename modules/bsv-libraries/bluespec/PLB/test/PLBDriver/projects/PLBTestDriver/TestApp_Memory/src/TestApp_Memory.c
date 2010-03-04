@@ -38,27 +38,69 @@
 
 //====================================================
 
-int testMem (volatile long long *data){
-	  long long i = 0;
-     
+int testMem (volatile int *data){
+	  int i = 0;
+     int error = 0;
 	  //xil_printf("start mem test\n");
 	  
 	  for (i = 0; i < 16; i = i + 1) {
-   	  //xil_printf("Initial %x: %x\n", data+i, *(data+i));
+   	  xil_printf("Initial %x: %x\n", data+i, *(data+i));
 	     *(data+i) = data+i;  
 	  }
 	  //xil_printf("begin read back\n");
 	  for (i = 0; i < 16; i = i + 1) {
-	     if(*(data+i) != data+i) {
+	     if(*(data+i) != 0) {
           xil_printf("Failed to write %x: expected %x got %x\n", data+i, data+i, *(data+i));
-          return 1;			
+          error = 1;			
         }	
         else{ 
-          //xil_printf("Success to write %x: expected %x got %x\n", data+i, data+i, *(data+i));        }		  
+          xil_printf("Success to write %x: expected %x got %x\n", data+i, data+i, *(data+i));    
         }
 	  }	  
 	 //xil_printf("test complete\n"); 
-	 return 0;
+	 return error;
+}
+
+int checkMem (volatile int *data){
+	  long long i = 0;
+     int error = 0;
+	  int length;
+	  volatile long long *start = 0x00004000;
+     int *burstSize = 0x0000400c;  
+	  int *burstNum = 0x00004008;
+	  //xil_printf("start memory test\n");
+
+  for(length = 1; length < 32; length = length*2) {
+
+	  for (i = 0; i < 4096/(sizeof(int)); i = i + 1) {
+   	  //xil_printf("Initial %x: %x\n", data+i, *(data+i));
+	     *(data+i) = i;  
+	  }
+
+     // Silly endianess issues...
+     *burstSize = length;	  
+     *burstNum = 4096/8/length*2;	//Reads/Writes entire 4K segment  	 
+	  *start = 0xffffffff;
+	   //xil_printf("Bus not destroyed\n");
+	 
+     	 
+	  while(*start != 0){};
+	 
+	  //xil_printf("begin read back\n");
+	  for (i = 0; i < 4096/sizeof(int); i = i+1) {	    
+	     if(*(data+i) != ~i) {
+        //  xil_printf("Failed to write %x: expected %x got %x\n", data+i, ~i, *(data+i));
+          error=1;			
+        }	
+		  i++;
+		  if(*(data+i) != ((~i) & (~1))) {
+          xil_printf("Failed to write %x: expected %x got %x\n", data+i, ((~i) & (~1)), *(data+i));
+          error=1;			
+        }		  
+	  }	  
+	 //xil_printf("test complete\n");
+  }	 
+	 return error;
 }
 
 int testReadableRegs (){
@@ -118,8 +160,9 @@ int testCharWrite() {
 
 int main (void) {
    int error = 0;
+	int i;
    volatile int *resultReg = 0x00004010;
-   print("-- Entering main() --\r\n");
+   //print("-- Entering main() --\r\n");
 
    /*
     * Peripheral SelfTest will not be run for debug_module
@@ -127,18 +170,15 @@ int main (void) {
     */
   // print out the data 
 	
-   error |= testMem(0x00000000);
-
-   error |= testWritableRegs();
-   error |= testReadableRegs();
-   error |= testCharWrite();
-   
+	for(i=0;i<10000; i = i +1) {
+     error |= checkMem(0x00000000);
+   } 
 	/*
     * Disable cache and reinitialize it so that other
     * applications can be run with no problems
     */
 
-   xil_printf("Passed if 0: %x\n", error);
+   //xil_printf("Passed if 0: %x\n", error);
 
    if(error) {
 	   *resultReg = 0xffffffff;
@@ -148,7 +188,7 @@ int main (void) {
 	   *(resultReg+1) = 0xaaaaaaaa;		
 	}
 	
-   print("-- Exiting main() --\r\n");
+   //print("-- Exiting main() --\r\n");
    return 0;
 
 }

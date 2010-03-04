@@ -42,10 +42,19 @@ module [CONNECTED_MODULE]  mkConnectPLBDebugger#( ServerStub_PLBDEBUGRRR server_
     let nullResp <- server_stub.acceptRequest_getMasterLoadCommands();
     server_stub.sendResponse_getMasterLoadCommands(plbMaster.loadCommandTotal()); 
   endrule
+  rule getMasterLoadCommandsCompleted;
+    let nullResp <- server_stub.acceptRequest_getMasterLoadCommandsCompleted();
+    server_stub.sendResponse_getMasterLoadCommandsCompleted(plbMaster.loadCommandCompletedTotal()); 
+  endrule
 
   rule getMasterStoreCommands;
     let nullResp <- server_stub.acceptRequest_getMasterStoreCommands();
     server_stub.sendResponse_getMasterStoreCommands(plbMaster.storeCommandTotal()); 
+  endrule
+
+  rule getMasterStoreCommandsCompleted;
+    let nullResp <- server_stub.acceptRequest_getMasterStoreCommandsCompleted();
+    server_stub.sendResponse_getMasterStoreCommandsCompleted(plbMaster.storeCommandCompletedTotal()); 
   endrule
 
 
@@ -58,6 +67,22 @@ module [CONNECTED_MODULE]  mkConnectPLBDebugger#( ServerStub_PLBDEBUGRRR server_
     let nullResp <- server_stub.acceptRequest_getMasterStoreData();
     server_stub.sendResponse_getMasterStoreData(plbMaster.storeDataTotal()); 
   endrule
+
+  rule getMasterLoadBufferCount;
+    let nullResp <- server_stub.acceptRequest_getMasterLoadBufferCount();
+    server_stub.sendResponse_getMasterLoadBufferCount(plbMaster.loadBufferCount()); 
+  endrule
+
+  rule getMasterStoreBufferCount;
+    let nullResp <- server_stub.acceptRequest_getMasterStoreBufferCount();
+    server_stub.sendResponse_getMasterStoreBufferCount(plbMaster.storeBufferCount()); 
+  endrule
+
+  rule getMasterStatus;
+    let nullResp <- server_stub.acceptRequest_getMasterStatus();
+    server_stub.sendResponse_getMasterStatus(zeroExtend({pack(plbMaster.requestState()),pack(plbMaster.loadState()),pack(plbMaster.storeState())}),{plbMaster.storeAAcksCount,plbMaster.storeDAcksCount},plbMaster.errorCount); 
+  endrule
+
 
 endmodule
 

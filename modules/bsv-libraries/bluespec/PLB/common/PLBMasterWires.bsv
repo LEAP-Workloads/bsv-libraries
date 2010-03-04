@@ -70,98 +70,98 @@ import PLBMasterDefaultParameters::*;
 
 interface PLBMasterWires;
 
-  (* always_ready, prefix="", result=`PLB_ABUS_NAME *)
+  (* always_ready *)
   method Bit#(PLBAddrSize) mABus();     // Address Bus
 
-  (* always_ready, prefix="", result=`PLB_BE_NAME *)
+  (* always_ready *)
   method Bit#(8)           mBE();       // Byte Enable
 
-  (* always_ready, prefix="", result=`PLB_RNW_NAME *)
+  (* always_ready *)
   method Bit#(1)           mRNW();      // Read Not Write
 
-  (* always_ready, prefix="", result=`PLB_ABORT_NAME *)
+  (* always_ready *)
   method Bit#(1)           mAbort();    // Abort
 
-  (* always_ready, prefix="", result=`PLB_BUSLOCK_NAME *)
+  (* always_ready *)
   method Bit#(1)           mBusLock();  // Bus lock
 
-  (* always_ready, prefix="", result=`PLB_COMPRESS_NAME *)
+  (* always_ready *)
   method Bit#(1)           mCompress(); // compressed transfer
 
-  (* always_ready, prefix="", result=`PLB_GUARDED_NAME *)
+  (* always_ready *)
   method Bit#(1)           mGuarded();  // guarded transfer
 
-  (* always_ready, prefix="", result=`PLB_LOCKERR_NAME *)
+  (* always_ready *)
   method Bit#(1)           mLockErr();  // lock error
 
-  (* always_ready, prefix="", result=`PLB_MSIZE_NAME *)
+  (* always_ready *)
   method Bit#(2)           mMSize();    // data bus width?
 
-  (* always_ready, prefix="", result=`PLB_ORDERED_NAME *)
+  (* always_ready *)
   method Bit#(1)           mOrdered();  // synchronize transfer
 
-  (* always_ready, prefix="", result=`PLB_PRIORITY_NAME *)
+  (* always_ready *)
   method Bit#(2)           mPriority(); // priority indicator
 
-  (* always_ready, prefix="", result=`PLB_RDBURST_NAME *)
+  (* always_ready *)
   method Bit#(1)           mRdBurst();  // read burst
 
-  (* always_ready, prefix="", result=`PLB_REQUEST_NAME *)
+  (* always_ready *)
   method Bit#(1)           mRequest();  // bus request
 
-  (* always_ready, prefix="", result=`PLB_SIZE_NAME *)
+  (* always_ready *)
   method Bit#(4)           mSize();     // transfer size 
 
-  (* always_ready, prefix="", result=`PLB_TYPE_NAME *)
+  (* always_ready *)
   method Bit#(3)           mType();     // transfer type (dma) 
 
-  (* always_ready, prefix="", result=`PLB_WRBURST_NAME *)
+  (* always_ready *)
   method Bit#(1)           mWrBurst();  // write burst
 
-  (* always_ready, prefix="", result=`PLB_WRDBUS_NAME *)
+  (* always_ready *)
   method Bit#(64)          mWrDBus();   // write data bus
 
   (* always_ready, always_enabled *)
-  method Action mRst((* port=`PLB_RST_NAME *)                  Bit#(1) mRst);
+  method Action mRst( Bit#(1) mRst);
 
   (* always_ready, always_enabled *)
-  method Action mAddrAck((* port=`PLB_MADDRACK_NAME *)         Bit#(1) mAddrAck);
+  method Action mAddrAck( Bit#(1) mAddrAck);
 
   (* always_ready, always_enabled *)
-  method Action mBusy((* port=`PLB_MBUSY_NAME *)               Bit#(1) mBusy);
+  method Action mBusy(Bit#(1) mBusyVal);
 
   (* always_ready, always_enabled *)
-  method Action mErr((* port=`PLB_MERR_NAME *)                 Bit#(1) mErr);
+  method Action mErr(Bit#(1) mErrVal);
 
   (* always_ready, always_enabled *)
-  method Action mRdBTerm((* port=`PLB_MRDBTERM_NAME *)         Bit#(1) mRdBTerm);
+  method Action mRdBTerm(Bit#(1) mRdBTerm);
 
   (* always_ready, always_enabled *)
-  method Action mRdDAck((* port=`PLB_MRDDACK_NAME *)           Bit#(1) mRdDAck);
+  method Action mRdDAck(Bit#(1) mRdDAck);
 
   (* always_ready, always_enabled *)
-  method Action mRdDBus((* port=`PLB_MRDDBUS_NAME *)           Bit#(64) mRdDBus);
+  method Action mRdDBus(Bit#(64) mRdDBus);
 
   (* always_ready, always_enabled *)
-  method Action mRdWdAddr((* port=`PLB_MRDWDADDR_NAME *)       Bit#(4) mRdWdAddr);
+  method Action mRdWdAddr(Bit#(4) mRdWdAddr);
 
   (* always_ready, always_enabled *)
-  method Action mRearbitrate((* port=`PLB_MREARBITRATE_NAME *) Bit#(1) mRearbitrate);
+  method Action mRearbitrate(Bit#(1) mRearbitrate);
 
   (* always_ready, always_enabled *)
-  method Action mWrBTerm((* port=`PLB_MWRBTERM_NAME *)         Bit#(1) mWrBTerm);
+  method Action mWrBTerm(Bit#(1) mWrBTerm);
 
   (* always_ready, always_enabled *)
-  method Action mWrDAck((* port=`PLB_MWRDACK_NAME *)           Bit#(1) mWrDAck);
+  method Action mWrDAck(Bit#(1) mWrDAck);
 
   (* always_ready, always_enabled *)
-  method Action mSSize((* port=`PLB_MSSIZE_NAME *)             Bit#(2) mSSize);
+  method Action mSSize(Bit#(2) mSSize);
 
   (* always_ready, always_enabled *)
-  method Action sMErr((* port=`PLB_SMERR_NAME *)               Bit#(1) sMErr);
+  method Action sMErr(Bit#(1) sMErr);
 
   (* always_ready, always_enabled *)
-  method Action sMBusy((* port=`PLB_SMBUSY_NAME *)             Bit#(1) sMBusy);
+  method Action sMBusy(Bit#(1) sMBusy);
     
 
      

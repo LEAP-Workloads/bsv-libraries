@@ -1,0 +1,15 @@
+********************************************************************
+* PLB Master Multi
+********************************************************************
+
+%AWB_START
+
+%name PLB Master Multi Unsafe
+%desc Full PLB Master		
+
+%provides plb_master
+	 
+%sources -t BSV -v PUBLIC PLBMasterMultiSizeUnsafe.bsv
+%sources -t BSV -v PUBLIC PLBMasterWrapper.bsv
+
+%AWB_END

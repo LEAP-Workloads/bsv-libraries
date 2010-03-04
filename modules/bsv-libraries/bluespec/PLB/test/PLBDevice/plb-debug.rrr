@@ -8,9 +8,15 @@ service PLBDEBUGRRR
         method getSlaveStoreData(in UINT32[32] dummy, out UINT32[32] count);
         method getSlaveTotalCommands(in UINT32[32] dummy, out UINT32[32] count);
         method getMasterLoadCommands(in UINT32[32] dummy, out UINT32[32] count);
+        method getMasterLoadCommandsCompleted(in UINT32[32] dummy, out UINT32[32] count);
         method getMasterLoadData(in UINT32[32] dummy, out UINT32[32] count);
+        method getMasterLoadBufferCount(in UINT32[32] dummy, out UINT32[32] count);
         method getMasterStoreCommands(in UINT32[32] dummy, out UINT32[32] count);
+        method getMasterStoreCommandsCompleted(in UINT32[32] dummy, out UINT32[32] count);
         method getMasterStoreData(in UINT32[32] dummy, out UINT32[32] count);
+        method getMasterStoreBufferCount(in UINT32[32] dummy, out UINT32[32] count);
+        method getMasterStatus(in UINT32[32] dummy, out UINT32[32] count , out UINT32[32] acks,out UINT32[32] error);
+        method getTestReceived(in UINT32[32] dummy, out UINT32[32] count);
         method getTestStatus(in UINT32[32] dummy, out UINT32[32] count);
     };
 

@@ -19,6 +19,7 @@
 %sources -t BSV -v PUBLIC PLBDeviceTypes.bsv
 %sources -t BSV -v PUBLIC PLBDebug.bsv
 %sources -t RRR -v PUBLIC plb-debug.rrr
+%sources -t ELF -v PUBLIC simple_plb_master.elf
 
 
 %AWB_END

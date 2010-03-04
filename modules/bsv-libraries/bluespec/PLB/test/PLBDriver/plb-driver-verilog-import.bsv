@@ -23,7 +23,9 @@ interface PLB_DRIVER;
      method Bit#(1) outPLB_MAddrAck();
      method Bit#(2) outPLB_MSSize();
      method Bit#(1) outPLB_MRearbitrate();
+     (* always_ready *)
      method Bit#(1) outPLB_MBusy();
+     (* always_ready *)
      method Bit#(1) outPLB_MErr();
      method Bit#(1) outPLB_MWrDAck();
      method Bit#(64) outPLB_MRdDBus();
@@ -119,6 +121,7 @@ module mkPLBDriver
 
 schedule    (
       inIP2Bus_IntrEvent,
+
       outBus2IP_Addr,
       outBus2IP_Data,
       outBus2IP_BE,

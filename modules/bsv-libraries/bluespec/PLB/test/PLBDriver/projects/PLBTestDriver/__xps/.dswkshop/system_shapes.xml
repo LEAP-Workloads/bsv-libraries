@@ -1,4 +1,4 @@
-<EDKSYSTEM ARCH="virtex2p" EDKVERSION="10.1.03" PART="xc2vp30ff896-7" SRC="/home/kfleming/libImport/src/bsv-libraries/modules/bsv-libraries/bluespec/PLB/test/PLBDriver/projects/PLBTestDriver/system.xmp" TIMESTAMP="Mon Mar  1 18:01:49 2010&#xA;">
+<EDKSYSTEM ARCH="virtex2p" EDKVERSION="10.1.03" PART="xc2vp30ff896-7" SRC="/home/kfleming/libImport/src/bsv-libraries/modules/bsv-libraries/bluespec/PLB/test/PLBDriver/projects/PLBTestDriver/system.xmp" TIMESTAMP="Wed Mar  3 12:29:06 2010&#xA;">
 
   <EXTERNALPORTS>
     <PORT DIR="O" GROUP="A" INDEX="7" MHS_INDEX="0" NAME="fpga_0_net_gnd_pin" SIGNAME="net_gnd"/>
@@ -19,17 +19,17 @@
     <PORT DIR="O" GROUP="B" INDEX="41" MHS_INDEX="15" NAME="ftl_0_Bus2IP_WrReqOut_pin" SIGNAME="ftl_0_Bus2IP_WrReqOut"/>
     <PORT DIR="O" GROUP="B" INDEX="38" MHS_INDEX="16" NAME="ftl_0_Bus2IP_RdReqOut_pin" SIGNAME="ftl_0_Bus2IP_RdReqOut"/>
     <PORT DIR="O" ENDIAN="BIG" GROUP="B" INDEX="40" LSB="0" MHS_INDEX="17" MSB="1" NAME="ftl_0_Bus2IP_WrCEOut_pin" SIGNAME="ftl_0_Bus2IP_WrCEOut"/>
-    <PORT DIR="O" ENDIAN="BIG" GROUP="B" INDEX="37" LSB="0" MHS_INDEX="18" MSB="1" NAME="ftl_0_Bus2IP_RdCEOut_pin" SIGNAME="ftl_0_Bus2IP_RdCEOut"/>
+    <PORT DIR="O" ENDIAN="LITTLE" GROUP="B" INDEX="37" LSB="0" MHS_INDEX="18" MSB="1" NAME="ftl_0_Bus2IP_RdCEOut_pin" SIGNAME="ftl_0_Bus2IP_RdCEOut"/>
     <PORT DIR="O" GROUP="B" INDEX="34" MHS_INDEX="19" NAME="ftl_0_Bus2IP_CSOut_pin" SIGNAME="ftl_0_Bus2IP_CSOut"/>
     <PORT DIR="O" ENDIAN="BIG" GROUP="B" INDEX="33" LSB="0" MHS_INDEX="20" MSB="7" NAME="ftl_0_Bus2IP_BEOut_pin" SIGNAME="ftl_0_Bus2IP_BEOut"/>
-    <PORT DIR="O" ENDIAN="BIG" GROUP="B" INDEX="36" LSB="0" MHS_INDEX="21" MSB="63" NAME="ftl_0_Bus2IP_DataOut_pin" SIGNAME="ftl_0_Bus2IP_DataOut"/>
+    <PORT DIR="O" ENDIAN="LITTLE" GROUP="B" INDEX="36" LSB="0" MHS_INDEX="21" MSB="63" NAME="ftl_0_Bus2IP_DataOut_pin" SIGNAME="ftl_0_Bus2IP_DataOut"/>
     <PORT DIR="O" ENDIAN="BIG" GROUP="B" INDEX="32" LSB="0" MHS_INDEX="22" MSB="31" NAME="ftl_0_Bus2IP_AddrOut_pin" SIGNAME="ftl_0_Bus2IP_AddrOut"/>
     <PORT DIR="I" GROUP="B" INDEX="10" MHS_INDEX="23" NAME="ftl_0_IP2Bus_IntrEventOut_pin" SIGNAME="ftl_0_IP2Bus_IntrEventOut"/>
     <PORT DIR="O" GROUP="B" INDEX="39" MHS_INDEX="24" NAME="ftl_0_Bus2IP_ResetOut_pin" SIGNAME="ftl_0_Bus2IP_ResetOut"/>
     <PORT DIR="O" GROUP="B" INDEX="35" MHS_INDEX="25" NAME="ftl_0_Bus2IP_ClkOut_pin" SIGNAME="ftl_0_Bus2IP_ClkOut"/>
     <PORT DIR="I" GROUP="B" INDEX="26" MHS_INDEX="26" NAME="ftl_0_M_rdBurstOut_pin" SIGNAME="ftl_0_M_rdBurstOut"/>
     <PORT DIR="I" GROUP="B" INDEX="30" MHS_INDEX="27" NAME="ftl_0_M_wrBurstOut_pin" SIGNAME="ftl_0_M_wrBurstOut"/>
-    <PORT DIR="I" ENDIAN="BIG" GROUP="B" INDEX="31" LSB="0" MHS_INDEX="28" MSB="63" NAME="ftl_0_M_wrDBusOut_pin" SIGNAME="ftl_0_M_wrDBusOut"/>
+    <PORT DIR="I" ENDIAN="LITTLE" GROUP="B" INDEX="31" LSB="0" MHS_INDEX="28" MSB="63" NAME="ftl_0_M_wrDBusOut_pin" SIGNAME="ftl_0_M_wrDBusOut"/>
     <PORT DIR="I" ENDIAN="BIG" GROUP="B" INDEX="15" LSB="0" MHS_INDEX="29" MSB="31" NAME="ftl_0_M_ABusOut_pin" SIGNAME="ftl_0_M_ABusOut"/>
     <PORT DIR="I" GROUP="B" INDEX="19" MHS_INDEX="30" NAME="ftl_0_M_abortOut_pin" SIGNAME="ftl_0_M_abortOut"/>
     <PORT DIR="I" GROUP="B" INDEX="23" MHS_INDEX="31" NAME="ftl_0_M_lockErrOut_pin" SIGNAME="ftl_0_M_lockErrOut"/>
@@ -48,7 +48,7 @@
     <PORT DIR="O" GROUP="B" INDEX="46" MHS_INDEX="44" NAME="ftl_0_PLB_MRdBTermOut_pin" SIGNAME="ftl_0_PLB_MRdBTermOut"/>
     <PORT DIR="O" GROUP="B" INDEX="47" MHS_INDEX="45" NAME="ftl_0_PLB_MRdDAckOut_pin" SIGNAME="ftl_0_PLB_MRdDAckOut"/>
     <PORT DIR="O" ENDIAN="BIG" GROUP="B" INDEX="49" LSB="0" MHS_INDEX="46" MSB="3" NAME="ftl_0_PLB_MRdWdAddrOut_pin" SIGNAME="ftl_0_PLB_MRdWdAddrOut"/>
-    <PORT DIR="O" ENDIAN="LITTLE" GROUP="B" INDEX="48" LSB="0" MHS_INDEX="47" MSB="63" NAME="ftl_0_PLB_MRdDBusOut_pin" SIGNAME="ftl_0_PLB_MRdDBusOut"/>
+    <PORT DIR="O" ENDIAN="BIG" GROUP="B" INDEX="48" LSB="0" MHS_INDEX="47" MSB="63" NAME="ftl_0_PLB_MRdDBusOut_pin" SIGNAME="ftl_0_PLB_MRdDBusOut"/>
     <PORT DIR="O" GROUP="B" INDEX="53" MHS_INDEX="48" NAME="ftl_0_PLB_MWrDAckOut_pin" SIGNAME="ftl_0_PLB_MWrDAckOut"/>
     <PORT DIR="O" GROUP="B" INDEX="45" MHS_INDEX="49" NAME="ftl_0_PLB_MErrOut_pin" SIGNAME="ftl_0_PLB_MErrOut"/>
     <PORT DIR="O" GROUP="B" INDEX="44" MHS_INDEX="50" NAME="ftl_0_PLB_MBusyOut_pin" SIGNAME="ftl_0_PLB_MBusyOut"/>
@@ -747,7 +747,7 @@
       <PARAMETER MPD_INDEX="0" NAME="c_num_masters" VALUE="8"/>
       <PARAMETER ADDRESS="BASE" ADDR_TYPE="MEMORY" CHANGEDBY="USER" MPD_INDEX="1" NAME="c_baseaddr" VALUE="0x00000000"/>
       <PARAMETER ADDRESS="HIGH" ADDR_TYPE="MEMORY" CHANGEDBY="USER" MPD_INDEX="2" NAME="c_highaddr" VALUE="0x00003fff"/>
-      <PARAMETER MPD_INDEX="3" NAME="c_include_burst_cacheln_support" VALUE="0"/>
+      <PARAMETER CHANGEDBY="USER" MPD_INDEX="3" NAME="c_include_burst_cacheln_support" VALUE="1"/>
       <PARAMETER MPD_INDEX="4" NAME="c_plb_dwidth" VALUE="64"/>
       <PARAMETER MPD_INDEX="5" NAME="c_plb_awidth" VALUE="32"/>
       <PARAMETER CHANGEDBY="USER" MPD_INDEX="6" NAME="c_plb_clk_period_ps" VALUE="10000"/>

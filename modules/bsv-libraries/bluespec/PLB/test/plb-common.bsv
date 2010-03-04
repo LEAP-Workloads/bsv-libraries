@@ -7,9 +7,13 @@ import Connectable::*;
 instance Connectable#(PLB_DRIVER,PLB_DEVICE);
   module mkConnection#(PLB_DRIVER driver, PLB_DEVICE device) ();
     (* no_implicit_conditions *)
+    rule driveSeperate;
+      device.plbMasterWires.mBusy(driver.outPLB_MBusy());
+      device.plbMasterWires.mErr(driver.outPLB_MErr());
+    endrule
+
+    (* no_implicit_conditions *)
     rule driveWiresDevice;
-
-
       device.plbSlaveWires.sABus(driver.outBus2IP_Addr());
       device.plbSlaveWires.sDataIn(driver.outBus2IP_Data());
       device.plbSlaveWires.sBE(driver.outBus2IP_BE);
@@ -18,21 +22,18 @@ instance Connectable#(PLB_DRIVER,PLB_DEVICE);
       device.plbSlaveWires.sWrCE(driver.outBus2IP_WrCE);
       device.plbSlaveWires.sRdReq(driver.outBus2IP_RdReq);
       device.plbSlaveWires.sWrReq(driver.outBus2IP_WrReq);
-
       device.plbMasterWires.mAddrAck(driver.outPLB_MAddrAck());
       device.plbMasterWires.mSSize(driver.outPLB_MSSize());
       device.plbMasterWires.mRearbitrate(driver.outPLB_MRearbitrate());
-      device.plbMasterWires.mBusy(driver.outPLB_MBusy());
-      device.plbMasterWires.mErr(driver.outPLB_MErr());
       device.plbMasterWires.mWrDAck(driver.outPLB_MWrDAck());
       device.plbMasterWires.mRdDBus(driver.outPLB_MRdDBus());
       device.plbMasterWires.mRdWdAddr(driver.outPLB_MRdWdAddr());
       device.plbMasterWires.mRdDAck(driver.outPLB_MRdDAck());
       device.plbMasterWires.mRdBTerm(driver.outPLB_MRdBTerm());
       device.plbMasterWires.mWrBTerm(driver.outPLB_MWrBTerm());
- 
     endrule
 
+    (* no_implicit_conditions *)
     rule driveWiresDriver;
       driver.inIP2Bus_IntrEvent(0);
       driver.inIP2Bus_Data(device.plbSlaveWires.sDataOut());
