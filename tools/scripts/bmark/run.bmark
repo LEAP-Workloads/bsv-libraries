@@ -496,6 +496,8 @@ sub CompareOutput() {
         print "*** Output comparison failed ***\n";
     }
 
+    #delete result file
+    `rm hardware.out`;
     return $result;
 }
 
