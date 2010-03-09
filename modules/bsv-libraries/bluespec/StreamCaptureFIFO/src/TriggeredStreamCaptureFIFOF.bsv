@@ -24,11 +24,17 @@ module mkTriggeredStreamCaptureFIFOF#(Integer streamSize) (TriggeredStreamCaptur
 
   rule cycle (deqPulse && state == Filling);
     fifoStore.deq;
-    $display("TrigFIFO: Droppin Data");
+    if(`DEBUG_STREAM_CAPTURE_FIFO == 1) 
+      begin
+        $display("TrigFIFO: Droppin Data");
+      end
   endrule
 
   rule setTrigger(triggerPulse);
-    $display("TrigFIFO: setting trigger");
+    if(`DEBUG_STREAM_CAPTURE_FIFO == 1) 
+      begin
+        $display("TrigFIFO: setting trigger");
+      end
     state <= Draining;
   endrule
 

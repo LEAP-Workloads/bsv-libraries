@@ -1,5 +1,6 @@
+`include "asim/provides/stream_capture_fifo.bsh"
+
 import FIFOF::*;
-import TriggeredStreamCaptureFIFOF::*;
 import LFSR::*;
 
 
@@ -14,12 +15,18 @@ module mkHWOnlyApplication (Empty);
   rule stuffData (counter <= zeroExtend(offset));
     fifof.fifof.enq(counter);
     counter <= counter + 1;
-    $display("TB: Enq %h", counter);
+    if(`DEBUG_STREAM_CAPTURE_FIFO == 1) 
+      begin
+        $display("TB: Enq %h", counter);
+      end
   endrule
 
   rule trigger(counter > zeroExtend(offset));
     fifof.trigger;
-    $display("TB: Firing trigger");
+    if(`DEBUG_STREAM_CAPTURE_FIFO == 1) 
+      begin
+        $display("TB: Firing trigger");
+      end
   endrule
   
 
@@ -31,14 +38,22 @@ module mkHWOnlyApplication (Empty);
         $display("Error: expected: %h, got %h", offset   - zeroExtend(checkCount),fifof.fifof.first);
         $finish; 
       end
-    $display("deqed: %h", fifof.fifof.first);
+
+    if(`DEBUG_STREAM_CAPTURE_FIFO == 1) 
+      begin
+        $display("deqed: %h", fifof.fifof.first);
+      end
+
     checkCount <= checkCount - 1;
     if(checkCount == 0) 
       begin
         totalPasses <= totalPasses + 1;
         lfsr.next;
         counter <= 0;
-        $display("TB: Check complete");
+        if(`DEBUG_STREAM_CAPTURE_FIFO == 1) 
+          begin
+            $display("TB: Check complete");
+          end
       end
     if(totalPasses + 1 == 0) 
       begin
