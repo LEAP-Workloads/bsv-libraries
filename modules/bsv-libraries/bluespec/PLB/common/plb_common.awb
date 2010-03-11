@@ -14,6 +14,16 @@
 %sources -t BSV -v PUBLIC PLBSlaveWires.bsv
 %sources -t BSV -v PUBLIC PLBMasterTypes.bsv
 %sources -t BSV -v PUBLIC PLBSlaveTypes.bsv
+%sources -t BSV -v PUBLIC plb-common.bsv
+%sources -t BSV -v PUBLIC PLBDriverTypes.bsv
+%sources -t BSV -v PUBLIC PLBDeviceTypes.bsv
+
+
+%param C_IP_INTR_NUM 1  "Number of interrupts"
+%param C_AWIDTH 32 "Address width"
+%param C_DWIDTH 64 "Data width"
+%param C_NUM_CS 1 "Chip selects"
+%param C_NUM_CE 2 "Chip enables"
 
 
 %AWB_END

@@ -48,6 +48,7 @@ interface CommitFIFOLevel#(type data, numeric type size);
   // including speculative data
   method Bool isLessThan   ( Bit#(TAdd#(1,TLog#(size))) c1 ) ;
   method Bool isGreaterThan( Bit#(TAdd#(1,TLog#(size))) c1 ) ;
+  method Bit#(TAdd#(1,TLog#(size))) count();
 endinterface
 
 module mkCommitFIFOLevel (CommitFIFOLevel#(data,size))
@@ -169,6 +170,10 @@ module mkCommitFIFOLevel (CommitFIFOLevel#(data,size))
 
   method Bool isGreaterThan( Bit#(TAdd#(1,TLog#(size))) c1 );
    return ( dataCounter + commitCounter  > c1 );   
+  endmethod
+
+  method Bit#(TAdd#(1,TLog#(size))) count();
+    return dataCounter + commitCounter;
   endmethod
 
 endmodule

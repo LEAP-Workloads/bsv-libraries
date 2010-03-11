@@ -1,0 +1,16 @@
+********************************************************************
+* PLB Device Debug
+********************************************************************
+
+%AWB_START
+
+%name PLB Device Debug
+%desc PLB Device Debug
+
+%provides plb_device_debug
+
+
+%sources -t BSV -v PUBLIC PLBDebug.bsv
+%sources -t RRR -v PUBLIC plb-debug.rrr
+
+%AWB_END

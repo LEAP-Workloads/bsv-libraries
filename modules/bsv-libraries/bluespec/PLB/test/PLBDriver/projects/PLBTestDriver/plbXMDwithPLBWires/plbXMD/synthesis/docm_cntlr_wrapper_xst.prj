@@ -1,2 +1,0 @@
-VHDL dsbram_if_cntlr_v3_00_b /usr/local/Xilinx/10.1/EDK/hw/XilinxProcessorIPLib/pcores/dsbram_if_cntlr_v3_00_b/hdl/vhdl/dsbram_if_cntlr.vhd
-vhdl work ../hdl/docm_cntlr_wrapper.vhd

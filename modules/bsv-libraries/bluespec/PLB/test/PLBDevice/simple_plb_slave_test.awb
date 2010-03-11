@@ -11,15 +11,14 @@
 %requires plb_common
 %requires plb_slave
 %requires plb_master
+%requires plb_device_debug
 %requires rewind_fifo
 %requires commit_fifo
 %requires register_library
 	 
 %sources -t BSV -v PUBLIC SimplePLBSlaveTest.bsv
-%sources -t BSV -v PUBLIC PLBDeviceTypes.bsv
-%sources -t BSV -v PUBLIC PLBDebug.bsv
-%sources -t RRR -v PUBLIC plb-debug.rrr
 %sources -t ELF -v PUBLIC simple_plb_slave.elf
+%sources -t BMM -v PUBLIC plb_system.bmm
 
 
 %AWB_END

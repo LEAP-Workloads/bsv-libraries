@@ -1,6 +1,9 @@
 `include "asim/provides/plb_driver.bsh"
 `include "asim/provides/plb_device.bsh"
+`include "asim/provides/plb_common.bsh"
 `include "asim/provides/soft_connections.bsh"
+
+import Connectable::*;
 
 module [CONNECTED_MODULE] mkConnectedApplication();
   

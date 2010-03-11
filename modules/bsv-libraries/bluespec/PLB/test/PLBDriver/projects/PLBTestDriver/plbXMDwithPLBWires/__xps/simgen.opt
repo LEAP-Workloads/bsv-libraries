@@ -1,1 +1,0 @@
- -p virtex2p -lang verilog -lp /home/kfleming/xilinx_xup/   TestApp_Memory/executable.elf -s mti

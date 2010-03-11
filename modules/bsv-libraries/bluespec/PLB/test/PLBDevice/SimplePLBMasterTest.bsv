@@ -1,6 +1,7 @@
 `include "asim/provides/plb_master.bsh"
 `include "asim/provides/plb_slave.bsh"
 `include "asim/provides/plb_common.bsh"
+`include "asim/provides/plb_device_debug.bsh"
 `include "asim/provides/register_library.bsh"
 `include "asim/provides/librl_bsv_base.bsh"
 `include "asim/provides/soft_connections.bsh"
@@ -31,7 +32,7 @@ module [CONNECTED_MODULE]  mkPLBDevice#(Clock plbClock, Reset plbReset) (PLB_DEV
 
   // Setup Debug RRR
 
-  ServerStub_PLBDEBUGRRR server_stub <- mkServerStub_PLBDEBUGRRR();  
+  plb_device_debug::ServerStub_PLBDEBUGRRR server_stub <- plb_device_debug::mkServerStub_PLBDEBUGRRR();  
 
   mkConnectPLBDebugger(server_stub, plbMaster, plbSlave); 
 
@@ -153,6 +154,9 @@ module [CONNECTED_MODULE]  mkPLBDevice#(Clock plbClock, Reset plbReset) (PLB_DEV
     dataFIFO.deq;
   endrule
 
+  method Bit#(1) outIP2Bus_IntrEvent();
+    return 0;
+  endmethod
 
   interface plbMasterWires = plbMaster.plbMasterWires;
   interface plbSlaveWires = plbSlave.plbSlaveWires;

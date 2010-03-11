@@ -10,6 +10,7 @@ import Connectable::*;
 import ClientServer::*;
 import GetPut::*;
 
+
 module [CONNECTED_MODULE]  mkConnectPLBDebugger#( ServerStub_PLBDEBUGRRR server_stub, PLBMaster plbMaster, PLBSlave#(addr_width,data_width) plbSlave) (Empty);
    
   rule getSlaveLoadCommands;

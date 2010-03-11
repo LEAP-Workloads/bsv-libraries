@@ -2,7 +2,7 @@
 [Global]
 SaveParameters=0
 Description=Hello World Demo using hybrid streams
-File=plb_simple_slave
+File=plb_simple_master
 Version=2.1
 Name=Hello World
 DefaultBenchmark=config/bm/bluespec/demos.cfx/benchmarks/null.cfg
@@ -58,8 +58,12 @@ Packagehint=bsv-libraries
 
 [PLB Test/Requires]
 plb_driver=PLB Driver
-plb_device=PLB Slave Test
+plb_test_common=PLB Test Common Files
+plb_device=PLB Simple Master Test
 
+[PLB Test Common Files]
+File=modules/bsv-libraries/bluespec/PLB/test/plb_test_common.awb
+Packagehint=bsv-libraries
 
 [PLB Common]
 File=modules/bsv-libraries/bluespec/PLB/common/plb_common.awb
@@ -69,21 +73,8 @@ Packagehint=bsv-libraries
 File=modules/bsv-libraries/bluespec/PLB/src/Slave/plb_slave.awb
 Packagehint=bsv-libraries
 
-[PLB Slave Test/Requires]
-plb_slave=PLB Slave
-plb_common=PLB Common
-register_library=RegisterLibrary
-plb_master=PLB Master Multi
-rewind_fifo=RewindFIFO
-commit_fifo=CommitFIFO
-plb_device_debug=PLB Device Debug
-
 [RegisterLibrary]
 File=modules/bsv-libraries/bluespec/Register/src/register_library.awb
-Packagehint=bsv-libraries
-
-[PLB Slave Test]
-File=modules/bsv-libraries/bluespec/PLB/test/PLBDevice/simple_plb_slave_test.awb
 Packagehint=bsv-libraries
 
 [PLB Master Multi]
@@ -98,9 +89,22 @@ Packagehint=bsv-libraries
 File=modules/bsv-libraries/bluespec/RewindFIFO/src/rewind_fifo.awb
 Packagehint=bsv-libraries
 
+[FPGA Environment/Params]
+MODEL_CLOCK_MULTIPLIER=2
+
+[PLB Simple Master Test/Requires]
+plb_slave=PLB Slave
+rewind_fifo=RewindFIFO
+plb_common=PLB Common
+register_library=RegisterLibrary
+commit_fifo=CommitFIFO
+plb_master=PLB Master Multi
+plb_device_debug=PLB Device Debug
+
+[PLB Simple Master Test]
+File=modules/bsv-libraries/bluespec/PLB/test/PLBDevice/simple_plb_master_test.awb
+Packagehint=bsv-libraries
+
 [PLB Device Debug]
 File=modules/bsv-libraries/bluespec/PLB/test/PLBDevice/plb_device_debug.awb
 Packagehint=bsv-libraries
-
-[FPGA Environment/Params]
-MODEL_CLOCK_MULTIPLIER=2

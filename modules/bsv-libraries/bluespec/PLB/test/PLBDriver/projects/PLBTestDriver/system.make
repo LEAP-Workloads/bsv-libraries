@@ -166,6 +166,24 @@ TestApp_Memory_programclean:
 	rm -f $(TESTAPP_MEMORY_OUTPUT) 
 
 #################################################################
+# SOFTWARE APPLICATION TESTAPP_FTL
+#################################################################
+
+TestApp_FTL_program: $(TESTAPP_FTL_OUTPUT) 
+
+$(TESTAPP_FTL_OUTPUT) : $(TESTAPP_FTL_SOURCES) $(TESTAPP_FTL_HEADERS) $(TESTAPP_FTL_LINKER_SCRIPT) \
+                    $(LIBRARIES) __xps/testapp_ftl_compiler.opt
+	@mkdir -p $(TESTAPP_FTL_OUTPUT_DIR) 
+	$(TESTAPP_FTL_CC) $(TESTAPP_FTL_CC_OPT) $(TESTAPP_FTL_SOURCES) -o $(TESTAPP_FTL_OUTPUT) \
+	$(TESTAPP_FTL_OTHER_CC_FLAGS) $(TESTAPP_FTL_INCLUDES) $(TESTAPP_FTL_LIBPATH) \
+	$(TESTAPP_FTL_CFLAGS) $(TESTAPP_FTL_LFLAGS) 
+	$(TESTAPP_FTL_CC_SIZE) $(TESTAPP_FTL_OUTPUT) 
+	@echo ""
+
+TestApp_FTL_programclean:
+	rm -f $(TESTAPP_FTL_OUTPUT) 
+
+#################################################################
 # BOOTLOOP ELF FILES
 #################################################################
 

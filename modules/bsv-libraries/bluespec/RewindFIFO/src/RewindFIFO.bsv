@@ -46,6 +46,7 @@ interface RewindFIFOLevel#(type data, numeric type size);
   method Bool notEmpty;
   method Bool isLessThan   ( Bit#(TAdd#(1,TLog#(size))) c1 ) ;
   method Bool isGreaterThan( Bit#(TAdd#(1,TLog#(size))) c1 ) ;
+  method Bit#(TAdd#(1,TLog#(size))) count();
 endinterface
 
 module mkRewindFIFOLevel (RewindFIFOLevel#(data,size))
@@ -226,6 +227,10 @@ module mkRewindFIFOLevel (RewindFIFOLevel#(data,size))
 
   method Bool isGreaterThan( Bit#(TAdd#(1,TLog#(size))) c1 );
    return ( dataCounter - rewindCounter  > c1 );   
+  endmethod
+
+  method Bit#(TAdd#(1,TLog#(size))) count();
+    return  dataCounter - rewindCounter;
   endmethod
 
 endmodule
