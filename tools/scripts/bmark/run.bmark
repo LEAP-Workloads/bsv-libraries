@@ -227,6 +227,16 @@ else {
 }
 
 #
+# Set environmental variable from sysFlags
+#
+
+my @env_vars = split(/ /, $config{sysFlags});
+foreach (@env_vars) {
+  my ($var, $val) = split(/=/, $_);
+  $ENV{$var} = $val;
+}
+
+#
 # Bluesim arguments
 #
 
