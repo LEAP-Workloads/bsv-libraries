@@ -349,15 +349,15 @@ module mkAvalonSlaveDualDomain#(Clock asicClock, Reset asicReset) (AvalonSlave#(
   SyncFIFOIfc#(Bit#(data_width)) respFIFO <- mkSyncFIFOToCC(2,asicClock,asicReset);
   FIFOF#(Bit#(0)) tokenFIFO <- mkSizedFIFOF(2);
 
-  rule driveWait(!tokenFIFO.notFull) ;
+  rule driveWait(!tokenFIFO.notFull && avalonDebug) ;
     $display("Warning avalon is driving wait due to token...");
   endrule
 
-  rule driveWait2(!reqFIFO.notFull) ;
+  rule driveWait2(!reqFIFO.notFull && avalonDebug) ;
     $display("Warning avalon is driving wait due to req");
   endrule
 
-  rule driveWait3;
+  rule driveWait3(avalonDebug);
     $display("Warning avalon req: addr:%h data:%h",reqFIFO.first.addr,reqFIFO.first.data);
   endrule
 

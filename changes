@@ -1,0 +1,15 @@
+
+----------
+kfleming    Date: Fri Mar 26 14:32:21 EDT 2010  CSN: CSN-bsv-libraries-43
+                  Fri Mar 26 18:32:21 UTC 2010
+
+
+Directory modules/bsv-libraries/bluespec/Avalon/src
+ AvalonCommon.bsv          Locally Modified           42 
+ AvalonSlave.bsv           Locally Modified           42 
+ avalon.awb                Locally Modified           42 
+
+Directory modules/bsv-libraries/bluespec/PLB/test/PLBDriver/projects/PLBTestDriver/__xps
+ system.gui                Locally Modified           42 
+
+Removed prints from Avalon slave and master.
