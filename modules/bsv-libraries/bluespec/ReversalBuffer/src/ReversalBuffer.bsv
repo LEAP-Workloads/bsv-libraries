@@ -76,7 +76,11 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
   Bit#(log_reversal_granularity_minus) addr = (writeDirection == WriteUp)?truncate(~(writeCount - 1)):
 									  truncate( (writeCount - 1));
   rule readLastSet(state == Flush);
-    $display("%s: Read last: count: %d returning Data: %h: read from: %d",str, writeCount,rfile.sub(addr), addr);
+    if(`DEBUG_REVBUF == 1)
+      begin
+        $display("%s: Read last: count: %d returning Data: %h: read from: %d",str, writeCount,rfile.sub(addr), addr);
+      end
+
     outfifo.enq(rfile.sub(addr));
     if(readLast && (writeCountNext == 0))
       begin
@@ -86,7 +90,11 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
       end
     else if(writeCountNext == 0) // done with the flush
       begin
-        $display("%s: Completing buffer!",str);
+        if(`DEBUG_REVBUF == 1)
+          begin
+            $display("%s: Completing buffer!",str);
+          end
+
         readLast <= False;
         writeCount <= fromInteger(valueof(reversal_granularity));
         state <= SendLast;
@@ -100,8 +108,11 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
  
   // Need one last rule to spit out the Last Token...
   // Can assert isLast here...
-  rule handleLast(state == SendLast); 
-    $display("%s: sending last", str);
+  rule handleLast(state == SendLast);
+    if(`DEBUG_REVBUF == 1)
+      begin  
+        $display("%s: sending last", str);
+      end
     state <= Data;
     inQ.deq;
     outfifo.enq(inQ.first);
@@ -112,7 +123,11 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
   rule handleInputLast(state == Data && isLast(ctrl));
     if(isLast(ctrl))
       begin
-        $display("%s: Got Last",str);
+        if(`DEBUG_REVBUF == 1)
+          begin
+            $display("%s: Got Last",str);
+          end
+
         let remainder = fromInteger(valueOf(reversal_granularity)) - writeCount;
         kBitsBottom <= truncate(remainder);
         if(!readLast && writeCount == fromInteger(valueOf(reversal_granularity))) // Inexplicably no data...
@@ -160,12 +175,20 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
         writeCount <= writeCountNext;
       end 
 
-    $display("%s: Got Data: %h Wrote to: %d", str,  nextData, addr);
+    if(`DEBUG_REVBUF == 1)
+      begin
+        $display("%s: Got Data: %h Wrote to: %d", str,  nextData, addr);
+      end
+
     rfile.upd(addr, inQ.first);
 
     if(readLast)
       begin
-        $display("%s: Pushing Data: %h read from: %d",str, rfile.sub(addr), addr);
+        if(`DEBUG_REVBUF == 1)
+          begin
+            $display("%s: Pushing Data: %h read from: %d",str, rfile.sub(addr), addr);
+          end
+
         outfifo.enq(rfile.sub(addr));
       end
   endrule 
@@ -184,7 +207,10 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
         end
       dataIn <= dataInNext;
       lastIn <= lastInNext;
-      $display("%s: DataIn: %d LastIn: %d", str , dataInNext, lastInNext);
+      if(`DEBUG_REVBUF == 1)
+        begin
+          $display("%s: DataIn: %d LastIn: %d", str , dataInNext, lastInNext);
+        end
       inQ.enq(value);
     endmethod
   endinterface
@@ -204,7 +230,10 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
         end
       dataOut <= dataOutNext;
       lastOut <= lastOutNext;
-      $display("%s: DataOut: %d LastOut: %d Returning Data: %d, %h ",str, dataOutNext, lastOutNext, ctrl, data);
+      if(`DEBUG_REVBUF == 1)
+        begin
+          $display("%s: DataOut: %d LastOut: %d Returning Data: %d, %h ",str, dataOutNext, lastOutNext, ctrl, data);
+        end
       outfifo.deq;
       return outfifo.first();
     endmethod
