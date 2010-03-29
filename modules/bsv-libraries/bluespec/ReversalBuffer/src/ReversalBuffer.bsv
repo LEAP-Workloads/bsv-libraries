@@ -1,3 +1,5 @@
+`include "asim/provides/reversal_buffer.bsh"
+
 import RegFile::*;
 import GetPut::*;
 import FIFO::*;
