@@ -63,19 +63,46 @@ interface AvalonMasterWires#(numeric type address_width, numeric type data_width
   method Action readdatavalid(Bit#(1) readdatavalid);
   	 
 endinterface
+
+// the inverse of the master wires
+interface AvalonMasterInverseWires#(numeric type address_width, numeric type data_width);
+  (* always_ready, always_enabled, prefix="", result="read" *) 
+  method Action read(Bit#(1) read);
   
+  (* always_ready, always_enabled, prefix="", result="write" *) 
+  method Action write(Bit#(1) write);
+
+  (* always_ready, always_enabled, prefix="", result="address" *) 
+  method Action address(Bit#(address_width) address);
+
+  (* always_ready, always_enabled, prefix="", result="writedata" *) 
+  method Action writedata(Bit#(data_width) writedata);  
+
+  (* always_ready, always_enabled, prefix="", result="readdata" *) 
+  method Bit#(data_width) readdata();
+
+  (* always_ready, always_enabled, prefix="", result="waitrequest" *) 
+  method Bit#(1) waitrequest();
+
+  (* always_ready, always_enabled, prefix="", result="readdatavalid" *) 
+  method Bit#(1) readdatavalid();
+  	 
+endinterface
+
+
+// busServer will only has a response for read command but not write command
 interface AvalonMaster#(numeric type address_width, numeric type data_width);
   interface AvalonMasterWires#(address_width,data_width) masterWires;
   interface Server#(AvalonRequest#(address_width,data_width), Bit#(data_width)) busServer;
 endinterface
 
-module mkAvalonMaster#(Clock asicClock, Reset asicReset) (AvalonMaster#(address_width,data_width));
+module mkAvalonMaster (AvalonMaster#(address_width,data_width));
   Clock clock <- exposeCurrentClock;
   Reset reset <- exposeCurrentReset;
   AvalonMaster#(address_width,data_width) m;
 
 
-  m <- mkAvalonMasterDualDomain(asicClock,asicReset);
+  m <- mkAvalonMasterDualDomain(clock,reset);
 
   return m;
 endmodule
