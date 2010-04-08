@@ -37,7 +37,7 @@ module mkHWOnlyApplication (Empty);
   Clock clock <- exposeCurrentClock;
   Reset reset <- exposeCurrentReset;
   AvalonSlaveWires#(4,32) regs <- mkSmallAvalonRegisterFile;
-  AvalonMaster#(4,32) regDriver <- mkAvalonMaster(clock,reset);
+  AvalonMaster#(4,32) regDriver <- mkAvalonMaster;
 
   Reg#(Bit#(4)) addr <- mkReg(0); 
   Reg#(Bit#(32)) data <- mkReg(0);
