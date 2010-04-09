@@ -118,8 +118,8 @@ typedef enum {
 // Avalon master
 module mkAvalonMasterDualDomain#(Clock asicClock, Reset asicReset) (AvalonMaster#(address_width,data_width));
 
-  SyncFIFOIfc#(AvalonRequest#(address_width,data_width)) reqFIFO <- mkSyncFIFOFromCC(2,asicClock);
-  SyncFIFOIfc#(Bit#(data_width)) respFIFO <- mkSyncFIFOToCC(2,asicClock,asicReset);
+  SyncFIFOIfc#(AvalonRequest#(address_width,data_width)) reqFIFO <- mkSyncFIFOToCC(2,asicClock,asicReset);
+  SyncFIFOIfc#(Bit#(data_width)) respFIFO <- mkSyncFIFOFromCC(2,asicClock);
   FIFO#(Bit#(0)) tokenFIFO <- mkFIFO;
   
   Reg#(Bit#(address_width)) addr <- mkReg(0); 
