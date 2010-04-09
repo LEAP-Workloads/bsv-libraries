@@ -120,7 +120,7 @@ module mkAvalonMasterDualDomain#(Clock asicClock, Reset asicReset) (AvalonMaster
 
   SyncFIFOIfc#(AvalonRequest#(address_width,data_width)) reqFIFO <- mkSyncFIFOToCC(2,asicClock,asicReset);
   SyncFIFOIfc#(Bit#(data_width)) respFIFO <- mkSyncFIFOFromCC(2,asicClock);
-  FIFO#(Bit#(0)) tokenFIFO <- mkFIFO;
+  SyncFIFOIfc#(Bit#(0)) tokenFIFO <- mkSyncFIFOFromCC(2,asicClock);
   
   Reg#(Bit#(address_width)) addr <- mkReg(0); 
   Reg#(Bit#(data_width)) dataOut <- mkReg(0);
