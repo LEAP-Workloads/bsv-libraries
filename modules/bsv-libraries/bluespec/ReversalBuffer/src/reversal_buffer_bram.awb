@@ -1,0 +1,15 @@
+********************************************************************
+* ReversalBuffer
+********************************************************************
+
+%AWB_START
+
+%name ReversalBufferBRAM
+%desc A fifo that reverses a parameteric block of data, using a BRAM
+%provides reversal_buffer
+
+%sources -t BSV -v PUBLIC ReversalBufferBRAM.bsv
+
+%param DEBUG_REVBUF 0 "Enable debug messages"
+
+%AWB_END

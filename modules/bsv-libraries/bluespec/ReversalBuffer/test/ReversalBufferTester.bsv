@@ -4,8 +4,7 @@ import GetPut::*;
 import FIFO::*;
 import FIFOF::*;
 
-import ReversalBuffer::*;
-import FIFOUtility::*;
+
 
 module mkHWOnlyApplication();
   ReversalBuffer#(Bit#(15), Bool, 64) buffer <- mkReversalBuffer("testbench");
