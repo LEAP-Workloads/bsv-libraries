@@ -56,15 +56,16 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
              Add#(log_reversal_granularity, xxx,  data_size)         
            );
 
-  // Keeping all the excess ctrl_t around is probably not necessary and 
-  // should be fixed at some point
-
-  MEMORY_IFC#(Bit#(log_reversal_granularity_minus),Tuple2#(ctrl_t,data_t)) rfile <- mkBRAM();
+  // Unguarded BRAM -> use outstanding reqs to keep to allocate output buffering
+  // we add some latency in a few spots, mainly filling the pipeline and the 
+  // last counter, but we should be basically streaming.
+  MEMORY_IFC#(Bit#(log_reversal_granularity_minus),Tuple2#(ctrl_t,data_t)) rfile <- mkBRAMUnguarded();
 
   // Module state
-  FIFO#(Tuple2#(ctrl_t,data_t))                      inQ <- mkLFIFO; 
-  FIFO#(Tuple2#(ctrl_t,data_t))                      outfifo <- mkFIFO;
-  FIFOF#(Bit#(1))                                     outstandingReqs <- mkSizedFIFOF(4);
+  FIFO#(Tuple2#(ctrl_t,data_t))                       inQ <- mkLFIFO; 
+  FIFO#(Tuple2#(ctrl_t,data_t))                       outfifo <- mkSizedFIFO(2);
+  FIFOF#(Bit#(1))                                     bufferAllocate <- mkSizedFIFOF(2);
+  FIFOF#(Bit#(1))                                     outstandingResps <- mkSizedFIFOF(2);
   Reg#(WriteDirection) writeDirection                    <- mkReg(WriteUp);
   Reg#(Bit#(log_reversal_granularity)) writeCount        <- mkReg(fromInteger(valueof(reversal_granularity)));  
   Reg#(Bit#(log_reversal_granularity_minus)) kBitsBottom <- mkReg(0);  
@@ -89,7 +90,8 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
       end
 
     rfile.readReq(addr);
-    outstandingReqs.enq(?);
+    bufferAllocate.enq(?);
+    outstandingResps.enq(?);
     if(readLast && (writeCountNext == 0))
       begin
         readLast <= False;
@@ -116,13 +118,14 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
  
   // Need one last rule to spit out the Last Token...
   // Can assert isLast here...
-  rule handleLast(state == SendLast && !outstandingReqs.notEmpty());
+  rule handleLast(state == SendLast && !outstandingResps.notEmpty());
     if(`DEBUG_REVBUF == 1)
       begin  
         $display("%s: sending last", str);
       end
     state <= Data;
     inQ.deq;
+    bufferAllocate.enq(?);
     outfifo.enq(inQ.first);
   endrule
 
@@ -197,15 +200,18 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
             $display("%s: Pushing Data: ? read from: %d",str, addr);
           end
         rfile.readReq(addr);
-        outstandingReqs.enq(?);
+        bufferAllocate.enq(?);
+        outstandingResps.enq(?);
       end
   endrule 
-   
+  
+  // reading illegal data.  need a second fifo. 
   rule handleReadRsp;
-    outstandingReqs.deq();
     let data <- rfile.readRsp();
     outfifo.enq(data);
+    outstandingResps.deq();
   endrule
+
  
   interface Put inputData;
     method Action put(Tuple2#(ctrl_t,data_t) value);
@@ -250,6 +256,7 @@ module mkReversalBuffer#(String str) (ReversalBuffer#(data_t, ctrl_t, reversal_g
           $display("%s: DataOut: %d LastOut: %d Returning Data: %d, %h ",str, dataOutNext, lastOutNext, ctrl, data);
         end
       outfifo.deq;
+      bufferAllocate.deq();
       return outfifo.first();
     endmethod
   endinterface
