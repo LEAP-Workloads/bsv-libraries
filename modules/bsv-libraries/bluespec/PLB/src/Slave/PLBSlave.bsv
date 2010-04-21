@@ -157,10 +157,12 @@ module mkPLBSlave#(Clock externalClock, Reset externalReset) (PLBSlave#(address_
    endinterface
  endinterface
 
- interface loadCommandCount = loadCommandCountWire;
- interface storeCommandCount = storeCommandCountWire;
- interface totalCommandCount = totalCommandCountWire;
- interface loadDataCount = loadDataCountWire;
- interface storeDataCount = storeDataCountWire;
+ interface PLBSlaveDebug plbSlaveDebug;
+   interface loadCommandCount = loadCommandCountWire;
+   interface storeCommandCount = storeCommandCountWire;
+   interface totalCommandCount = totalCommandCountWire;
+   interface loadDataCount = loadDataCountWire;
+   interface storeDataCount = storeDataCountWire;
+ endinterface
 
 endmodule

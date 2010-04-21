@@ -1,9 +1,6 @@
 `include "asim/provides/librl_bsv_base.bsh"
 
-interface PLBMaster;
-  interface BURST_MEMORY_IFC#(PLBAddr,BusWord,PLBMaxBurst) burstIfc;
-  interface PLBMasterWires   plbMasterWires;
-  // Debug interface 
+interface PLBMasterDebug;
   interface ReadOnly#(Bit#(32)) loadCommandTotal;
   interface ReadOnly#(Bit#(32)) storeCommandTotal;
   interface ReadOnly#(Bit#(32)) loadCommandCompletedTotal;
@@ -18,7 +15,13 @@ interface PLBMaster;
   interface ReadOnly#(StateRequest)  requestState;
   interface ReadOnly#(StateTransfer) loadState;
   interface ReadOnly#(StateTransfer) storeState;
-  
+endinterface
+
+interface PLBMaster;
+  interface BURST_MEMORY_IFC#(PLBAddr,BusWord,PLBMaxBurst) burstIfc;
+  interface PLBMasterWires   plbMasterWires;
+  interface PLBMasterDebug   plbMasterDebug;
+  // Debug interface 
 endinterface
  
 typedef struct {

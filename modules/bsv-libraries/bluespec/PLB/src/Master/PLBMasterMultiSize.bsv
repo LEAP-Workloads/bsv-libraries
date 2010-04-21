@@ -594,18 +594,20 @@ endfunction
 
   endinterface
 
- interface loadCommandTotal = loadCommandCountWire;
- interface storeCommandTotal = storeCommandCountWire;
- interface loadCommandCompletedTotal = loadCommandCompletedCountWire;
- interface storeCommandCompletedTotal = storeCommandCompletedCountWire;
- interface loadDataTotal = loadDataCountWire;
- interface storeDataTotal = storeDataCountWire;
- interface storeAAcksCount = storeAAcksCountWire;
- interface storeDAcksCount = storeDAcksCountWire;
- interface errorCount = errorCountWire;
- interface storeBufferCount = storeBufferCountWire;
- interface loadBufferCount = loadBufferCountWire;
- interface requestState = requestStateWire;
- interface loadState = loadStateWire;
- interface storeState = storeStateWire;
+ interface PLBMasterDebug plbMasterDebug;
+   interface loadCommandTotal = loadCommandCountWire;
+   interface storeCommandTotal = storeCommandCountWire;
+   interface loadCommandCompletedTotal = loadCommandCompletedCountWire;
+   interface storeCommandCompletedTotal = storeCommandCompletedCountWire;
+   interface loadDataTotal = loadDataCountWire;
+   interface storeDataTotal = storeDataCountWire;
+   interface storeAAcksCount = storeAAcksCountWire;
+   interface storeDAcksCount = storeDAcksCountWire;
+   interface errorCount = errorCountWire;
+   interface storeBufferCount = storeBufferCountWire;
+   interface loadBufferCount = loadBufferCountWire;
+   interface requestState = requestStateWire;
+   interface loadState = loadStateWire;
+   interface storeState = storeStateWire;
+ endinterface 
 endmodule
