@@ -1,0 +1,14 @@
+********************************************************************
+* Awb module specification
+********************************************************************
+
+%AWB_START
+
+%name SPI RRR 
+%desc An RRR hook for driving a spi bus from software
+%provides spi_master_rrr
+
+%sources -t RRR  -v PUBLIC  SPIMASTER.rrr
+
+
+%AWB_END

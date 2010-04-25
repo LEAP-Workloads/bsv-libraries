@@ -1,0 +1,9 @@
+service SPIMASTERRRR
+{
+    server hw (bsv,connection) <- sw (cpp, method)
+    {
+       method SPIRead(in UINT32[32] addr, out UINT32[32] data);  
+       method SPIWrite(in UINT32[32] addr, in UINT32[32] data);  
+    };
+
+ };
