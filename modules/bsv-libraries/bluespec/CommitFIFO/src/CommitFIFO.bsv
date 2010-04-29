@@ -195,3 +195,148 @@ module mkCommitFIFO (CommitFIFO#(data,size))
   method notEmpty = fifo.notEmpty; 
 
 endmodule
+
+
+module mkCommitFIFOLevelUG (CommitFIFOLevel#(data,size))
+   provisos(
+     Bits#(data, dataSz)
+   );
+
+  RegFile#(Bit#(TAdd#(1,TLog#(size))),data) memory <- mkRegFile(0,fromInteger(valueof(size))); 
+
+  Reg#(Bit#(TAdd#(1,TLog#(size)))) firstPtr      <- mkReg(0);
+  Reg#(Bit#(TAdd#(1,TLog#(size)))) commitPtr     <- mkReg(0);
+  Reg#(Bit#(TAdd#(1,TLog#(size)))) enqPtr        <- mkReg(0);
+  Reg#(Bit#(TAdd#(1,TLog#(size)))) dataCounter   <- mkReg(0);
+  Reg#(Bit#(TAdd#(1,TLog#(size)))) commitCounter <- mkReg(0);
+  PulseWire           countUp       <- mkPulseWire;
+  PulseWire           countDown     <- mkPulseWire;
+  PulseWire           commitPulse   <- mkPulseWire;
+  PulseWire           abortPulse    <- mkPulseWire;
+
+  rule toggle;
+    // adjust data counter
+    if(countDown && !commitPulse) // don't care about count up, unless we also commit.
+      begin
+        dataCounter <= dataCounter - 1;
+      end  
+    else if(!countDown && commitPulse && !countUp)
+      begin
+        dataCounter <= dataCounter + commitCounter;
+      end 
+    else if(!countDown && commitPulse && countUp)
+      begin
+        dataCounter <= dataCounter + commitCounter + 1;
+      end 
+    else if(countDown && commitPulse && !countUp)
+      begin
+        dataCounter <= dataCounter + commitCounter - 1;
+      end 
+    else if(countDown && commitPulse && countUp)
+      begin
+        dataCounter <= dataCounter + commitCounter;
+      end 
+
+    if(commitPulse)
+      begin
+        commitCounter <= 0;
+      end
+    else if(abortPulse)
+      begin
+        commitCounter <= 0;
+      end
+    else if(!commitPulse && countUp)
+      begin
+        commitCounter <= commitCounter + 1;
+      end
+
+    if(commitPulse)
+      begin
+        if(countUp)
+          begin
+            enqPtr <= (enqPtr + 1 == fromInteger(valueof(size)))?0:enqPtr+1;  
+          end
+      end
+    else if(abortPulse)
+      begin
+        enqPtr <= commitPtr;
+      end
+    else if(countUp)
+      begin
+        enqPtr <= (enqPtr + 1 == fromInteger(valueof(size)))?0:enqPtr+1;  
+      end
+   
+    if(commitPulse && countUp)
+      begin
+        commitPtr <= (enqPtr + 1 == fromInteger(valueof(size)))?0:enqPtr+1; 
+      end
+    else if(commitPulse && !countUp)
+      begin
+        commitPtr <= enqPtr;
+      end
+
+  endrule
+
+  method data first() if(dataCounter > 0);
+    return memory.sub(firstPtr);
+  endmethod
+
+  method Action commit();  
+    commitPulse.send;
+  endmethod
+
+  method Action abort();  
+    abortPulse.send;
+  endmethod
+
+  method Action deq() if(dataCounter > 0);
+    firstPtr <= (firstPtr + 1 == fromInteger(valueof(size)))?0:firstPtr+1;
+    countDown.send;
+  endmethod
+
+  // You asked for it, you got it...
+  method Action enq(data inData);
+    countUp.send;
+    memory.upd(enqPtr,inData);  
+  endmethod
+
+
+  method Bool notFull;
+   return dataCounter + commitCounter < fromInteger(valueof(size));
+  endmethod
+
+  method Bool notEmpty;
+    return dataCounter > 0;
+  endmethod
+
+  method Bool isLessThan   ( Bit#(TAdd#(1,TLog#(size))) c1 );
+    return ( dataCounter + commitCounter  < c1 );
+  endmethod
+
+  method Bool isGreaterThan( Bit#(TAdd#(1,TLog#(size))) c1 );
+   return ( dataCounter + commitCounter  > c1 );   
+  endmethod
+
+  method Bit#(TAdd#(1,TLog#(size))) count();
+    return dataCounter + commitCounter;
+  endmethod
+
+endmodule
+
+
+module mkCommitFIFOUG (CommitFIFO#(data,size))
+   provisos(
+     Bits#(data, dataSz)
+   );
+
+  CommitFIFOLevel#(data,size) fifo <- mkCommitFIFOLevelUG(); 
+
+  method first = fifo.first;
+  method commit = fifo.commit;  
+  method abort = fifo.abort;  
+  method deq = fifo.deq;
+  method enq = fifo.enq;
+  method notFull = fifo.notFull;
+  method notEmpty = fifo.notEmpty; 
+
+endmodule

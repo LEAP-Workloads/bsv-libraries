@@ -1,0 +1,9 @@
+service PLBDEBUGRRR
+{
+    server hw (bsv, connection) <- sw (cpp, method)
+    {
+        method getTestReceived(in UINT32[32] dummy, out UINT32[32] count);
+        method getTestStatus(in UINT32[32] dummy, out UINT32[32] count);
+    };
+
+ };
