@@ -183,14 +183,16 @@ void writeFlashPage(int bus, int blockNum, int pageNum, int *ramAddr) {
 
 long long checkBusy() {
   long long status = *(SSD+8);
-  return (status & 0xf) != 0;   
+  
+  return ((status>>24) & 0xf) != 0;   
 }
 
 void dumpControllerStatus() {
    long long status = *(SSD+8);
-   xil_printf("SSD status: version: %x\n, busBusy: %x\n exists: %x%x\n",
-          status >> 4 & 0xf,
-			 status &0xf,
+   xil_printf("SSD status: %x%x version: %x\n, busBusy: %x\n exists: %x%x\n",
+	       status,
+          status >> 28 & 0xf,
+			 status >> 24 &0xf,
 			 *(SSD+2),
 			 *(SSD+3));
 }
@@ -274,7 +276,7 @@ int main (void) {
     */
    // print out the data 
    dumpControllerStatus();
-   while(checkBusy()){};
+   while(checkBusy()){dumpControllerStatus();};
 	dumpControllerStatus();
 	resetFlashBuses();
    xil_printf("SSD intialized\n");

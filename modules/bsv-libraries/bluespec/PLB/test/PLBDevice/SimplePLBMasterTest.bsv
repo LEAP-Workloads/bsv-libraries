@@ -34,7 +34,7 @@ module [CONNECTED_MODULE]  mkPLBDevice#(Clock plbClock, Reset plbReset) (PLB_DEV
 
   plb_device_debug::ServerStub_PLBDEBUGRRR server_stub <- plb_device_debug::mkServerStub_PLBDEBUGRRR();  
 
-  mkConnectPLBDebugger(server_stub, plbMaster, plbSlave); 
+  mkConnectPLBDebugger(server_stub, plbMaster.plbMasterDebug, plbSlave.plbSlaveDebug); 
 
   // Wire up PLB Slave
   // There are other solutions, but it seems simplest to emulate the byte 

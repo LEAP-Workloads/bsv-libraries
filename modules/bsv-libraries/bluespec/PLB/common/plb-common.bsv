@@ -31,7 +31,7 @@ instance Connectable#(PLB_DRIVER,PLB_DEVICE);
 
     (* no_implicit_conditions *)
     rule driveWiresDriver;
-      driver.inIP2Bus_IntrEvent(0);
+      driver.inIP2Bus_IntrEvent(device.outIP2Bus_IntrEvent());
       driver.inIP2Bus_Data(device.plbSlaveWires.sDataOut());
       driver.inIP2Bus_Retry(device.plbSlaveWires.sRetry());
       driver.inIP2Bus_Error(device.plbSlaveWires.sError());
