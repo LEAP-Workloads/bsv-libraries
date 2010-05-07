@@ -58,12 +58,7 @@ Packagehint=bsv-libraries
 
 [PLB Test/Requires]
 plb_driver=PLB Driver
-plb_test_common=PLB Test Common Files
 plb_device=PLB Simple Master Test
-
-[PLB Test Common Files]
-File=modules/bsv-libraries/bluespec/PLB/test/plb_test_common.awb
-Packagehint=bsv-libraries
 
 [PLB Common]
 File=modules/bsv-libraries/bluespec/PLB/common/plb_common.awb
@@ -106,5 +101,5 @@ File=modules/bsv-libraries/bluespec/PLB/test/PLBDevice/simple_plb_master_test.aw
 Packagehint=bsv-libraries
 
 [PLB Device Debug]
-File=modules/bsv-libraries/bluespec/PLB/test/PLBDevice/plb_device_debug.awb
+File=modules/bsv-libraries/bluespec/PLB/test/PLBDevice/PLBDebug/plb_device_debug.awb
 Packagehint=bsv-libraries

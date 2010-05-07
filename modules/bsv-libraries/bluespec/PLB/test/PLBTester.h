@@ -18,13 +18,15 @@
 #define __AUDIO_PROCESSOR_CONNECTED_APPLICATION__
 
 #include "asim/provides/virtual_platform.h"
-#include "asim/rrr/client_stub_PLBDEBUGRRR.h"
+#include "asim/provides/plb_debug.h"
+#include "asim/rrr/client_stub_PLBTESTRRR.h"
+
 
 typedef class CONNECTED_APPLICATION_CLASS* CONNECTED_APPLICATION;
 class CONNECTED_APPLICATION_CLASS : public PLATFORMS_MODULE_CLASS
 {
  private:
-  PLBDEBUGRRR_CLIENT_STUB clientStub;
+  PLBTESTRRR_CLIENT_STUB clientStub;
 
  public:
   CONNECTED_APPLICATION_CLASS(VIRTUAL_PLATFORM vp);

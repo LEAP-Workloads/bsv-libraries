@@ -6,7 +6,7 @@
 `include "asim/provides/librl_bsv_base.bsh"
 `include "asim/provides/soft_connections.bsh"
 
-`include "asim/rrr/remote_server_stub_PLBDEBUGRRR.bsh"
+`include "asim/rrr/server_stub_PLBTESTRRR.bsh"
 
 import Vector::*;
 import Connectable::*;
@@ -24,9 +24,9 @@ module [CONNECTED_MODULE]  mkPLBDevice#(Clock plbClock, Reset plbReset) (PLB_DEV
 
   // Setup Debug RRR
 
-  plb_device_debug::ServerStub_PLBDEBUGRRR server_stub <- plb_device_debug::mkServerStub_PLBDEBUGRRR();  
+  plb_device_debug::ServerStub_PLBTESTRRR server_stub <- plb_device_debug::mkServerStub_PLBTESTRRR();  
 
-  mkConnectPLBDebugger(server_stub, plbMaster, plbSlave); 
+  mkConnectPLBDebugger(plbMaster, plbSlave); 
   
   // Wire up PLB Master
   // Do nothing with the master here

@@ -11,7 +11,9 @@ import ClientServer::*;
 import GetPut::*;
 
 
-module [CONNECTED_MODULE]  mkConnectPLBDebugger#( ServerStub_PLBDEBUGRRR server_stub, PLBMasterDebug plbMasterDebug, PLBSlaveDebug plbSlaveDebug) (Empty);
+module [CONNECTED_MODULE]  mkConnectPLBDebugger#(PLBMasterDebug plbMasterDebug, PLBSlaveDebug plbSlaveDebug) (Empty);
+
+   ServerStub_PLBDEBUGRRR server_stub <- plb_device_debug::mkServerStub_PLBDEBUGRRR();  
    
   rule getSlaveLoadCommands;
     let nullResp <- server_stub.acceptRequest_getSlaveLoadCommands();

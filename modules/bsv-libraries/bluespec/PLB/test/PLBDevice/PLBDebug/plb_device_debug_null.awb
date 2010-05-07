@@ -4,13 +4,14 @@
 
 %AWB_START
 
-%name PLB Device Debug
-%desc PLB Device Debug
+%name PLB Device Debug Null
+%desc PLB Device Debug Null
 
 %provides plb_device_debug
 
 
-%sources -t BSV -v PUBLIC PLBDebug.bsv
-%sources -t RRR -v PUBLIC plb-debug.rrr
+%sources -t BSV -v PUBLIC PLBDebugSmall.bsv
+%sources -t H -v PUBLIC PLBDebugSmall.h
+%sources -t CPP -v PUBLIC PLBDebugSmall.cpp
 
 %AWB_END
