@@ -101,5 +101,5 @@ File=modules/bsv-libraries/bluespec/PLB/src/Master/plb_master_multi_unsafe.awb
 Packagehint=bsv-libraries
 
 [PLB Device Debug]
-File=modules/bsv-libraries/bluespec/PLB/test/PLBDevice/plb_device_debug.awb
+File=modules/bsv-libraries/bluespec/PLB/test/PLBDevice/PLBDebug/plb_device_debug.awb
 Packagehint=bsv-libraries

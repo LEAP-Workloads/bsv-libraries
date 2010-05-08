@@ -18,7 +18,7 @@
 #define __AUDIO_PROCESSOR_CONNECTED_APPLICATION__
 
 #include "asim/provides/virtual_platform.h"
-#include "asim/provides/plb_debug.h"
+#include "asim/provides/plb_device_debug.h"
 #include "asim/rrr/client_stub_PLBTESTRRR.h"
 
 
