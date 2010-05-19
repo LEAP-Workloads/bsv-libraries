@@ -13,3 +13,13 @@ Directory modules/bsv-libraries/bluespec/PLB/test/PLBDriver/projects/PLBTestDriv
  system.gui                Locally Modified           42 
 
 Removed prints from Avalon slave and master.
+
+----------
+kfleming    Date: Wed May 19 10:57:02 EDT 2010  CSN: CSN-bsv-libraries-61
+                  Wed May 19 14:57:02 UTC 2010
+
+
+Directory config/pm/bsv-libraries/altera
+ fpgaenv-hybrid-altera.apm Locally Modified           60 
+
+ Modifying existing fpgaenvs to have associate build pipelines.

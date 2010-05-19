@@ -22,6 +22,7 @@ Packagehint=platforms
 virtual_platform=Standard Virtual Platform
 fpga_components=Software FPGA Components
 librl_bsv=Altera RL Bluespec Library
+build_pipeline=BlueSim Build Pipeline
 
 [Standard Virtual Platform]
 File=modules/bluespec/common/fpgaenv/virtual-platform/std-virtual-platform.awb
@@ -179,4 +180,8 @@ Packagehint=platforms
 
 [Common Altera Platform Utilities]
 File=modules/bluespec/common/fpgaenv/physical-platform/utils/altera/altera_utils.awb
+Packagehint=platforms
+
+[BlueSim Build Pipeline]
+File=modules/project/pipelines/sim-build-pipeline.awb
 Packagehint=platforms
