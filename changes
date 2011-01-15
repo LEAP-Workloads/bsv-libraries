@@ -23,3 +23,14 @@ Directory config/pm/bsv-libraries/altera
  fpgaenv-hybrid-altera.apm Locally Modified           60 
 
  Modifying existing fpgaenvs to have associate build pipelines.
+
+----------
+kfleming    Date: Sat Jan 15 19:43:54 KST 2011  CSN: CSN-bsv-libraries-64
+                  Sat Jan 15 10:43:54 UTC 2011
+
+
+Directory config/pm/bsv-libraries/altera
+ fpgaenv-hybrid-altera.apm Locally Modified           63 
+
+
+Updated apm to V2.2

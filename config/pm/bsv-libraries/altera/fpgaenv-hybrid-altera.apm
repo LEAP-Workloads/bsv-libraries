@@ -3,20 +3,22 @@
 SaveParameters=0
 Description=Altera Hybrid Simulation FPGA Environment
 File=fpgaenv-hybrid-altera
-Version=2.1
+Version=2.2
 Type=HAsim
 Name=Altera Hybrid Simulation FPGA Environment
 Class=Asim::Model
 DefaultBenchmark=
 DefaultRunOpts=
+RootName=FPGA Environment
+RootProvides=fpgaenv
 
 [Model]
 DefaultAttributes=hybrid exe altera
 model=FPGA Environment
 
 [FPGA Environment]
-File=modules/bluespec/common/fpgaenv/fpga-environment.awb
-Packagehint=platforms
+File=modules/leap/virtual-platform/fpga-environment.awb
+Packagehint=leap
 
 [FPGA Environment/Requires]
 virtual_platform=Standard Virtual Platform
@@ -25,7 +27,7 @@ librl_bsv=Altera RL Bluespec Library
 build_pipeline=BlueSim Build Pipeline
 
 [Standard Virtual Platform]
-File=modules/bluespec/common/fpgaenv/virtual-platform/std-virtual-platform.awb
+File=modules/leap/virtual-platform/std-virtual-platform.awb
 Packagehint=leap
 
 [Standard Virtual Platform/Requires]
@@ -34,7 +36,7 @@ low_level_platform_interface=Low Level Platform Interface Hybrid
 umf=Little-Endian Unified Message Format
 
 [RRR Clients and Servers]
-File=modules/bluespec/common/fpgaenv/virtual-platform/rrr/basic/basic-rrr.awb
+File=modules/leap/virtual-platform/rrr/basic/basic-rrr.awb
 Packagehint=leap
 
 [Standard Virtual Devices]
@@ -42,18 +44,18 @@ File=config/pm/hasim/submodels/fpgaenv/std-virtual-devices.apm
 Packagehint=leap
 
 [Simulation Physical Channel]
-File=modules/bluespec/common/fpgaenv/virtual-platform/channelio/physical-channel/sim/sim-physical-channel.awb
+File=modules/leap/virtual-platform/channelio/physical-channel/sim/sim-physical-channel.awb
 Packagehint=leap
 
 [Basic Virtual Channel Multiplexer]
-File=modules/bluespec/common/fpgaenv/virtual-platform/channelio/basic/basic-channelio.awb
+File=modules/leap/virtual-platform/channelio/basic/basic-channelio.awb
 Packagehint=leap
 
 [Basic Virtual Channel Multiplexer/Requires]
 physical_channel=Simulation Physical Channel
 
 [Low Level Platform Interface Hybrid]
-File=modules/bluespec/common/fpgaenv/low-level-platform-interface/hybrid-llpi.awb
+File=modules/leap/virtual-platform/low-level-platform-interface/hybrid-llpi.awb
 Packagehint=leap
 
 [Low Level Platform Interface Hybrid/Requires]
@@ -86,7 +88,7 @@ File=modules/bluespec/common/fpgaenv/physical-platform/debuggers/null/null-debug
 Packagehint=platforms
 
 [Local Memory Interface using BRAM]
-File=modules/bluespec/common/fpgaenv/low-level-platform-interface/local-mem/local-mem-bram.awb
+File=modules/leap/virtual-platform/low-level-platform-interface/local-mem/local-mem-bram.awb
 Packagehint=leap
 
 [Simulation Clocks Device]
@@ -103,7 +105,7 @@ LOCAL_MEM_READ_LATENCY=8
 LOCAL_MEM_ADDR_BITS=10
 
 [Null Remote Memory]
-File=modules/bluespec/common/fpgaenv/low-level-platform-interface/remote-memory/null/null-remote-memory.awb
+File=modules/leap/virtual-platform/low-level-platform-interface/remote-memory/null/null-remote-memory.awb
 Packagehint=leap
 
 [Little-Endian Unified Message Format]
@@ -111,7 +113,7 @@ File=modules/bluespec/common/fpgaenv/virtual-platform/umf/little-endian/umf-litt
 Packagehint=platforms
 
 [RRR Common Module]
-File=modules/bluespec/common/fpgaenv/virtual-platform/rrr/rrr_common/rrr_common.awb
+File=modules/leap/virtual-platform/rrr/rrr-common/rrr-common.awb
 Packagehint=leap
 
 [RRR Clients and Servers/Requires]
@@ -140,7 +142,7 @@ File=modules/bsv-libraries/bluespec/Debug/debug_utils.awb
 Packagehint=bsv-libraries
 
 [RL Bluespec Storage Library]
-File=modules/bluespec/librl/storage/librl-bsv-storage.awb
+File=modules/leap/libraries/librl/storage/librl-bsv-storage.awb
 Packagehint=leap
 
 [Avalon Bus Intefaces]
@@ -159,7 +161,7 @@ Packagehint=bsv-libraries
 register_library=RegisterLibrary
 
 [RL Bluespec Cache Managers]
-File=modules/bluespec/librl/storage/cache/librl-cache.awb
+File=modules/leap/libraries/librl/cache/librl-cache.awb
 Packagehint=leap
 
 [Altera RL Bluespec Library]
@@ -175,7 +177,7 @@ debug_utils=Debug Utilities
 register_mapper=Register Mapping Utilities
 
 [RL Bluespec Base Library]
-File=modules/bluespec/librl/base/librl-bsv-base.awb
+File=modules/leap/libraries/librl/base/librl-bsv-base.awb
 Packagehint=leap
 
 [Common Altera Platform Utilities]
