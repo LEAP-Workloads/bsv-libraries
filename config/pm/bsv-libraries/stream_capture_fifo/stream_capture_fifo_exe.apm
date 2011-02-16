@@ -3,12 +3,14 @@
 SaveParameters=0
 Description=Hello World Demo using hybrid streams
 File=stream_capture_fifo_exe
-Version=2.1
+Version=2.2
 Name=Hello World
 DefaultBenchmark=config/bm/bluespec/demos.cfx/benchmarks/null.cfg
 Type=HAsim
 Class=Asim::Model
 DefaultRunOpts=
+RootName=HW/SW Hybrid Project Foundation
+RootProvides=model
 
 [Model]
 DefaultAttributes=hello unconnected hybrid project exe
@@ -18,42 +20,30 @@ model=HW/SW Hybrid Project Foundation
 File=modules/bsv-libraries/bluespec/Common/hw-only-testbench.awb
 Packagehint=bsv-libraries
 
-[Hybrid Project Common Utilities]
-File=config/pm/hasim/submodels/common/project-common-default.apm
-Packagehint=hasim
 
 [HW only hybrid application/Requires]
 hw_only_application=StreamCaptureFIFO Test
 
-[FPGA Environment]
-File=config/pm/hasim/submodels/fpgaenv/fpgaenv-hybrid-exe.apm
-Packagehint=platforms
 
 [HW/SW Hybrid Project Foundation]
-File=modules/project/project-hybrid.awb
-Packagehint=platforms
+File=modules/leap/build-support/project/project-hybrid.awb
+Packagehint=leap
 
 [HW/SW Hybrid Project Foundation/Requires]
-project_common=Hybrid Project Common Utilities
-fpgaenv=FPGA Environment
+project_common=Default Hybrid Project Common Utilities
+fpgaenv=Hybrid Simulation FPGA Environment
 application_env=Soft Connections Hybrid Application Environment
 
 [Soft Connections Hybrid Application Environment/Requires]
-platform_services=Platform Services
-soft_connections_lib=Soft Connections Library
+platform_services=Standard Platform Services
+soft_connections_lib=Standard Soft Connections Lib
 connected_application=HW only hybrid application
 
-[Soft Connections Library]
-File=config/pm/hasim/submodels/common/soft-connections-lib.apm
-Packagehint=hasim
 
-[Platform Services]
-File=config/pm/hasim/submodels/platform-services/standard-platform-services.apm
-Packagehint=hasim
 
 [Soft Connections Hybrid Application Environment]
-File=modules/application-env/hybrid/soft-connections/application-env-hybrid-soft-conn.awb
-Packagehint=platforms
+File=modules/leap/build-support/project/application-env/hybrid/soft-connections/application-env-hybrid-soft-conn.awb
+Packagehint=leap
 
 [StreamCaptureFIFO Test]
 File=modules/bsv-libraries/bluespec/StreamCaptureFIFO/test/stream_capture_fifo_test.awb
@@ -65,3 +55,19 @@ Packagehint=bsv-libraries
 
 [StreamCaptureFIFO Test/Requires]
 stream_capture_fifo=StreamCaptureFIFO
+
+[Standard Platform Services]
+File=config/pm/hasim/submodels/platform-services/standard-platform-services.apm
+Packagehint=leap
+
+[Hybrid Simulation FPGA Environment]
+File=config/pm/hasim/submodels/fpgaenv/fpgaenv-hybrid-exe.apm
+Packagehint=leap
+
+[Standard Soft Connections Lib]
+File=config/pm/hasim/submodels/common/soft-connections-lib.apm
+Packagehint=leap
+
+[Default Hybrid Project Common Utilities]
+File=config/pm/hasim/submodels/common/project-common-default.apm
+Packagehint=leap
