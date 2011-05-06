@@ -1,14 +1,14 @@
 `include "asim/provides/stream_capture_fifo.bsh"
+`include "asim/provides/librl_bsv_storage.bsh"
+`include "asim/provides/librl_bsv_base.bsh"
 
 import FIFOF::*;
 
-import BRAMFIFO::*;
-
-module mkStreamCaptureFIFOF#(Integer streamSize) (FIFOF#(data_t))
+module mkStreamCaptureFIFOF#(NumTypeParam#(fifo_sz) fifoSz) (FIFOF#(data_t))
   provisos(Bits#(data_t, data_sz),
            Literal#(data_t)); // required by bramfifo
 
-  FIFOF#(data_t) fifo <- mkSizedFIFOF(streamSize);
+  FIFOF#(data_t) fifo <- mkSizedBRAMFIFOF(fifoSz);
   Reg#(State) state <- mkReg(Filling);
    
   rule setState (!fifo.notFull && state != Draining); 
