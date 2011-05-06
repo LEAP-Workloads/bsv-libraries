@@ -39,14 +39,58 @@ module mkNaiveCRC#(Bit#(TAdd#(1,width)) initPoly, Bit#(width) initRem) (CRC#(Bit
    
 endmodule
 
+typedef enum {
+ BIG_ENDIAN_CRC,
+ LITTLE_ENDIAN_CRC
+} CRCType deriving (Bits,Eq);
 
-module mkParallelCRC#(Bit#(TAdd#(1,width)) initPoly, Bit#(width) initRem) (CRC#(Bit#(width),Bit#(in)))
+module mkParallelCRC#(Bit#(TAdd#(1,width)) initPoly, Bit#(width) initRem, CRCType endianess) (CRC#(Bit#(width),Bit#(in)))
    provisos(Add#(width, 1, TAdd#(1, width)),
+            Add#(in, yyy, width),
             Mul#(xxx, in, width)
    );
    
    Reg#(Bit#(TAdd#(1,width)))  poly    <- mkReg(initPoly);
    Reg#(Bit#(width))           rem     <- mkReg(0);
+
+   function Action bigEndianCRC(Bit#(in) bitIn);
+     action
+       Bit#(TAdd#(1,width)) new_rem = ?;
+       Bit#(width) rem_temp = rem;
+       for(Integer i = 0; i < valueof(in); i = i + 1)
+         begin
+           new_rem = {rem_temp, reverseBits(bitIn)[i]};           
+           if(new_rem[valueof(width)]==1) // grab top bit
+             begin
+               new_rem = new_rem ^ poly;
+             end
+           rem_temp = truncate(new_rem);
+         end
+
+       Bit#(width) rem_trunc= truncate(new_rem);
+       debug(crcDebug,$display("CRC input %b rem %b new_rem %b poly %b init %b", bitIn, rem, rem_trunc, poly, initRem));
+       rem <= truncate(new_rem);     
+     endaction
+   endfunction
+
+   function Action littleEndianCRC(Bit#(in) bitIn);
+     action
+       Bit#(width) rem_temp = rem ^ zeroExtend(bitIn);
+       for(Integer i = 0; i < valueof(in); i = i + 1)
+         begin
+           if(rem_temp[0]==1) // grab top bit
+             begin
+               rem_temp = (rem_temp >> 1) ^ truncateLSB(reverseBits(poly));
+             end
+           else
+             begin 
+              rem_temp = rem_temp >> 1; 
+             end
+       end
+
+       rem <= rem_temp;     
+     endaction
+   endfunction
 
    method Bit#(width)   getRemainder();
      return rem;
@@ -58,20 +102,17 @@ module mkParallelCRC#(Bit#(TAdd#(1,width)) initPoly, Bit#(width) initRem) (CRC#(
 
    // silly unfolding, but whatever...
    // should probably do this as a foldr but i'm too lazy today.
+   
    method Action inputBits(Bit#(in) bitIn);
-      Bit#(TAdd#(1,width)) new_rem = ?;
-      Bit#(width) rem_temp = rem;
-      for(Integer i = 0; i < valueof(in); i = i + 1)
-        begin
-          new_rem = {rem_temp, reverseBits(bitIn)[i]};
-          if(new_rem[valueof(width)]==1) // grab top bit
-	    new_rem = new_rem ^ poly;
-          rem_temp = truncate(new_rem);
-        end
-      Bit#(width) rem_trunc= truncate(new_rem);
-      debug(crcDebug,$display("CRC input %b rem %b new_rem %b poly %b init %b", bitIn, rem, rem_trunc, poly, initRem));
-      rem <= truncate(new_rem);     
-   endmethod
+     if(endianess == BIG_ENDIAN_CRC)
+       begin
+         bigEndianCRC(bitIn);
+       end
+     else
+       begin
+         littleEndianCRC(bitIn);
+       end
+   endmethod 
    
 endmodule
 

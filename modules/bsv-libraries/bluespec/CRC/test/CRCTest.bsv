@@ -7,7 +7,7 @@ import CRC::*;
 module mkHWOnlyApplication(Empty);
    
    CRC#(Bit#(1),Bit#(1)) crc <- mkNaiveCRC('b11,'b0);
-   CRC#(Bit#(1),Bit#(1)) crcPar <- mkParallelCRC('b11,'b0);
+   CRC#(Bit#(1),Bit#(1)) crcPar <- mkParallelCRC('b11,'b0, BIG_ENDIAN_CRC);
    Reg#(Bool) done <- mkReg(False);
    Reg#(Bit#(10)) i <- mkReg(0);
    Reg#(Bit#(10)) j <- mkReg(0);
